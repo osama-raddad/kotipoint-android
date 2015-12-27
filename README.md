@@ -9,7 +9,7 @@ Features
 
 Release Notes
 ============
-0.1.0 - basic list of Kotopeky&Tihava events
+0.1.0.x - basic list of Kotopeky&Tihava events
                                                                                              
 Documentation
 =============

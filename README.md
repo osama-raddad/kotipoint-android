@@ -11,6 +11,10 @@ Release Notes
 ============
 0.1.0 - basic list of Kotopeky&Tihava events
                                                                                              
+Documentation
+=============
+mobile/src/res/raw/kotokeystore.bks - keystore for public key of server certifikate from https://kotopeky.cz to realize ssl verification.
+
 
 Dependencies
 ============

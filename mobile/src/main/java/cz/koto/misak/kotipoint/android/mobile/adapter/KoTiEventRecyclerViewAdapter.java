@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
-import cz.koto.misak.kotipoint.android.mobile.utility.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 
 public class KoTiEventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoTiEvent> {
 

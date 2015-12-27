@@ -12,8 +12,8 @@ import java.util.Map;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.utility.Logcat;
-import cz.koto.misak.kotipoint.android.mobile.utility.PermissionUtil;
+import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.utils.PermissionUtils;
 
 
 public abstract class PermissionFragment extends Fragment {
@@ -132,7 +132,7 @@ public abstract class PermissionFragment extends Fragment {
         }else {
             // We have requested multiple permissions for contacts, so all of them need to be
             // checked.
-            if (PermissionUtil.verifyPermissions(grantResults)) {
+            if (PermissionUtils.verifyPermissions(grantResults)) {
                 // All required permissions have been granted, do the right thing with these permission...
                 Logcat.d("%s permissions granted.",requestedAppPermission);
                 grantAndDoWithPermissions(requestedAppPermission);

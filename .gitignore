@@ -48,8 +48,7 @@ out/
 # Crashlytics
 crashlytics.properties
 crashlytics-build.properties
-com_crashlytics_export_strings.xml
-
+/mobile/fabric.properties
 
 
 #SSL

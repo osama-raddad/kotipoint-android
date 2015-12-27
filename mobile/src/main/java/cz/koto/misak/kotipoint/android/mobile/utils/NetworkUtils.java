@@ -1,4 +1,4 @@
-package cz.koto.misak.kotipoint.android.mobile.utility;
+package cz.koto.misak.kotipoint.android.mobile.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,9 +6,9 @@ import android.net.NetworkInfo;
 
 
 // requires android.permission.ACCESS_NETWORK_STATE
-public final class NetworkUtility
+public final class NetworkUtils
 {
-	private NetworkUtility() {}
+	private NetworkUtils() {}
 
 
 	public static boolean isOnline(Context context)

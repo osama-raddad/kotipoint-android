@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package cz.koto.misak.kotipoint.android.mobile.utility;
+package cz.koto.misak.kotipoint.android.mobile.utils;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -23,7 +23,7 @@ import android.content.pm.PackageManager;
  * Utility class that wraps access to the runtime permissions API in M and provides basic helper
  * methods.
  */
-public abstract class PermissionUtil {
+public abstract class PermissionUtils {
 
     /**
      * Check that all given permissions have been granted by verifying that each entry in the

@@ -14,8 +14,8 @@ import cz.koto.misak.kotipoint.android.mobile.adapter.KoTiEventRecyclerViewAdapt
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
-import cz.koto.misak.kotipoint.android.mobile.utility.Logcat;
-import cz.koto.misak.kotipoint.android.mobile.utility.NetworkUtility;
+import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.utils.NetworkUtils;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 
@@ -98,7 +98,7 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
         // setup stateful layout
         setupStatefulLayout(savedInstanceState);
 
-        if (NetworkUtility.isOnline(getActivity())) {
+        if (NetworkUtils.isOnline(getActivity())) {
         /*
          * Request all permissions defined in getPermissionList and
          * call doWithPermissions() after all of them are granted.

@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,8 +16,8 @@ import cz.koto.misak.kotipoint.android.mobile.adapter.AutoLoadingRecyclerViewAda
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.AutoLoadingRecyclerViewException;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.ILoading;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.OffsetAndLimit;
-import cz.koto.misak.kotipoint.android.mobile.utility.BackgroundExecutor;
-import cz.koto.misak.kotipoint.android.mobile.utility.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.utils.BackgroundExecutor;
+import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import rx.Subscriber;
 import rx.Subscription;

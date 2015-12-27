@@ -34,6 +34,6 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="@string/kotoFabric" />
+            android:value="8c0bb2c33591aad3c129ef62c7250ea617524715" />
     </application>
 </manifest>

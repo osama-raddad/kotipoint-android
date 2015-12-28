@@ -8,4 +8,6 @@
     <string name="permissions_not_granted">Permissions were not granted.</string>
 
     <string name="ok">OK</string>
+
+    <string name="date_format_date">dd.MM.yyyy</string>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cz.koto.misak.kotipoint.events.detail.EventDetailScrollingActivity"
+    tools:showIn="@layout/fragment_event_detail">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/event_detail_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Header"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/event_detail_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Text"
+            android:layout_below="@+id/event_detail_header" />
+
+        <TextView
+            android:id="@+id/event_detail_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event Date"
+            android:gravity="right"
+            android:layout_alignParentTop="true"/>
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

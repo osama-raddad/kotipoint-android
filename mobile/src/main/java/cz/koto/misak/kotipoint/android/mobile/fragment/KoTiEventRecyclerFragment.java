@@ -1,5 +1,6 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -14,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
+import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.adapter.KoTiEventRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
@@ -166,7 +169,7 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
         mStatefulLayout.setOnStateChangeListener(new StatefulLayout.OnStateChangeListener() {
             @Override
             public void onStateChange(View v, StatefulLayout.State state) {
-                Logcat.d("***StateChange:%s",state);
+                Logcat.d("***StateChange:%s", state);
 
                 if (state == StatefulLayout.State.CONTENT) {
 
@@ -180,11 +183,16 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
 
     @Override
     public void onItemClick(View view, int position, long id, int viewType) {
-
+        Intent i = new Intent(getContext(),EventDetailActivity.class);
+        i.putExtra(EventDetailActivity.PAYLOAD_KEY, recyclerViewAdapter.getItem(position));
+        getContext().startActivity(i);
     }
 
     @Override
     public void onItemLongClick(View view, int position, long id, int viewType) {
+        KoTiEvent koTiEvent = recyclerViewAdapter.getItem(position);
+        if (koTiEvent==null) return;
+        Toast.makeText(getContext(), koTiEvent.getmTextCapital() == null ? koTiEvent.getmHeadline() : koTiEvent.getmTextCapital(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

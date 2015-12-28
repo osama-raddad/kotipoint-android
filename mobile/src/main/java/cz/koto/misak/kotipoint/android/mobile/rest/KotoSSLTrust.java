@@ -18,6 +18,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
+import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 
 public class KotoSSLTrust {
     public static OkHttpClient trustcert(Context context){
@@ -37,7 +38,7 @@ public class KotoSSLTrust {
             sslContext.init(null, tmf.getTrustManagers(), null);
             okHttpClient.setSslSocketFactory(sslContext.getSocketFactory());
         } catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException | KeyManagementException e) {
-            e.printStackTrace();
+            Logcat.e(e,"Koto SSL Trust failed!");
         }
         return okHttpClient;
     }

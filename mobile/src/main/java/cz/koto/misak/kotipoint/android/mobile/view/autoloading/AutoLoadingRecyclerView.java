@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 import cz.koto.misak.kotipoint.android.mobile.adapter.AutoLoadingRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.AutoLoadingRecyclerViewException;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.ILoading;
@@ -243,7 +244,9 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
             try {
                 loadNewItemsSubscription.unsubscribe();
             }catch (Throwable th){
-                Logcat.e(th,"https://github.com/kaushikgopal/RxJava-Android-Samples/pull/26");
+                if (KoTiPointConfig.DEV_API) {
+                    Logcat.e(th, "https://github.com/kaushikgopal/RxJava-Android-Samples/pull/26");
+                }
             }
         }
         super.onDetachedFromWindow();

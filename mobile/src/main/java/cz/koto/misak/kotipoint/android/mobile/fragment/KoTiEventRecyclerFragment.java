@@ -2,9 +2,13 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.crashlytics.android.Crashlytics;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +20,7 @@ import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
 import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.utils.NetworkUtils;
+import cz.koto.misak.kotipoint.android.mobile.view.LinearDividerItemDecoration;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 
@@ -26,7 +31,7 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
     private View mRootView;
     private StatefulLayout mStatefulLayout;
 
-    private final static int LIMIT = 15;
+    private final static int LIMIT = 35;
     private AutoLoadingRecyclerView<KoTiEvent> recyclerView;
     private KoTiEventRecyclerViewAdapter recyclerViewAdapter;
 
@@ -77,6 +82,10 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
         }
 
         recyclerView.setSaveEnabled(true);
+
+        // add decoration
+        RecyclerView.ItemDecoration itemDecoration = new LinearDividerItemDecoration(getActivity(), null);
+        recyclerView.addItemDecoration(itemDecoration);
 
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
         recyclerView.setLimit(LIMIT);
@@ -176,7 +185,6 @@ public class KoTiEventRecyclerFragment extends PermissionFragment implements KoT
 
     @Override
     public void onItemLongClick(View view, int position, long id, int viewType) {
-
     }
 
     @Override

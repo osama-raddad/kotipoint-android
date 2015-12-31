@@ -17,7 +17,7 @@ public class KoTiPointApplication extends Application {
         CrashlyticsCore core = new CrashlyticsCore.Builder()
                 .disabled(KoTiPointConfig.DEV_API)
                 .build();
-        Fabric.with(this, new Crashlytics.Builder().core(core).build(), new Crashlytics());
+        Fabric.with(this, new Crashlytics.Builder().core(core).build());
     }
 
 }

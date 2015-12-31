@@ -126,6 +126,12 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
         this.limit = limit;
     }
 
+
+    /**
+     * Unsafe (non-typed) setter.
+     * @deprecated - use typed setter (below) instead!
+     * @param adapter
+     */
     @Deprecated
     @Override
     public void setAdapter(Adapter adapter) {

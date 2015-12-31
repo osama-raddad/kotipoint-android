@@ -1,4 +1,5 @@
 # KoTiPoint
+Kotopeky & Tíhava village (K&T) related point.
 
 ![KoTiPoint](./mobile/src/main/res/mipmap-hdpi/ic_launcher.png "KoTiPoint")
 
@@ -7,11 +8,18 @@
 Features
 ============
 
-Release Notes
-============
-0.1.0.x - basic list of Kotopeky&Tihava events
+* List of near future (& the history) events related to K&T
+* Media (photo) gallery related to K&T
 
-0.2.0.x - List of Kotopeky&Tihava events with proper detail
+Release notes
+============
+WTF(What The Feature) is new in this version.
+
+0.1.x.y - Basic list of Kotopeky&Tihava events
+
+0.2.x.y - List of Kotopeky&Tihava events with proper detail
+
+0.3.x.y - Media gallery
                                                                                              
 Documentation
 =============

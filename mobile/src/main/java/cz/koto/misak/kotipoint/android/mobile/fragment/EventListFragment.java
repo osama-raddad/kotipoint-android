@@ -2,6 +2,7 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,9 +28,7 @@ import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecycl
 
 
 public class EventListFragment extends StatefulPermissionFragment implements EventRecyclerViewAdapter.EventViewHolder.OnItemClickListener {
-    private static final String ARGUMENT_EXAMPLE = "example";
-
-    private View mFragmentView;
+    private static final String TITLE_KEY = "key_title";
 
     private final static int LIMIT = 35;
 
@@ -39,17 +38,16 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
     private EventRecyclerViewAdapter mRecyclerViewAdapter;
 
 
-    public static EventListFragment newInstance(String example) {
+    public static EventListFragment newInstance(String title) {
         EventListFragment fragment = new EventListFragment();
 
         // arguments
         Bundle arguments = new Bundle();
-        arguments.putString(ARGUMENT_EXAMPLE, example);
+        arguments.putString(TITLE_KEY, title);
         fragment.setArguments(arguments);
 
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,17 +60,25 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
         }
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mFragmentView = inflater.inflate(R.layout.fragment_event_list, container, false);
-        ButterKnife.bind(this, mFragmentView);
-        setRetainInstance(true);
-        init(mFragmentView, savedInstanceState);
-        return mFragmentView;
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        setUserVisibleHint(true);
     }
 
-    private void init(View view, Bundle savedInstanceState) {
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+
+    @Override
+    void initView(View view, Bundle savedInstanceState) {
         GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerViewLayoutManager.supportsPredictiveItemAnimations();
         // init adapter for the first time
@@ -98,25 +104,15 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        setUserVisibleHint(true);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    @LayoutRes
+    int getLayoutResource() {
+        return R.layout.fragment_event_list;
     }
 
     private void handleArguments(Bundle arguments) {
-        if (arguments.containsKey(ARGUMENT_EXAMPLE)) {
-            String mExample = (String) arguments.get(ARGUMENT_EXAMPLE);
-            Logcat.d("Handled %s value: %s", ARGUMENT_EXAMPLE, mExample);
+        if (arguments.containsKey(TITLE_KEY)) {
+            String mTitle = (String) arguments.get(TITLE_KEY);
+            Logcat.d("Handled %s value: %s", TITLE_KEY, mTitle);
         }
     }
 

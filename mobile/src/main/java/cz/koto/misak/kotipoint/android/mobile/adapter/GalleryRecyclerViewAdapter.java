@@ -8,21 +8,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
+import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 
-public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoTiEvent> {
+/**
+ * http://blog.sqisland.com/2014/12/recyclerview-grid-with-header.html
+ *
+ * http://www.slideshare.net/devunwired/mastering-recyclerview-layouts
+ */
+public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<GalleryItem> {
 
-    private static final int VIEW_TYPE_EVENT = 1;
+    private static final int VIEW_TYPE_IMAGE = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
 
-    private EventViewHolder.OnItemClickListener mListener;
+    private GalleryViewHolder.OnItemClickListener mListener;
     FooterViewHolder mFooterViewHolder = null;
 
 
-    public EventRecyclerViewAdapter(EventViewHolder.OnItemClickListener listener) {
+    public GalleryRecyclerViewAdapter(GalleryViewHolder.OnItemClickListener listener) {
         mListener = listener;
-        addFooter(new KoTiEvent(-2,"Loader"));
+        addFooter(new GalleryItem("-",-1L));
 
     }
 
@@ -30,7 +35,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
     @Override
     public long getItemId(int position) {
         Logcat.w("Items count %s, Requester position:%s , Item:%s",getItemCount(), position,getItem(position));
-        if (getItem(position).getmId()==null) {
+        if (getItem(position).getmUrl()==null) {
             Logcat.w("Null ID for position: %s",getItem(position));
         }
         return getItem(position).getmId();
@@ -38,11 +43,11 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_EVENT) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_event_item, parent, false);
-            return new EventViewHolder(v, mListener);
+        if (viewType == VIEW_TYPE_IMAGE) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_gallery_item, parent, false);
+            return new GalleryViewHolder(v, mListener);
         } else if (viewType == VIEW_TYPE_FOOTER) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_event_footer, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_gallery_footer, parent, false);
             return mFooterViewHolder =  new FooterViewHolder(view);
         }
         return null;
@@ -53,14 +58,14 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         if (getItem(position).getmId()<-1){
             return VIEW_TYPE_FOOTER;
         }else{
-            return VIEW_TYPE_EVENT;
+            return VIEW_TYPE_IMAGE;
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-            case VIEW_TYPE_EVENT:
+            case VIEW_TYPE_IMAGE:
                 onBindTextHolder(holder, position);
                 break;
             case VIEW_TYPE_FOOTER:
@@ -69,8 +74,8 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
     }
 
     private void onBindTextHolder(RecyclerView.ViewHolder holder, int position) {
-        EventViewHolder mainHolder = (EventViewHolder) holder;
-        mainHolder.mNameTextView.setText(getItem(position).getmHeadline());
+        GalleryViewHolder mainHolder = (GalleryViewHolder) holder;
+        mainHolder.mNameTextView.setText(getItem(position).getmUrl());
     }
 
 
@@ -84,7 +89,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         mFooterViewHolder.showProgress();
     }
 
-    public static final class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public static final class GalleryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView mNameTextView;
         private OnItemClickListener mListener;
 
@@ -96,7 +101,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         }
 
 
-        public EventViewHolder(View itemView, OnItemClickListener listener) {
+        public GalleryViewHolder(View itemView, OnItemClickListener listener) {
             super(itemView);
             mListener = listener;
 
@@ -105,7 +110,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
             itemView.setOnLongClickListener(this);
 
             // find views
-            mNameTextView = (TextView) itemView.findViewById(R.id.fragment_event_item_name);
+            mNameTextView = (TextView) itemView.findViewById(R.id.fragment_gallery_item_name);
         }
 
         @Override
@@ -127,8 +132,8 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         }
 
 
-        public void bindData(KoTiEvent koTiEvent) {
-            mNameTextView.setText(koTiEvent.getmHeadline());
+        public void bindData(GalleryItem galleryItem) {
+            mNameTextView.setText(galleryItem.getmUrl());
         }
     }
 
@@ -139,7 +144,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         public FooterViewHolder(View itemView) {
             super(itemView);
 
-            mProgressBar = (ProgressBar) itemView.findViewById(R.id.fragment_event_footer_progress);
+            mProgressBar = (ProgressBar) itemView.findViewById(R.id.fragment_gallery_footer_progress);
             hideProgress();
         }
 

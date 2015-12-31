@@ -34,7 +34,6 @@ public class EventDetailFragment extends PermissionFragment {
     @Bind(R.id.event_detail_date)
     TextView mEventDetailDate;
 
-    private View mRootView;
     private KoTiEvent mKoTiEvent;
 
     @Override
@@ -49,15 +48,6 @@ public class EventDetailFragment extends PermissionFragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
     }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_event_detail, container, false);
-        ButterKnife.bind(this, mRootView);
-        return mRootView;
-    }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -75,46 +65,13 @@ public class EventDetailFragment extends PermissionFragment {
     }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mRootView = null;
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+        mFragmentView = null;
     }
 
 
@@ -144,6 +101,15 @@ public class EventDetailFragment extends PermissionFragment {
         // TODO
     }
 
+    @Override
+    int getLayoutResource() {
+        return R.layout.fragment_event_detail;
+    }
+
+    @Override
+    void initView(View view, Bundle savedInstanceState) {
+        //Nothing to do yet.
+    }
 
     private void bindNetworkImage() {
         if (NetworkUtils.isOnline(getActivity())) {

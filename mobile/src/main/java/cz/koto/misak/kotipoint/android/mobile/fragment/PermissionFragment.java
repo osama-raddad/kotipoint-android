@@ -16,7 +16,7 @@ import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.utils.PermissionUtils;
 
 
-public abstract class PermissionFragment extends Fragment {
+public abstract class PermissionFragment extends BaseFragment {
 
     private Map<AppPermissionEnum, Boolean> mGrantedPermissionMap = new HashMap<>();
 

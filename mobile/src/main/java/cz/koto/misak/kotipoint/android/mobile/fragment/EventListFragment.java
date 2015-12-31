@@ -16,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
-import cz.koto.misak.kotipoint.android.mobile.adapter.KoTiEventRecyclerViewAdapter;
+import cz.koto.misak.kotipoint.android.mobile.adapter.EventRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
@@ -26,7 +26,7 @@ import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 
 
-public class KoTiEventRecyclerFragment extends StatefulPermissionFragment implements KoTiEventRecyclerViewAdapter.EventViewHolder.OnItemClickListener {
+public class EventListFragment extends StatefulPermissionFragment implements EventRecyclerViewAdapter.EventViewHolder.OnItemClickListener {
     private static final String ARGUMENT_EXAMPLE = "example";
 
     private View mFragmentView;
@@ -36,11 +36,11 @@ public class KoTiEventRecyclerFragment extends StatefulPermissionFragment implem
     @Bind(R.id.RecyclerView)
     AutoLoadingRecyclerView<KoTiEvent> mRecyclerView;
 
-    private KoTiEventRecyclerViewAdapter mRecyclerViewAdapter;
+    private EventRecyclerViewAdapter mRecyclerViewAdapter;
 
 
-    public static KoTiEventRecyclerFragment newInstance(String example) {
-        KoTiEventRecyclerFragment fragment = new KoTiEventRecyclerFragment();
+    public static EventListFragment newInstance(String example) {
+        EventListFragment fragment = new EventListFragment();
 
         // arguments
         Bundle arguments = new Bundle();
@@ -65,7 +65,7 @@ public class KoTiEventRecyclerFragment extends StatefulPermissionFragment implem
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mFragmentView = inflater.inflate(R.layout.fragment_autoloading_recycler, container, false);
+        mFragmentView = inflater.inflate(R.layout.fragment_event_list, container, false);
         ButterKnife.bind(this, mFragmentView);
         setRetainInstance(true);
         init(mFragmentView, savedInstanceState);
@@ -80,7 +80,7 @@ public class KoTiEventRecyclerFragment extends StatefulPermissionFragment implem
             if (mRecyclerViewAdapter == null) {
                 Logcat.d("RecyclerViewAdapter is NULL, init it!");
             }
-            mRecyclerViewAdapter = new KoTiEventRecyclerViewAdapter(this);
+            mRecyclerViewAdapter = new EventRecyclerViewAdapter(this);
             mRecyclerViewAdapter.setHasStableIds(true);
         }
 

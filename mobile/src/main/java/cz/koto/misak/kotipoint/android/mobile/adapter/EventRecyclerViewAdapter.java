@@ -11,7 +11,7 @@ import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 
-public class KoTiEventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoTiEvent> {
+public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoTiEvent> {
 
     private static final int VIEW_TYPE_EVENT = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
@@ -20,7 +20,7 @@ public class KoTiEventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter
     FooterViewHolder mFooterViewHolder = null;
 
 
-    public KoTiEventRecyclerViewAdapter(EventViewHolder.OnItemClickListener listener) {
+    public EventRecyclerViewAdapter(EventViewHolder.OnItemClickListener listener) {
         mListener = listener;
         addFooter(new KoTiEvent(-2,"Loader"));
 

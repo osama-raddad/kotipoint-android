@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cz.koto.misak.kotipoint.android.mobile.fragment.KoTiEventRecyclerFragment;
+import cz.koto.misak.kotipoint.android.mobile.fragment.EventListFragment;
 
 
 public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -26,7 +26,7 @@ public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return KoTiEventRecyclerFragment.newInstance("EVENT");
+                return EventListFragment.newInstance("EVENT");
             default:
                 return null;
         }

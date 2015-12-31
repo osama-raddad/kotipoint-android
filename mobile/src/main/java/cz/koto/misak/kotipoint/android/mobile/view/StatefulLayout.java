@@ -13,185 +13,170 @@ import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
 
 
 // code inspired by: https://github.com/jakubkinst/Android-StatefulView
-public class StatefulLayout extends FrameLayout
-{
-	private static final String SAVED_STATE = "stateful_layout_state";
+public class StatefulLayout extends FrameLayout {
+    private static final String SAVED_STATE = "stateful_layout_state";
 
-	private State mInitialState;
-	private int mProgressLayoutId;
-	private int mOfflineLayoutId;
-	private int mEmptyLayoutId;
-	private View mContentLayout;
-	private View mProgressLayout;
-	private View mOfflineLayout;
-	private View mEmptyLayout;
-	private State mState;
-	private OnStateChangeListener mOnStateChangeListener;
+    private State mInitialState;
+    private int mProgressLayoutId;
+    private int mOfflineLayoutId;
+    private int mEmptyLayoutId;
+    private int mNoPermissionLayoutId;
 
-
-	public enum State
-	{
-		CONTENT(0), PROGRESS(1), OFFLINE(2), EMPTY(3);
-
-		private final int mValue;
+    private View mContentLayout;
+    private View mProgressLayout;
+    private View mOfflineLayout;
+    private View mEmptyLayout;
+    private View mNoPermissionLayout;
+    private State mState;
+    private OnStateChangeListener mOnStateChangeListener;
 
 
-		public static State valueToState(int value)
-		{
-			State[] values = State.values();
-			return values[value];
-		}
+    public enum State {
+        CONTENT(0), PROGRESS(1), OFFLINE(2), EMPTY(3), NOPERMISSION(4);
+
+        private final int mValue;
 
 
-		private State(int value)
-		{
-			mValue = value;
-		}
+        public static State valueToState(int value) {
+            State[] values = State.values();
+            return values[value];
+        }
 
 
-		public int getValue()
-		{
-			return mValue;
-		}
-	}
+        private State(int value) {
+            mValue = value;
+        }
 
 
-	public interface OnStateChangeListener
-	{
-		void onStateChange(View v, State state);
-	}
+        public int getValue() {
+            return mValue;
+        }
+    }
 
 
-	public StatefulLayout(Context context)
-	{
-		this(context, null);
-	}
+    public interface OnStateChangeListener {
+        void onStateChange(View v, State state);
+    }
 
 
-	public StatefulLayout(Context context, AttributeSet attrs)
-	{
-		this(context, attrs, 0);
-	}
+    public StatefulLayout(Context context) {
+        this(context, null);
+    }
 
 
-	public StatefulLayout(Context context, AttributeSet attrs, int defStyleAttr)
-	{
-		super(context, attrs, defStyleAttr);
-
-		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulLayout);
-		if(typedArray.hasValue(R.styleable.StatefulLayout_state))
-		{
-			int initialStateValue = typedArray.getInt(R.styleable.StatefulLayout_state, State.CONTENT.getValue());
-			mInitialState = State.valueToState(initialStateValue);
-		}
-		if(typedArray.hasValue(R.styleable.StatefulLayout_progressLayout) &&
-				typedArray.hasValue(R.styleable.StatefulLayout_offlineLayout) &&
-				typedArray.hasValue(R.styleable.StatefulLayout_emptyLayout))
-		{
-			mProgressLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_progressLayout, 0);
-			mOfflineLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_offlineLayout, 0);
-			mEmptyLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_emptyLayout, 0);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Attributes progressLayout, offlineLayout and emptyLayout are mandatory");
-		}
-		typedArray.recycle();
-	}
+    public StatefulLayout(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
 
-	@Override
-	protected void onFinishInflate()
-	{
-		super.onFinishInflate();
-		setupView();
-	}
+    public StatefulLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulLayout);
+        if (typedArray.hasValue(R.styleable.StatefulLayout_state)) {
+            int initialStateValue = typedArray.getInt(R.styleable.StatefulLayout_state, State.CONTENT.getValue());
+            mInitialState = State.valueToState(initialStateValue);
+        }
+        if (typedArray.hasValue(R.styleable.StatefulLayout_progressLayout) &&
+                typedArray.hasValue(R.styleable.StatefulLayout_offlineLayout) &&
+                typedArray.hasValue(R.styleable.StatefulLayout_emptyLayout) &&
+                typedArray.hasValue(R.styleable.StatefulLayout_noPermissionLayout)) {
+            mProgressLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_progressLayout, 0);
+            mOfflineLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_offlineLayout, 0);
+            mEmptyLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_emptyLayout, 0);
+            mNoPermissionLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_noPermissionLayout, 0);
+        } else {
+            throw new IllegalArgumentException("Attributes progressLayout, offlineLayout and emptyLayout are mandatory");
+        }
+        typedArray.recycle();
+    }
 
 
-	public void showContent()
-	{
-		setState(State.CONTENT);
-	}
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        setupView();
+    }
 
 
-	public void showProgress()
-	{
-		setState(State.PROGRESS);
-	}
+    public void showContent() {
+        setState(State.CONTENT);
+    }
 
 
-	public void showOffline()
-	{
-		setState(State.OFFLINE);
-	}
+    public void showProgress() {
+        setState(State.PROGRESS);
+    }
 
 
-	public void showEmpty()
-	{
-		setState(State.EMPTY);
-	}
+    public void showOffline() {
+        setState(State.OFFLINE);
+    }
 
 
-	public State getState()
-	{
-		return mState;
-	}
+    public void showEmpty() {
+        setState(State.EMPTY);
+    }
+
+    public void showNoPermission() {
+        setState(State.NOPERMISSION);
+    }
 
 
-	public void setState(State state)
-	{
-        Logcat.d(">>setState:%s",state);
-		mState = state;
-		mContentLayout.setVisibility(state == State.CONTENT ? View.VISIBLE : View.GONE);
-		mProgressLayout.setVisibility(state == State.PROGRESS ? View.VISIBLE : View.GONE);
-		mOfflineLayout.setVisibility(state == State.OFFLINE ? View.VISIBLE : View.GONE);
-		mEmptyLayout.setVisibility(state == State.EMPTY ? View.VISIBLE : View.GONE);
-		if(mOnStateChangeListener!=null) mOnStateChangeListener.onStateChange(this, state);
-	}
+    public State getState() {
+        return mState;
+    }
 
 
-	public void setOnStateChangeListener(OnStateChangeListener l)
-	{
-		mOnStateChangeListener = l;
-	}
+    public void setState(State state) {
+        Logcat.d(">>setState:%s", state);
+        mState = state;
+        mContentLayout.setVisibility(state == State.CONTENT ? VISIBLE : GONE);
+        mProgressLayout.setVisibility(state == State.PROGRESS ? VISIBLE : GONE);
+        mOfflineLayout.setVisibility(state == State.OFFLINE ? VISIBLE : GONE);
+        mEmptyLayout.setVisibility(state == State.EMPTY ? VISIBLE : GONE);
+        mNoPermissionLayout.setVisibility(state == State.NOPERMISSION ? VISIBLE : GONE);
+        if (mOnStateChangeListener != null) mOnStateChangeListener.onStateChange(this, state);
+    }
 
 
-	public void saveInstanceState(Bundle outState)
-	{
-		if(mState!=null)
-		{
-			outState.putInt(SAVED_STATE, mState.getValue());
-		}
-	}
+    public void setOnStateChangeListener(OnStateChangeListener l) {
+        mOnStateChangeListener = l;
+    }
 
 
-	public State restoreInstanceState(Bundle savedInstanceState)
-	{
-		State state = null;
-		if(savedInstanceState!=null && savedInstanceState.containsKey(SAVED_STATE))
-		{
-			int value = savedInstanceState.getInt(SAVED_STATE);
-			state = StatefulLayout.State.valueToState(value);
-			setState(state);
-		}
-		return state;
-	}
+    public void saveInstanceState(Bundle outState) {
+        if (mState != null) {
+            outState.putInt(SAVED_STATE, mState.getValue());
+        }
+    }
 
 
-	private void setupView()
-	{
-		if(mContentLayout==null)
-		{
-			mContentLayout = getChildAt(0);
-			mProgressLayout = LayoutInflater.from(getContext()).inflate(mProgressLayoutId, this, false);
-			mOfflineLayout = LayoutInflater.from(getContext()).inflate(mOfflineLayoutId, this, false);
-			mEmptyLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
+    public State restoreInstanceState(Bundle savedInstanceState) {
+        State state = null;
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_STATE)) {
+            int value = savedInstanceState.getInt(SAVED_STATE);
+            state = StatefulLayout.State.valueToState(value);
+            setState(state);
+        }
+        return state;
+    }
 
-			addView(mProgressLayout);
-			addView(mOfflineLayout);
-			addView(mEmptyLayout);
 
-			setState(mInitialState);
-		}
-	}
+    private void setupView() {
+        if (mContentLayout == null) {
+            mContentLayout = getChildAt(0);
+            mProgressLayout = LayoutInflater.from(getContext()).inflate(mProgressLayoutId, this, false);
+            mOfflineLayout = LayoutInflater.from(getContext()).inflate(mOfflineLayoutId, this, false);
+            mEmptyLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
+            mNoPermissionLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
+
+            addView(mProgressLayout);
+            addView(mOfflineLayout);
+            addView(mEmptyLayout);
+            addView(mNoPermissionLayout);
+
+            setState(mInitialState);
+        }
+    }
 }

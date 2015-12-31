@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.adapter.TabLayoutFragmentPagerAdapter;
 
@@ -12,12 +14,18 @@ import cz.koto.misak.kotipoint.android.mobile.adapter.TabLayoutFragmentPagerAdap
 public class MainActivity extends AppCompatActivity {
     private TabLayoutFragmentPagerAdapter mAdapter;
 
+    @Bind(R.id.activity_tablayout_pager)
+    ViewPager viewPager;
+
+    @Bind(R.id.activity_tablayout_tabs)
+    TabLayout tabLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         bindData();
     }
 
@@ -25,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private void bindData()
     {
         // reference
-        ViewPager viewPager = (ViewPager) findViewById(R.id.activity_tablayout_pager);
         viewPager.setOffscreenPageLimit(TabLayoutFragmentPagerAdapter.FRAGMENT_COUNT-1);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.activity_tablayout_tabs);
 
         // pager content
         if(mAdapter==null)

@@ -23,31 +23,31 @@ import java.util.List;
  */
 public abstract class AutoLoadingRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    protected List<T> listElements = new ArrayList<>();
+    protected List<T> mElementList = new ArrayList<>();
 
     public void addNewItems(List<T> items) {
-        listElements.addAll(listElements.size()-1,items);
+        mElementList.addAll(mElementList.size()-1,items);
     }
 
     public void addNewItem(T item) {
-        listElements.add(listElements.size()-1,item);
+        mElementList.add(mElementList.size()-1,item);
     }
 
     public void addFooter(T item) {
-        listElements.add(item);
+        mElementList.add(item);
     }
 
     public List<T> getItems() {
-        return listElements;
+        return mElementList;
     }
 
     public T getItem(int position) {
-        return listElements.get(position);
+        return mElementList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return listElements.size();
+        return mElementList.size();
     }
 
     public abstract void hideAutoLoader();

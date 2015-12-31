@@ -10,5 +10,6 @@
 		<attr name="progressLayout" format="reference" />
 		<attr name="offlineLayout" format="reference" />
 		<attr name="emptyLayout" format="reference" />
+		<attr name="noPermissionLayout" format="reference" />
 	</declare-styleable>
 </resources>

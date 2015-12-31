@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/fragment_example_stateful_layout"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:animateLayoutChanges="true"
-	app:state="content"
-	app:progressLayout="@layout/fragment_placeholder_progress"
-	app:offlineLayout="@layout/fragment_placeholder_offline"
-	app:emptyLayout="@layout/fragment_placeholder_empty">
+<cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_example_stateful_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    app:state="content"
+    app:progressLayout="@layout/fragment_placeholder_progress"
+    app:offlineLayout="@layout/fragment_placeholder_offline"
+    app:emptyLayout="@layout/fragment_placeholder_empty"
+    app:noPermissionLayout="@layout/fragment_placeholder_nopermission">
 
 	<cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView
 		android:id="@+id/RecyclerView"

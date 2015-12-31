@@ -18,17 +18,17 @@ import cz.koto.misak.kotipoint.android.mobile.utils.PermissionUtils;
 
 public abstract class PermissionFragment extends Fragment {
 
-    private Map<AppPermissionEnum, Boolean>  grantedPermissions = new HashMap<>();
+    private Map<AppPermissionEnum, Boolean> mGrantedPermissionMap = new HashMap<>();
 
-    private boolean permissionNotGranted;
+    private boolean mPermissionNotGranted;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        grantedPermissions.clear();
+        mGrantedPermissionMap.clear();
         if (getPermissionList() == null) return;
         for(AppPermissionEnum appPermissionEnum:getPermissionList()){
-            grantedPermissions.put(appPermissionEnum,Boolean.FALSE);
+            mGrantedPermissionMap.put(appPermissionEnum, Boolean.FALSE);
         }
     }
 
@@ -77,7 +77,7 @@ public abstract class PermissionFragment extends Fragment {
      */
     void requestPermissions() {
 
-        permissionNotGranted = false;
+        mPermissionNotGranted = false;
         List<AppPermissionEnum> permissionEnumList = getPermissionList();
 
         if (permissionEnumList == null) {
@@ -123,7 +123,7 @@ public abstract class PermissionFragment extends Fragment {
          * If there is at least one not granted permission stop check for the others
          * until requestPermissions() will be invoked again.
          **/
-        if (permissionNotGranted) return;
+        if (mPermissionNotGranted) return;
 
         AppPermissionEnum requestedAppPermission = AppPermissionEnum.getAppPermissionEnumById(requestCode);
 
@@ -141,7 +141,7 @@ public abstract class PermissionFragment extends Fragment {
                 Snackbar.make(getView(), R.string.permissions_not_granted,
                         Snackbar.LENGTH_SHORT)
                         .show();
-                permissionNotGranted = true;
+                mPermissionNotGranted = true;
                 permissionNotGranted();
             }
 
@@ -154,8 +154,8 @@ public abstract class PermissionFragment extends Fragment {
      * @param appPermissionEnum
      */
     private void grantAndDoWithPermissions(AppPermissionEnum appPermissionEnum){
-        grantedPermissions.put(appPermissionEnum,Boolean.TRUE);
-        if (grantedPermissions.values().contains(null)||grantedPermissions.values().contains(Boolean.FALSE)) return;
+        mGrantedPermissionMap.put(appPermissionEnum, Boolean.TRUE);
+        if (mGrantedPermissionMap.values().contains(null)|| mGrantedPermissionMap.values().contains(Boolean.FALSE)) return;
         doWithPermissions();
     }
 

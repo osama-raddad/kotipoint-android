@@ -9,7 +9,7 @@ import cz.koto.misak.kotipoint.android.mobile.fragment.GalleryFragment;
 
 
 public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
-    public static final int FRAGMENT_COUNT = 2;
+    public static final int FRAGMENT_COUNT = 1;
 
 
     public TabLayoutFragmentPagerAdapter(FragmentManager fragmentManager) {
@@ -26,9 +26,9 @@ public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return EventListFragment.newInstance("EVENT");
             case 1:
+                return EventListFragment.newInstance("EVENT");
+            case 0:
                 return GalleryFragment.newInstance();
             default:
                 return null;
@@ -39,9 +39,9 @@ public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
-                return "EVENT";
             case 1:
+                return "EVENT";
+            case 0:
                 return "GALLERY";
             default:
                 return null;

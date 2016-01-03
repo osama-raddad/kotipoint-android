@@ -27,7 +27,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 
     public GalleryRecyclerViewAdapter(GalleryViewHolder.OnItemClickListener listener) {
         mListener = listener;
-        addFooter(new GalleryItem("-",-1L));
+        addFooter(new GalleryItem("-",-2L));
 
     }
 

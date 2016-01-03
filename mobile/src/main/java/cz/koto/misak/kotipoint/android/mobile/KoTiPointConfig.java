@@ -20,4 +20,9 @@ public class KoTiPointConfig
 	 * Internet endpoint
 	 */
 	public static final String API_KOTINODE_ENDPOINT_PRODUCTION = "https://kotopeky.cz/api/kotinode";
+
+	/**
+	 * Delay (in millis) for testing purpose.
+	 */
+	public static final int API_KOTINODE_TEST_DELAY = 2000;
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.adapter.EventRecyclerViewAdapter;
@@ -99,7 +100,7 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mRecyclerView.setLimit(LIMIT);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), 2000));
+        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), KoTiPointConfig.API_KOTINODE_TEST_DELAY));
         mRecyclerView.setStatefulLayout(getFragmentView());
     }
 

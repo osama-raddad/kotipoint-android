@@ -1,19 +1,26 @@
 package cz.koto.misak.kotipoint.android.mobile.adapter;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
 
 /**
  * http://blog.sqisland.com/2014/12/recyclerview-grid-with-header.html
- *
+ * <p>
  * http://www.slideshare.net/devunwired/mastering-recyclerview-layouts
  */
 public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<GalleryItem> {
@@ -22,21 +29,23 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
     private static final int VIEW_TYPE_FOOTER = 2;
 
     private GalleryViewHolder.OnItemClickListener mListener;
+    private Context mContext;
     FooterViewHolder mFooterViewHolder = null;
 
 
-    public GalleryRecyclerViewAdapter(GalleryViewHolder.OnItemClickListener listener) {
+    public GalleryRecyclerViewAdapter(GalleryViewHolder.OnItemClickListener listener, Context context) {
         mListener = listener;
-        addFooter(new GalleryItem("-",-2L));
+        mContext = context;
+        addFooter(new GalleryItem("-", -2L));
 
     }
 
 
     @Override
     public long getItemId(int position) {
-        Logcat.w("Items count %s, Requester position:%s , Item:%s",getItemCount(), position,getItem(position));
-        if (getItem(position).getmUrl()==null) {
-            Logcat.w("Null ID for position: %s",getItem(position));
+        Logcat.w("Items count %s, Requester position:%s , Item:%s", getItemCount(), position, getItem(position));
+        if (getItem(position).getmUrl() == null) {
+            Logcat.w("Null ID for position: %s", getItem(position));
         }
         return getItem(position).getmId();
     }
@@ -48,16 +57,16 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
             return new GalleryViewHolder(v, mListener);
         } else if (viewType == VIEW_TYPE_FOOTER) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_gallery_footer, parent, false);
-            return mFooterViewHolder =  new FooterViewHolder(view);
+            return mFooterViewHolder = new FooterViewHolder(view);
         }
         return null;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position).getmId()<-1){
+        if (getItem(position).getmId() < -1) {
             return VIEW_TYPE_FOOTER;
-        }else{
+        } else {
             return VIEW_TYPE_IMAGE;
         }
     }
@@ -75,22 +84,36 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 
     private void onBindTextHolder(RecyclerView.ViewHolder holder, int position) {
         GalleryViewHolder mainHolder = (GalleryViewHolder) holder;
-        mainHolder.mNameTextView.setText(getItem(position).getmUrl());
-    }
+
+        //mainHolder.mImageView.setText(getItem(position).getmUrl());
+//        Uri imageURI = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Integer.toString(columnIndex));
+//        Picasso
+//                .with(context)
+//                .load(imageURI)
+//                .fit()
+//                .centerInside()
+//                .into(imageView);
+        Picasso
+                .with(mContext)
+                .load(Uri.parse("http://" + getItem(position).getmUrl()))
+                .transform(ImageTransformation.getTransformation(mainHolder.mImageView))
+                .placeholder(R.drawable.progress_animation)
+                .into(mainHolder.mImageView);
+                }
 
 
-    public void hideAutoLoader(){
-        if (mFooterViewHolder==null)return;
+    public void hideAutoLoader() {
+        if (mFooterViewHolder == null) return;
         mFooterViewHolder.hideProgress();
     }
 
-    public  void showLoader(){
-      if (mFooterViewHolder==null)return;
+    public void showLoader() {
+        if (mFooterViewHolder == null) return;
         mFooterViewHolder.showProgress();
     }
 
     public static final class GalleryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView mNameTextView;
+        private ImageView mImageView;
         private OnItemClickListener mListener;
 
 
@@ -110,7 +133,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
             itemView.setOnLongClickListener(this);
 
             // find views
-            mNameTextView = (TextView) itemView.findViewById(R.id.fragment_gallery_item_name);
+            mImageView = (ImageView) itemView.findViewById(R.id.fragment_gallery_item_view);
         }
 
         @Override
@@ -132,9 +155,9 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
         }
 
 
-        public void bindData(GalleryItem galleryItem) {
-            mNameTextView.setText(galleryItem.getmUrl());
-        }
+//        public void bindData(GalleryItem galleryItem) {
+//            mImageView.setText(galleryItem.getmUrl());
+//        }
     }
 
     public static final class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -153,11 +176,11 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
             // do nothing
         }
 
-        public void showProgress(){
+        public void showProgress() {
             mProgressBar.setVisibility(View.VISIBLE);
         }
 
-        public void hideProgress(){
+        public void hideProgress() {
             mProgressBar.setVisibility(View.GONE);
         }
     }

@@ -43,14 +43,14 @@ public class GalleryFragment extends StatefulPermissionFragment implements Galle
 
     @Override
     void initView(View view, Bundle savedInstanceState) {
-        GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 1);
+        GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewLayoutManager.supportsPredictiveItemAnimations();
         // init adapter for the first time
         if ((savedInstanceState == null) || (mRecyclerViewAdapter == null)) {
             if (mRecyclerViewAdapter == null) {
                 Logcat.d("RecyclerViewAdapter is NULL, init it!");
             }
-            mRecyclerViewAdapter = new GalleryRecyclerViewAdapter(this);
+            mRecyclerViewAdapter = new GalleryRecyclerViewAdapter(this, getContext());
             mRecyclerViewAdapter.setHasStableIds(true);
         }
 

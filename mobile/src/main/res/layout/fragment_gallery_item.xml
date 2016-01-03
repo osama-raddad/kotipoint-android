@@ -8,12 +8,20 @@
     android:orientation="horizontal"
     android:background="@drawable/selector_clickable_item_bg">
 
-    <TextView
-        android:id="@+id/fragment_gallery_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/global_keyline_s"
-        android:layout_marginRight="@dimen/global_keyline_s"
-        android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />
+    <!--<TextView-->
+        <!--android:id="@+id/fragment_gallery_item_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/global_keyline_s"-->
+        <!--android:layout_marginRight="@dimen/global_keyline_s"-->
+        <!--android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_gallery_item_view"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+    </ImageView>
 
 </LinearLayout>

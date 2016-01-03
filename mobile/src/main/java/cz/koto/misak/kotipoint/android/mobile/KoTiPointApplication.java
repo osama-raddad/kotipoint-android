@@ -17,6 +17,11 @@ public class KoTiPointApplication extends Application {
         CrashlyticsCore core = new CrashlyticsCore.Builder()
                 .disabled(KoTiPointConfig.DEV_API)
                 .build();
+        /**
+         * Attention!
+         * Never let the Fabric to generate plain new Crashlytics() Kit!
+         * Always use customized Kit (like the core above) to omit DEV reporting to Crashlytics server.
+         */
         Fabric.with(this, new Crashlytics.Builder().core(core).build());
     }
 

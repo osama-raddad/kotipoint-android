@@ -13,7 +13,7 @@ public interface KoTiNodeApi {
 
 
     @GET("/api/kotinode/event")
-    Observable<List<KoTiEvent>> eventList(@Query("offset") int offset,@Query("limit") int limit);
+    Observable<List<KoTiEvent>> eventList(@Query("offset") int offset,@Query("limit") int limit, @Query("delay") int delay);
 
     @GET("/api/kotinode/gallery")
     Observable<List<GalleryItem>> galleryList(@Query("offset") int offset,@Query("limit") int limit);

@@ -99,7 +99,7 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mRecyclerView.setLimit(LIMIT);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit()));
+        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), 2000));
         mRecyclerView.setStatefulLayout(getFragmentView());
     }
 

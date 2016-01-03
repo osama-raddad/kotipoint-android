@@ -18,7 +18,7 @@ public class KoTiNodeClient {
         if (sRestInterface == null) {
             GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'");//ISO-8601
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(KoTiPointConfig.API_KOTINODE_ENDPOINT_DEV_VBOXNET)
+                    .baseUrl(KoTiPointConfig.API_KOTINODE_ENDPOINT_PRODUCTION)
                     .client(KotoSSLTrust.trustcert(context))
                     .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//important for RX!!!

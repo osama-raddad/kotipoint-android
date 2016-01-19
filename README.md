@@ -13,7 +13,13 @@ Features
 
 Release notes
 ============
-WTF(What The Feature) is new in this version.
+**History**:
+This is fourth version (&repository) of KoTiPoint app. Old variants are:
+ * [KOTI-POINT](https://bitbucket.org/KotoMisak/koti-point-android)
+ * [KO-TI-POINT](https://bitbucket.org/KotoMisak/ko-ti-point-android)
+ * [KOTI-PORTAL - repository since 2014, lost in 2015]
+
+**WTF(What The Feature)** is new in which version.
 
 0.1.x.y - Basic list of Kotopeky&Tihava events
 

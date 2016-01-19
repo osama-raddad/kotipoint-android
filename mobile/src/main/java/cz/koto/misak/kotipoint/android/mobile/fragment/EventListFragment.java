@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
@@ -123,7 +120,7 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
 
     @Override
     public void onItemClick(View view, int position, long id, int viewType) {
-        Intent i = new Intent(getContext(), EventDetailActivity.class);
+        Intent i = EventDetailActivity.newIntent(getContext());
         i.putExtra(EventDetailActivity.PAYLOAD_KEY, mRecyclerViewAdapter.getItem(position));
         getContext().startActivity(i);
     }

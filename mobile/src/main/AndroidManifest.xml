@@ -29,6 +29,7 @@
 
 		<activity android:name=".activity.EventDetailActivity"/>
 
+		<activity android:name=".activity.GalleryDetailActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8c0bb2c33591aad3c129ef62c7250ea617524715" />

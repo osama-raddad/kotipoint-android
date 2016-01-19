@@ -8,8 +8,8 @@
     <include layout="@layout/toolbar" />
 
     <fragment
-        android:id="@+id/fragment_event_detail"
-        android:name="cz.koto.misak.kotipoint.android.mobile.fragment.EventDetailFragment"
+        android:id="@+id/fragment_gallery_detail"
+        android:name="cz.koto.misak.kotipoint.android.mobile.fragment.GaleryDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

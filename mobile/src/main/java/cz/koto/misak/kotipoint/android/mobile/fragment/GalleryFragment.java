@@ -1,6 +1,7 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.adapter.EventRecyclerViewAdapter;
+import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.adapter.GalleryRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
@@ -87,14 +88,16 @@ public class GalleryFragment extends StatefulPermissionFragment implements Galle
 
     @Override
     public void onItemClick(View view, int position, long id, int viewType) {
-        //TODO do nothing yet
+        Intent i = GalleryDetailActivity.newIntent(getContext());
+        i.putExtra(GalleryDetailActivity.PAYLOAD_KEY, mRecyclerViewAdapter.getItem(position));
+        getContext().startActivity(i);
     }
 
     @Override
     public void onItemLongClick(View view, int position, long id, int viewType) {
         GalleryItem galleryItem = mRecyclerViewAdapter.getItem(position);
         if (galleryItem == null) return;
-        Toast.makeText(getContext(), String.valueOf(galleryItem.getmId()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), String.valueOf(galleryItem.getId()), Toast.LENGTH_SHORT).show();
     }
 
     private void doLoading() {

@@ -6,8 +6,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.security.MessageDigest;
-
 public class GalleryItem implements Parcelable {
 
     @SerializedName("url")
@@ -51,20 +49,20 @@ public class GalleryItem implements Parcelable {
     }
 
 
-    public String getmUrl() {
+    public String getUrl() {
         return mUrl;
     }
 
-    public void setmUrl(String mUrl) {
+    public void setUrl(String mUrl) {
         this.mUrl = mUrl;
     }
 
 
-    public Long getmId() {
+    public Long getId() {
         return mId;
     }
 
-    public void setmId(Long mId) {
+    public void setId(Long mId) {
         this.mId = mId;
     }
 }

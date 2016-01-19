@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
@@ -44,10 +42,10 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
     @Override
     public long getItemId(int position) {
         Logcat.w("Items count %s, Requester position:%s , Item:%s", getItemCount(), position, getItem(position));
-        if (getItem(position).getmUrl() == null) {
+        if (getItem(position).getUrl() == null) {
             Logcat.w("Null ID for position: %s", getItem(position));
         }
-        return getItem(position).getmId();
+        return getItem(position).getId();
     }
 
     @Override
@@ -64,7 +62,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position).getmId() < -1) {
+        if (getItem(position).getId() < -1) {
             return VIEW_TYPE_FOOTER;
         } else {
             return VIEW_TYPE_IMAGE;
@@ -95,7 +93,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 //                .into(imageView);
         Picasso
                 .with(mContext)
-                .load(Uri.parse("http://" + getItem(position).getmUrl()))
+                .load(Uri.parse("http://" + getItem(position).getUrl()))
                 .transform(ImageTransformation.getTransformation(mainHolder.mImageView))
                 .placeholder(R.drawable.progress_animation)
                 .into(mainHolder.mImageView);

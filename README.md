@@ -17,7 +17,7 @@ Release notes
 This is fourth version (&repository) of KoTiPoint app. Old variants are:
  * [KOTI-POINT](https://bitbucket.org/KotoMisak/koti-point-android)
  * [KO-TI-POINT](https://bitbucket.org/KotoMisak/ko-ti-point-android)
- * [KOTI-PORTAL - repository since 2014, lost in 2015]
+ * [KOTI-PORTAL](./extras/screens/KoTiPortal_KitKat.mp4) - repository since 2014, lost in 2015]
 
 **WTF(What The Feature)** is new in which version.
 

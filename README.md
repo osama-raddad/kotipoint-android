@@ -63,6 +63,10 @@ License
 Screens
 ============
 
+![Event list](./extras/screens/scr_fragment_event_list.png)
+
+![Event detail](./extras/screens/scr_fragment_event_detail.png)
+
 ![Gallery](./extras/screens/scr_fragment_gallery.png)
 
 ![Gallery detail](./extras/screens/scr_fragment_gallery_detail.png)

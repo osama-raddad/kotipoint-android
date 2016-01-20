@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         if(mAdapter==null)
         {
             // create adapter
-            mAdapter = new TabLayoutFragmentPagerAdapter(getSupportFragmentManager());
+            mAdapter = new TabLayoutFragmentPagerAdapter(getSupportFragmentManager(),getBaseContext());
         }
         else
         {

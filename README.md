@@ -14,18 +14,21 @@ Features
 Release notes
 ============
 **History**:
-This is fourth version (&repository) of KoTiPoint app. Old variants are:
+This is third version (&repository) of KoTiPoint app. 
+So this version of ap starts with major version set to 3.
+Old variants are:
  * [KOTI-POINT](https://bitbucket.org/KotoMisak/koti-point-android)
  * [KO-TI-POINT](https://bitbucket.org/KotoMisak/ko-ti-point-android)
  * [KOTI-PORTAL](./extras/screens/KoTiPortal_KitKat.mp4) - repository since 2014, lost in 2015]
 
 **WTF(What The Feature)** is new in which version.
 
-0.1.x.y - Basic list of Kotopeky&Tihava events
+**_3.1.x.y_** - Basic list of Kotopeky&Tihava events
 
-0.2.x.y - List of Kotopeky&Tihava events with proper detail
+**_3.2.x.y_** - List of Kotopeky&Tihava events with proper detail
 
-0.3.x.y - Media gallery
+**_3.3.x.y_** - Media gallery
+3.3.3.0 - (dex:31438)
                                                                                              
 Documentation
 =============

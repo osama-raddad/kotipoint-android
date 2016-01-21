@@ -93,6 +93,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 //                .into(imageView);
         Picasso
                 .with(mContext)
+                //http://localhost:8080/public/gallery/2015-11-15-Racice/racice_001.png
                 .load(Uri.parse("http://" + getItem(position).getUrl()))
                 .transform(ImageTransformation.getTransformation(mainHolder.mImageView))
                 .placeholder(R.drawable.progress_animation)

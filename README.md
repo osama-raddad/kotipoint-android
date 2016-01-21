@@ -27,7 +27,7 @@ Old variants are:
 
 **_3.2.x.y_** - List of Kotopeky&Tihava events with proper detail
 
-**_3.3.x.y_** - Media gallery
+**_3.3.x.y_** - Media gallery 
 3.3.3.0 - (dex:31438)
                                                                                              
 Documentation

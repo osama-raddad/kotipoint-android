@@ -29,6 +29,7 @@ Old variants are:
 
 **_3.3.x.y_** - Media gallery  
 3.3.3.0 - (dex:31438)
+3.3.4.x - architecture refactoring to MVVM (for more details look for [dev-feature-mvvm branch](https://github.com/kotomisak/kotipoint-android/tree/dev-feature-mvvm))
                                                                                              
 Documentation
 =============

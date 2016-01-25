@@ -19,6 +19,8 @@ final VERSION_BUILD = rootProject.ext.versionBuild // max three digits
 
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.android.databinding'
 apply plugin: 'io.fabric'
 
 repositories {

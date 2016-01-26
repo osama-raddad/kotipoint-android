@@ -1,4 +1,4 @@
-package cz.koto.misak.kotipoint.android.mobile.utils;
+package cz.koto.misak.kotipoint.android.mobile.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

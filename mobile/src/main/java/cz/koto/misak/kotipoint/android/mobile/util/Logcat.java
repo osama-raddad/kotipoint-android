@@ -1,9 +1,8 @@
-package cz.koto.misak.kotipoint.android.mobile.utils;
+package cz.koto.misak.kotipoint.android.mobile.util;
 
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 
 import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 

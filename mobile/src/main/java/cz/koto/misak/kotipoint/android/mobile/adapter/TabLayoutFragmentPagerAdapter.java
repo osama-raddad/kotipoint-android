@@ -12,13 +12,12 @@ import android.text.style.ImageSpan;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.fragment.EventListFragment;
-import cz.koto.misak.kotipoint.android.mobile.fragment.GalleryFragment;
 
 /**
  * https://github.com/codepath/android_guides/wiki/Google-Play-Style-Tabs-using-TabLayout
  */
 public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
-    public static final int FRAGMENT_COUNT = 2;
+    public static final int FRAGMENT_COUNT = 1;
 
     private Context mContext;
 
@@ -44,8 +43,8 @@ public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return EventListFragment.newInstance("EVENT");
-            case 1:
-                return GalleryFragment.newInstance();
+//            case 1:
+//                return GalleryFragment.newInstance();
             default:
                 return null;
         }

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 
 
 // code inspired by: https://github.com/jakubkinst/Android-StatefulView

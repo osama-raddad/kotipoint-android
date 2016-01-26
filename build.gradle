@@ -7,6 +7,7 @@ buildscript {
 	dependencies {
 		classpath 'com.android.tools.build:gradle:1.5.0'
 		classpath 'com.android.databinding:dataBinder:1.0-rc4'
+        //https://bitbucket.org/hvisser/android-apt/src
 		classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 		// NOTE: Do not place your application dependencies here; they belong
 		// in the individual module build.gradle files
@@ -47,4 +48,6 @@ ext {
 	butterknifeVersion = "7.0.1"
 	timberVersion = "4.1.0"
 	picassoVersion = "2.5.2"
+
+	prettyTime = "3.2.7.Final"
 }

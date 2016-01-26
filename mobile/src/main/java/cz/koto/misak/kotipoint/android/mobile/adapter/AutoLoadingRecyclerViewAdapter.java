@@ -21,16 +21,16 @@ import java.util.List;
  *
  * @author e.matsyuk
  */
-public abstract class AutoLoadingRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class AutoLoadingRecyclerViewAdapter<T,U extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<U> {
 
     protected List<T> mElementList = new ArrayList<>();
 
     public void addNewItems(List<T> items) {
-        mElementList.addAll(mElementList.size()-1,items);
+        mElementList.addAll(mElementList.size()/*-1 footer*/,items);
     }
 
     public void addNewItem(T item) {
-        mElementList.add(mElementList.size()-1,item);
+        mElementList.add(mElementList.size()/*-1 footer*/,item);
     }
 
     public void addFooter(T item) {

@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="@dimen/global_spacing_l"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:background="@drawable/selector_clickable_item_bg">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/fragment_event_item_name"
-        android:layout_width="wrap_content"
+    <data>
+        <variable name="viewModel" type="cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/global_keyline_s"
-        android:layout_marginRight="@dimen/global_keyline_s"
-        android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/comment_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/text_post_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@{viewModel.commentAuthor}"
+                        android:textColor="@color/private_primary_text"
+                        android:textSize="@dimen/text_body" />
+
+                    <TextView
+                        android:id="@+id/text_post_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/text_post_author"
+                        android:text="@{viewModel.commentDate}"
+                        android:textSize="@dimen/text_body"
+                        android:textColor="@color/private_accent" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/text_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web|email"
+                    android:text="@{viewModel.commentText}"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/comment_item"
+            android:background="@color/theme_edge_effect" />
+
+    </RelativeLayout>
+
+</layout>

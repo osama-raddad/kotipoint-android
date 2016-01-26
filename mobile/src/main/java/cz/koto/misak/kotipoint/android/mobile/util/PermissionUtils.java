@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package cz.koto.misak.kotipoint.android.mobile.utils;
+package cz.koto.misak.kotipoint.android.mobile.util;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

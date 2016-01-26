@@ -1,12 +1,10 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,24 +12,23 @@ import java.util.List;
 import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.adapter.EventRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.view.LinearDividerItemDecoration;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 
 
-public class EventListFragment extends StatefulPermissionFragment implements EventRecyclerViewAdapter.EventViewHolder.OnItemClickListener {
+public class EventListFragment extends StatefulPermissionFragment {
     private static final String TITLE_KEY = "key_title";
 
     private final static int LIMIT = 35;
 
     @Bind(R.id.RecyclerView)
-    AutoLoadingRecyclerView<KoTiEvent> mRecyclerView;
+    AutoLoadingRecyclerView<KoTiEvent,EventRecyclerViewAdapter.EventBindingHolder> mRecyclerView;
 
     private EventRecyclerViewAdapter mRecyclerViewAdapter;
 
@@ -84,7 +81,7 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
             if (mRecyclerViewAdapter == null) {
                 Logcat.d("RecyclerViewAdapter is NULL, init it!");
             }
-            mRecyclerViewAdapter = new EventRecyclerViewAdapter(this);
+            mRecyclerViewAdapter = new EventRecyclerViewAdapter(getContext());
             mRecyclerViewAdapter.setHasStableIds(true);
         }
 
@@ -119,23 +116,10 @@ public class EventListFragment extends StatefulPermissionFragment implements Eve
     }
 
     @Override
-    public void onItemClick(View view, int position, long id, int viewType) {
-        Intent i = EventDetailActivity.newIntent(getContext());
-        i.putExtra(EventDetailActivity.PAYLOAD_KEY, mRecyclerViewAdapter.getItem(position));
-        getContext().startActivity(i);
-    }
-
-    @Override
     StatefulLayout getFragmentView() {
         return (StatefulLayout) mFragmentView;
     }
 
-    @Override
-    public void onItemLongClick(View view, int position, long id, int viewType) {
-        KoTiEvent koTiEvent = mRecyclerViewAdapter.getItem(position);
-        if (koTiEvent == null) return;
-        Toast.makeText(getContext(), koTiEvent.getmTextCapital() == null ? koTiEvent.getmHeadline() : koTiEvent.getmTextCapital(), Toast.LENGTH_SHORT).show();
-    }
 
 
     @Override

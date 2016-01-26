@@ -11,4 +11,7 @@
     <string name="ok">OK</string>
 
     <string name="date_format_date">dd.MM.yyyy</string>
+
+    <string name="text_comment_author">%s -&#160;</string>
+
 </resources>

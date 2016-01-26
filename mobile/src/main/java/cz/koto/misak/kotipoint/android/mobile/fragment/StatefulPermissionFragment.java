@@ -4,12 +4,11 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
-import cz.koto.misak.kotipoint.android.mobile.utils.NetworkUtils;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 
 public abstract class StatefulPermissionFragment extends PermissionFragment{

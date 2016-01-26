@@ -3,7 +3,6 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import java.util.HashMap;
@@ -12,8 +11,8 @@ import java.util.Map;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
-import cz.koto.misak.kotipoint.android.mobile.utils.PermissionUtils;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.PermissionUtils;
 
 
 public abstract class PermissionFragment extends BaseFragment {

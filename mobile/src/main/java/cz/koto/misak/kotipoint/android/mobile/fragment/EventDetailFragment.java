@@ -2,13 +2,10 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
-import cz.koto.misak.kotipoint.android.mobile.utils.NetworkUtils;
+import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 
 public class EventDetailFragment extends PermissionFragment {
 

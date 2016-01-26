@@ -18,7 +18,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 
 public class KotoSSLTrust {
     public static OkHttpClient trustcert(Context context){

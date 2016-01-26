@@ -53,6 +53,8 @@ dependencies
 
 	compile "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
 
+	compile "org.ocpsoft.prettytime:prettytime:$rootProject.ext.prettyTime"
+
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
@@ -61,6 +63,10 @@ android
 {
 	compileSdkVersion rootProject.ext.compileSdkVersion
 	buildToolsVersion rootProject.ext.buildToolsVersion
+
+    lintOptions {
+        abortOnError false
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -17,8 +17,8 @@ import cz.koto.misak.kotipoint.android.mobile.adapter.AutoLoadingRecyclerViewAda
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.AutoLoadingRecyclerViewException;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.ILoading;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.OffsetAndLimit;
-import cz.koto.misak.kotipoint.android.mobile.utils.BackgroundExecutor;
-import cz.koto.misak.kotipoint.android.mobile.utils.Logcat;
+import cz.koto.misak.kotipoint.android.mobile.util.BackgroundExecutor;
+import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import rx.Subscriber;
 import rx.Subscription;
@@ -27,7 +27,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 
-public class AutoLoadingRecyclerView<T> extends RecyclerView {
+public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extends RecyclerView {
 
     private static final int START_OFFSET = 0;
     private StatefulLayout mStatefulLayout;
@@ -37,7 +37,7 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
     protected Subscription subscribeToLoadingChannelSubscription;
     protected int limit;
     protected ILoading<T> iLoading;
-    protected AutoLoadingRecyclerViewAdapter<T> autoLoadingRecyclerViewAdapter;
+    protected AutoLoadingRecyclerViewAdapter<T,U> autoLoadingRecyclerViewAdapter;
     // for restore after reorientation
     protected boolean firstPortionLoaded;
     protected boolean allPortionsLoaded;
@@ -104,7 +104,7 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
             StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) getLayoutManager();
             int[] into = staggeredGridLayoutManager.findLastVisibleItemPositions(null);
             List<Integer> intoList = new ArrayList<>();
-            for (int i : into) {
+                for (int i : into) {
                 intoList.add(i);
             }
             return Collections.max(intoList);
@@ -145,12 +145,12 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
     /**
      * required method
      */
-    public void setAdapter(AutoLoadingRecyclerViewAdapter<T> autoLoadingRecyclerViewAdapter) {
+    public void setAdapter(AutoLoadingRecyclerViewAdapter<T,U> autoLoadingRecyclerViewAdapter) {
         this.autoLoadingRecyclerViewAdapter = autoLoadingRecyclerViewAdapter;
         super.setAdapter(autoLoadingRecyclerViewAdapter);
     }
 
-    public AutoLoadingRecyclerViewAdapter<T> getAdapter() {
+    public AutoLoadingRecyclerViewAdapter<T,U> getAdapter() {
         if (autoLoadingRecyclerViewAdapter == null) {
             throw new AutoLoadingRecyclerViewException("Null adapter. Please initialise adapter! "+iLoading);
         }
@@ -326,7 +326,7 @@ public class AutoLoadingRecyclerView<T> extends RecyclerView {
         }
     }
 
-    private void setLayoutContent(AutoLoadingRecyclerViewAdapter<T> adapter) {
+    private void setLayoutContent(AutoLoadingRecyclerViewAdapter<T,U> adapter) {
 
         if ((adapter==null)||(adapter.getItemCount()<= 1)) {
             setLayoutOffline();//setLayoutEmpty();

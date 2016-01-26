@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+        android:id="@+id/event_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -16,12 +16,12 @@
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:id="@+id/container_post"
+            android:id="@+id/container_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:orientation="vertical"
-            android:onClick="@{viewModel.onClickPost}">
+            android:onClick="@{viewModel.onClickEvent}">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,47 +31,56 @@
                 android:background="@drawable/touchable_background_white">
 
                 <TextView
-                    android:id="@+id/text_post_title"
+                    android:id="@+id/event_item_headline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="@{viewModel.postTitle}"
-                    android:textColor="@color/private_primary_text"
+                    android:text="@{viewModel.headline}"
+                    android:textColor="@color/global_text_primary"
                     android:textSize="@dimen/text_large_title"
-                    android:onClick="@{viewModel.onClickPost}"/>
+                    android:onClick="@{viewModel.onClickEvent}"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/text_post_points"
+                        android:id="@+id/event_item_date_duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@{viewModel.postScore}"
+                        android:text="@{viewModel.eventDateDuration}"
                         android:textSize="@dimen/text_body"
-                        android:textColor="@color/private_accent" />
+                        android:textColor="@color/global_color_primary_dark" />
 
                     <TextView
-                        android:id="@+id/text_post_author"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/event_item_location"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/text_post_points"
-                        android:text="@{viewModel.postAuthor}"
-                        android:textColor="@color/private_primary_text"
+                        android:layout_toRightOf="@+id/event_item_date_duration"
+                        android:text="@{viewModel.eventLocation}"
+                        android:textColor="@color/theme_edge_effect"
                         android:textSize="@dimen/text_body"
-                        android:bufferType="spannable"
-                        android:onClick="@{viewModel.onClickAuthor}"/>
+                        android:gravity="right" />
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/event_item_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/event_item_date_duration"
+                    android:text="@{viewModel.eventDate}"
+                    android:textColor="@color/global_color_primary_dark"
+                    android:textSize="@dimen/text_body"
+                    android:gravity="right" />
+
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/theme_edge_effect" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/theme_edge_effect" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,8 +88,9 @@
                 android:orientation="horizontal"
                 android:background="@color/global_bg_front">
 
-                <TextView
-                    android:id="@+id/text_view_post"
+                <ImageButton
+                    android:id="@+id/event_calendar"
+                    android:src="@drawable/ic_calendar_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -89,8 +99,8 @@
                     android:textColor="@color/private_primary_text"
                     android:textSize="@dimen/text_small_body"
                     android:textStyle="bold"
-                    android:text="@string/view_button"
-                    android:onClick="@{viewModel.onClickPost}"/>
+                    android:onClick="@{viewModel.onClickDate}"
+                    android:visibility="@{viewModel.eventDateVisibility}"/>
 
                 <TextView
                     android:id="@+id/text_view_comments"
@@ -101,9 +111,8 @@
                     android:clickable="true"
                     android:textColor="@color/private_accent"
                     android:textSize="@dimen/text_small_body"
-                    android:text="@string/comments_button"
-                    android:onClick="@{viewModel.onClickComments}"
-                    android:visibility="@{viewModel.commentsVisibility}"/>
+                    android:text="@string/view_button"
+                    android:onClick="@{viewModel.onClickEvent}"/>
 
             </LinearLayout>
 

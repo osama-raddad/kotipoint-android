@@ -25,16 +25,19 @@ public abstract class AutoLoadingRecyclerViewAdapter<T,U extends RecyclerView.Vi
 
     protected List<T> mElementList = new ArrayList<>();
 
+    protected int mFooterCount = 0;
+
     public void addNewItems(List<T> items) {
-        mElementList.addAll(mElementList.size()/*-1 footer*/,items);
+        mElementList.addAll(mElementList.size()- mFooterCount,items);
     }
 
     public void addNewItem(T item) {
-        mElementList.add(mElementList.size()/*-1 footer*/,item);
+        mElementList.add(mElementList.size()- mFooterCount,item);
     }
 
     public void addFooter(T item) {
         mElementList.add(item);
+        mFooterCount++;
     }
 
     public List<T> getItems() {

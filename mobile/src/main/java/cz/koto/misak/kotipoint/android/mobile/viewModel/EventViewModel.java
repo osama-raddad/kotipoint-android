@@ -4,13 +4,13 @@ package cz.koto.misak.kotipoint.android.mobile.viewModel;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 
 import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
@@ -52,57 +52,38 @@ public class EventViewModel extends BaseObservable {
 //        }
 //    }
 
-    public String getPostScore() {
-        return event.getmEventDate()==null? "N/A":new PrettyTime().format(event.getmEventDate());
+    public String getEventDateDuration() {
+        return event.getmEventDate() == null ? "" : new PrettyTime().format(event.getmEventDate());
     }
 
-    public Spannable getPostAuthor() {
-        String location = (event.getmEventLocation()==null || event.getmEventLocation().size()==0)?"-":event.getmEventLocation().get(0);
-        String author = context.getString(R.string.text_post_author,location);
-        SpannableString content = new SpannableString(author);
-        int index = author.indexOf(location);
-        content.setSpan(new UnderlineSpan(), index,location.length() + index, 0);
-        return content;
+    public String getEventDate() {
+        SimpleDateFormat df = new SimpleDateFormat(context.getResources().getString(R.string.date_format_date));
+        return event.getmEventDate() == null ? "" : df.format(event.getmEventDate());
     }
 
-    public String getPostTitle() {
+    public int getEventDateVisibility() {
+        return (event.getmEventDate() == null || event.getmEventDate().after(new Date())) ? View.GONE : View.VISIBLE;
+    }
+
+    public String getEventLocation() {
+        String location = (event.getmEventLocation() == null || event.getmEventLocation().size() == 0) ? "-" : event.getmEventLocation().get(0);
+//        String author = context.getString(R.string.text_post_author,location);
+//        SpannableString content = new SpannableString(author);
+//        int index = author.indexOf(location);
+//        content.setSpan(new UnderlineSpan(), index,location.length() + index, 0);
+//        return content;
+        return location;
+    }
+
+    public String getHeadline() {
         return event.getmHeadline();
     }
 
-    public String getCommentText() {
-        return Html.fromHtml(event.getmText().trim()).toString();
-    }
 
-    public String getCommentAuthor() {
-        return context.getResources().getString(R.string.text_comment_author, event.getmHeadline());
-    }
-
-    public String getCommentDate() {
-        return event.getmEventDate()==null? "N/A":new PrettyTime().format(event.getmEventDate());
-    }
-
-    public int getCommentsVisibility() {
-        return  /*post.postType == Post.PostType.STORY && post.kids == null*/false ? View.GONE : View.VISIBLE;
-    }
-
-//    public int getCommentDepth() {
-//        return event.depth;
-//    }
-//
-//    public boolean getCommentIsTopLevel() {
-//        return event.isTopLevelComment;
-//    }
-
-    public View.OnClickListener onClickPost() {
+    public View.OnClickListener onClickEvent() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Post.PostType postType = post.postType;
-//                if (postType == Post.PostType.JOB || postType == Post.PostType.STORY) {
-//                    launchStoryActivity();
-//                } else if (postType == Post.PostType.ASK) {
-//                    launchCommentsActivity();
-//                }
                 context.startActivity(EventDetailActivity.newIntent(context));
                 Intent i = EventDetailActivity.newIntent(context);
                 i.putExtra(EventDetailActivity.PAYLOAD_KEY, event);
@@ -111,22 +92,16 @@ public class EventViewModel extends BaseObservable {
         };
     }
 
-    public View.OnClickListener onClickAuthor() {
+    public View.OnClickListener onClickDate() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //do nothing yet
+                // Display a SnackBar with an explanation and a button to trigger the request.
+                Snackbar.make(v, R.string.calendar_not_implemented,
+                        Snackbar.LENGTH_SHORT).show();
             }
         };
     }
 
-    public View.OnClickListener onClickComments() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               //do nothing yet
-            }
-        };
-    }
 }
 

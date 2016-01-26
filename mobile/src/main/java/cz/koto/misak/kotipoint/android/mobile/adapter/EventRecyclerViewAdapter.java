@@ -132,7 +132,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         private ViewDataBinding binding;
 
         public EventBindingHolder(FragmentEventItemBinding binding) {
-            super(binding.containerItem);
+            super(binding.cardView);
             this.binding = binding;
         }
 

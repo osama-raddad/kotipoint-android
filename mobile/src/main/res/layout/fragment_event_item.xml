@@ -1,75 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable name="viewModel" type="cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel" />
     </data>
 
-    <RelativeLayout
-        android:id="@+id/container_item"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:id="@+id/comment_item"
+            android:id="@+id/container_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:clickable="true"
+            android:orientation="vertical"
+            android:onClick="@{viewModel.onClickPost}">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="@drawable/touchable_background_white">
+
+                <TextView
+                    android:id="@+id/text_post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.postTitle}"
+                    android:textColor="@color/private_primary_text"
+                    android:textSize="@dimen/text_large_title"
+                    android:onClick="@{viewModel.onClickPost}"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text_post_points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@{viewModel.postScore}"
+                        android:textSize="@dimen/text_body"
+                        android:textColor="@color/private_accent" />
 
                     <TextView
                         android:id="@+id/text_post_author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="@{viewModel.commentAuthor}"
+                        android:layout_toRightOf="@+id/text_post_points"
+                        android:text="@{viewModel.postAuthor}"
                         android:textColor="@color/private_primary_text"
-                        android:textSize="@dimen/text_body" />
-
-                    <TextView
-                        android:id="@+id/text_post_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/text_post_author"
-                        android:text="@{viewModel.commentDate}"
                         android:textSize="@dimen/text_body"
-                        android:textColor="@color/private_accent" />
+                        android:bufferType="spannable"
+                        android:onClick="@{viewModel.onClickAuthor}"/>
 
                 </RelativeLayout>
 
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/theme_edge_effect" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/global_bg_front">
+
                 <TextView
-                    android:id="@+id/text_comment"
-                    android:layout_width="match_parent"
+                    android:id="@+id/text_view_post"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:autoLink="web|email"
-                    android:text="@{viewModel.commentText}"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:padding="16dp"
+                    android:background="@drawable/touchable_background_white"
+                    android:clickable="true"
+                    android:textColor="@color/private_primary_text"
+                    android:textSize="@dimen/text_small_body"
+                    android:textStyle="bold"
+                    android:text="@string/view_button"
+                    android:onClick="@{viewModel.onClickPost}"/>
+
+                <TextView
+                    android:id="@+id/text_view_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:background="@drawable/touchable_background_white"
+                    android:clickable="true"
+                    android:textColor="@color/private_accent"
+                    android:textSize="@dimen/text_small_body"
+                    android:text="@string/comments_button"
+                    android:onClick="@{viewModel.onClickComments}"
+                    android:visibility="@{viewModel.commentsVisibility}"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/comment_item"
-            android:background="@color/theme_edge_effect" />
-
-    </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 </layout>

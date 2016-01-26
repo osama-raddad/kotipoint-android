@@ -3,7 +3,6 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
 import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
-import cz.koto.misak.kotipoint.android.mobile.view.LinearDividerItemDecoration;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 
@@ -88,8 +86,8 @@ public class EventListFragment extends StatefulPermissionFragment {
         mRecyclerView.setSaveEnabled(true);
 
         // add decoration
-        RecyclerView.ItemDecoration itemDecoration = new LinearDividerItemDecoration(getActivity(), null);
-        mRecyclerView.addItemDecoration(itemDecoration);
+//        RecyclerView.ItemDecoration itemDecoration = new LinearDividerItemDecoration(getActivity(), null);
+//        mRecyclerView.addItemDecoration(itemDecoration);
 
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mRecyclerView.setLimit(LIMIT);

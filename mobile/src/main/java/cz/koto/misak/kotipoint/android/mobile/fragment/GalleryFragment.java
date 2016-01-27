@@ -22,7 +22,7 @@ import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecycl
 
 public class GalleryFragment extends StatefulPermissionFragment {
 
-    private final static int LIMIT = 35;
+    private final static int LIMIT = 12;
 
     @Bind(R.id.RecyclerView)
     AutoLoadingRecyclerView<GalleryItem, GalleryRecyclerViewAdapter.GalleryBindingHolder> mRecyclerView;

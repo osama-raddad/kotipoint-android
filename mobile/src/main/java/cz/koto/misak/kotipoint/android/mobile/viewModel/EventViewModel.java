@@ -18,12 +18,12 @@ import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
 
 public class EventViewModel extends BaseObservable {
 
-    private Context context;
-    private KoTiEvent event;
+    private Context mContext;
+    private KoTiEvent mEvent;
 
     public EventViewModel(Context context, KoTiEvent event) {
-        this.context = context;
-        this.event = event;
+        this.mContext = context;
+        this.mEvent = event;
     }
 
 //    @BindingAdapter("containerMargin")
@@ -53,21 +53,21 @@ public class EventViewModel extends BaseObservable {
 //    }
 
     public String getEventDateDuration() {
-        return event.getmEventDate() == null ? "" : new PrettyTime().format(event.getmEventDate());
+        return mEvent.getmEventDate() == null ? "" : new PrettyTime().format(mEvent.getmEventDate());
     }
 
     public String getEventDate() {
-        SimpleDateFormat df = new SimpleDateFormat(context.getResources().getString(R.string.date_format_date));
-        return event.getmEventDate() == null ? "" : df.format(event.getmEventDate());
+        SimpleDateFormat df = new SimpleDateFormat(mContext.getResources().getString(R.string.date_format_date));
+        return mEvent.getmEventDate() == null ? "" : df.format(mEvent.getmEventDate());
     }
 
     public int getEventDateVisibility() {
-        return (event.getmEventDate() == null || event.getmEventDate().after(new Date())) ? View.GONE : View.VISIBLE;
+        return (mEvent.getmEventDate() == null || mEvent.getmEventDate().after(new Date())) ? View.GONE : View.VISIBLE;
     }
 
     public String getEventLocation() {
-        String location = (event.getmEventLocation() == null || event.getmEventLocation().size() == 0) ? "-" : event.getmEventLocation().get(0);
-//        String author = context.getString(R.string.text_post_author,location);
+        String location = (mEvent.getmEventLocation() == null || mEvent.getmEventLocation().size() == 0) ? "-" : mEvent.getmEventLocation().get(0);
+//        String author = mContext.getString(R.string.text_post_author,location);
 //        SpannableString content = new SpannableString(author);
 //        int index = author.indexOf(location);
 //        content.setSpan(new UnderlineSpan(), index,location.length() + index, 0);
@@ -76,7 +76,7 @@ public class EventViewModel extends BaseObservable {
     }
 
     public String getHeadline() {
-        return event.getmHeadline();
+        return mEvent.getmHeadline();
     }
 
 
@@ -84,10 +84,10 @@ public class EventViewModel extends BaseObservable {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(EventDetailActivity.newIntent(context));
-                Intent i = EventDetailActivity.newIntent(context);
-                i.putExtra(EventDetailActivity.PAYLOAD_KEY, event);
-                context.startActivity(i);
+                mContext.startActivity(EventDetailActivity.newIntent(mContext));
+                Intent i = EventDetailActivity.newIntent(mContext);
+                i.putExtra(EventDetailActivity.PAYLOAD_KEY, mEvent);
+                mContext.startActivity(i);
             }
         };
     }

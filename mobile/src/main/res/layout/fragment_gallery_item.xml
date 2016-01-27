@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="@dimen/global_spacing_l"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:background="@drawable/selector_clickable_item_bg">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<TextView-->
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/fragment_gallery_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_clickable_item_bg"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/global_spacing_l"
+        android:orientation="horizontal"
+        android:onClick="@{viewModel.onClickGalleryItem}">
+
+        <!--<TextView-->
         <!--android:id="@+id/fragment_gallery_item_name"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
@@ -16,12 +27,15 @@
         <!--android:layout_marginRight="@dimen/global_keyline_s"-->
         <!--android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />-->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_gallery_item_view"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
-    </ImageView>
+        <ImageView
+            android:id="@+id/fragment_gallery_item_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:imageUrl="@{viewModel.imageUrl}">
+        </ImageView>
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

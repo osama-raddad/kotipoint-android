@@ -10,9 +10,9 @@
         android:id="@+id/event_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        card_view:cardCornerRadius="2dp"
+        android:layout_marginTop="@dimen/fragment_event_item_card_space"
+        android:layout_marginBottom="@dimen/fragment_event_item_card_space"
+        card_view:cardCornerRadius="@dimen/fragment_event_item_card_space"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -27,17 +27,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/touchable_background_white">
+                android:padding="@dimen/default_padding"
+                android:background="@drawable/selector_clickable_item_bg">
 
                 <TextView
                     android:id="@+id/event_item_headline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/global_spacing_xxs"
                     android:text="@{viewModel.headline}"
-                    android:textColor="@color/global_text_primary"
-                    android:textSize="@dimen/text_large_title"
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Headline"
                     android:onClick="@{viewModel.onClickEvent}"/>
 
                 <RelativeLayout
@@ -50,8 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="@{viewModel.eventDateDuration}"
-                        android:textSize="@dimen/text_body"
-                        android:textColor="@color/global_color_primary_dark" />
+                        android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date" />
 
                     <TextView
                         android:id="@+id/event_item_location"
@@ -60,7 +58,7 @@
                         android:layout_toRightOf="@+id/event_item_date_duration"
                         android:text="@{viewModel.eventLocation}"
                         android:textColor="@color/theme_edge_effect"
-                        android:textSize="@dimen/text_body"
+                        android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Location"
                         android:gravity="right" />
 
                 </RelativeLayout>
@@ -71,8 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/event_item_date_duration"
                     android:text="@{viewModel.eventDate}"
-                    android:textColor="@color/global_color_primary_dark"
-                    android:textSize="@dimen/text_body"
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date"
                     android:gravity="right" />
 
             </LinearLayout>
@@ -93,12 +90,9 @@
                     android:src="@drawable/ic_calendar_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@drawable/touchable_background_white"
+                    android:padding="@dimen/default_padding"
+                    android:background="@drawable/selector_clickable_item_bg"
                     android:clickable="true"
-                    android:textColor="@color/private_primary_text"
-                    android:textSize="@dimen/text_small_body"
-                    android:textStyle="bold"
                     android:onClick="@{viewModel.onClickDate}"
                     android:visibility="@{viewModel.eventDateVisibility}"/>
 
@@ -106,11 +100,10 @@
                     android:id="@+id/text_view_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@drawable/touchable_background_white"
+                    android:padding="@dimen/default_padding"
+                    android:background="@drawable/selector_clickable_item_bg"
                     android:clickable="true"
-                    android:textColor="@color/private_accent"
-                    android:textSize="@dimen/text_small_body"
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Body1.Link"
                     android:text="@string/view_button"
                     android:onClick="@{viewModel.onClickEvent}"/>
 

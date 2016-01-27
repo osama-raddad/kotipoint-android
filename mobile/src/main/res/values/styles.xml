@@ -42,10 +42,25 @@
 		<item name="android:textColor">?android:textColorPrimary</item>
 	</style>
 
+	<style name="TextAppearance.KoTiPoint.Subhead.Date" parent="@style/TextAppearance.AppCompat.Subhead">
+		<item name="android:textSize">@dimen/global_text_size_subhead</item>
+		<item name="android:textColor">@color/global_color_primary_dark</item>
+	</style>
+
+	<style name="TextAppearance.KoTiPoint.Subhead.Location" parent="@style/TextAppearance.AppCompat.Subhead">
+		<item name="android:textSize">@dimen/global_text_size_subhead</item>
+		<item name="android:textColor">@color/theme_edge_effect</item>
+	</style>
+
 	<style name="TextAppearance.KoTiPoint.Body2" parent="@style/TextAppearance.AppCompat.Body2">
 		<item name="android:textSize">@dimen/global_text_size_body_2</item>
 		<item name="android:textColor">?android:textColorPrimary</item>
 	</style>
+
+    <style name="TextAppearance.KoTiPoint.Body1.Link" parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">@dimen/global_text_size_body_1</item>
+        <item name="android:textColor">@color/global_color_accent</item>
+    </style>
 
 	<style name="TextAppearance.KoTiPoint.Body1" parent="@style/TextAppearance.AppCompat.Body1">
 		<item name="android:textSize">@dimen/global_text_size_body_1</item>

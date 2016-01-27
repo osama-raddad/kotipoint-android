@@ -9,8 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
-
+import timber.log.Timber;
 
 // code inspired by: https://github.com/jakubkinst/Android-StatefulView
 public class StatefulLayout extends FrameLayout {
@@ -86,7 +85,7 @@ public class StatefulLayout extends FrameLayout {
             mEmptyLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_emptyLayout, 0);
             mNoPermissionLayoutId = typedArray.getResourceId(R.styleable.StatefulLayout_noPermissionLayout, 0);
         } else {
-            throw new IllegalArgumentException("Attributes progressLayout, offlineLayout and emptyLayout are mandatory");
+            throw new IllegalArgumentException("Attributes progressLayout, offlineLayout, emptyLayout nad noPermissionLayout are mandatory");
         }
         typedArray.recycle();
     }
@@ -129,7 +128,7 @@ public class StatefulLayout extends FrameLayout {
 
 
     public void setState(State state) {
-        Logcat.d(">>setState:%s", state);
+        Timber.d(">>setState:%s", state);
         mState = state;
         mContentLayout.setVisibility(state == State.CONTENT ? VISIBLE : GONE);
         mProgressLayout.setVisibility(state == State.PROGRESS ? VISIBLE : GONE);
@@ -169,7 +168,7 @@ public class StatefulLayout extends FrameLayout {
             mProgressLayout = LayoutInflater.from(getContext()).inflate(mProgressLayoutId, this, false);
             mOfflineLayout = LayoutInflater.from(getContext()).inflate(mOfflineLayoutId, this, false);
             mEmptyLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
-            mNoPermissionLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
+            mNoPermissionLayout = LayoutInflater.from(getContext()).inflate(mNoPermissionLayoutId, this, false);
 
             addView(mProgressLayout);
             addView(mOfflineLayout);

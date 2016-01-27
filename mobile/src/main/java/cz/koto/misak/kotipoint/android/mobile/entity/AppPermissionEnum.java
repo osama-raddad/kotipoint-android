@@ -1,6 +1,5 @@
 package cz.koto.misak.kotipoint.android.mobile.entity;
 
-
 import android.Manifest;
 
 /**
@@ -9,9 +8,10 @@ import android.Manifest;
  */
 public enum AppPermissionEnum {
 
-    LOCATION(0,Manifest.permission.ACCESS_FINE_LOCATION),
-    NETWORK_STATE(1,Manifest.permission.ACCESS_NETWORK_STATE),
-    INTERNET(2,Manifest.permission.INTERNET);
+    LOCATION(0, Manifest.permission.ACCESS_FINE_LOCATION),
+    NETWORK_STATE(1, Manifest.permission.ACCESS_NETWORK_STATE),
+    INTERNET(2, Manifest.permission.INTERNET),
+    ACCESS_COARSE_LOCATION(3, Manifest.permission.ACCESS_COARSE_LOCATION);
 
     AppPermissionEnum(int requestId, String... permissions) {
         this.requestId = requestId;
@@ -37,10 +37,10 @@ public enum AppPermissionEnum {
         return permissionArray;
     }
 
-    public static AppPermissionEnum getAppPermissionEnumById(int requestId){
+    public static AppPermissionEnum getAppPermissionEnumById(int requestId) {
         AppPermissionEnum ret = null;
-        for (AppPermissionEnum appEnum:AppPermissionEnum.values()){
-            if (appEnum.getRequestId()==requestId){
+        for (AppPermissionEnum appEnum : AppPermissionEnum.values()) {
+            if (appEnum.getRequestId() == requestId) {
                 ret = appEnum;
                 break;
             }

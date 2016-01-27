@@ -24,6 +24,8 @@ public class GalleryFragment extends StatefulPermissionFragment {
 
     private final static int LIMIT = 12;
 
+    //public static final String M_TODAY_WEATHER_WRAPPER_0784150041885340 = "mTodayWeatherWrapper0784150041885340";
+
     @Bind(R.id.RecyclerView)
     AutoLoadingRecyclerView<GalleryItem, GalleryRecyclerViewAdapter.GalleryBindingHolder> mRecyclerView;
 
@@ -35,12 +37,27 @@ public class GalleryFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    int getLayoutResource() {
+    protected void onSaveState(Bundle outState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+        //outState.putParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340, mTodayWeatherWrapper);
+    }
+
+    @Override
+    protected void onRestoreState(Bundle savedInstanceState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+//        mTodayWeatherWrapper = savedInstanceState.getParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340);
+//        if ((isProgressLayoutVisible()||isContentLayoutVisible())&&mTodayWeatherWrapper!=null) {
+//            bindView(getFragmentView().getContext());
+//        }
+    }
+
+    @Override
+    protected int getLayoutResource() {
         return R.layout.fragment_gallery;
     }
 
     @Override
-    void initView(View view, Bundle savedInstanceState) {
+    protected void initOnCreateView(View view, Bundle savedInstanceState) {
         GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewLayoutManager.supportsPredictiveItemAnimations();
         // init adapter for the first time
@@ -67,7 +84,7 @@ public class GalleryFragment extends StatefulPermissionFragment {
 
 
     @Override
-    StatefulLayout getFragmentView() {
+    protected StatefulLayout getFragmentView() {
         return (StatefulLayout) mFragmentView;
     }
 

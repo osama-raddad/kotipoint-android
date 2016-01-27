@@ -2,21 +2,22 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
+import timber.log.Timber;
 
-public abstract class StatefulPermissionFragment extends PermissionFragment{
+public abstract class StatefulPermissionFragment extends PermissionFragment {
 
 
     private StatefulLayout mStatefulLayout;
 
-    abstract StatefulLayout getFragmentView();
+    protected abstract StatefulLayout getFragmentView();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -25,19 +26,42 @@ public abstract class StatefulPermissionFragment extends PermissionFragment{
         // setup stateful layout
         setupStatefulLayout(savedInstanceState, getFragmentView());
 
+        if (savedInstanceState == null) {
+            //Prevent unnecessary reloading!
+            requestContent(savedInstanceState);
+        }
+    }
+
+    /**
+     * Do request for content.
+     * Permission request is called only when savedInstanceState is null.
+     *
+     * @param savedInstanceState
+     */
+    protected final void requestContent(Bundle savedInstanceState) {
+
         if (NetworkUtils.isOnline(getActivity())) {
+            showProgress();
         /*
          * Request all permissions defined in getPermissionList and
          * call doWithPermissions() after all of them are granted.
          */
             if (savedInstanceState == null) {
                 requestPermissions();
-            }else{
-                Logcat.d("KoTiNode reloaded not necessary.");
+            } else {
+                Timber.d("KoTiNode reloaded not necessary.");
             }
-        }else {
+        } else {
             showOffline();
         }
+    }
+
+    /**
+     * Do request for content.
+     * Permission request is called regardless the savedInstanceState.
+     */
+    protected final void requestContent() {
+        requestContent(null);
     }
 
     @Override
@@ -51,51 +75,63 @@ public abstract class StatefulPermissionFragment extends PermissionFragment{
         // reference
         mStatefulLayout = fragmentView;
 
+
         // state change listener
-        mStatefulLayout.setOnStateChangeListener((v, state) -> {
-            Logcat.d("***StateChange:%s", state);
+        mStatefulLayout.setOnStateChangeListener(new StatefulLayout.OnStateChangeListener() {
+            @Override
+            public void onStateChange(View v, StatefulLayout.State state) {
+                Timber.d("***StateChange:%s", state);
 
-            if (state == StatefulLayout.State.CONTENT) {
-
+                if (state == StatefulLayout.State.NOPERMISSION) {
+                    Timber.i("***StateChange>>:%s", state);
+                }
             }
         });
-
-//        // state change listener
-//        mStatefulLayout.setOnStateChangeListener(new StatefulLayout.OnStateChangeListener() {
-//            @Override
-//            public void onStateChange(View v, StatefulLayout.State state) {
-//                Logcat.d("***StateChange:%s", state);
-//
-//                if (state == StatefulLayout.State.CONTENT) {
-//
-//                }
-//            }
-//        });
 
         // restore state
         mStatefulLayout.restoreInstanceState(savedInstanceState);
     }
 
-    void showOffline(){
+    protected final void showOffline() {
         mStatefulLayout.showOffline();
     }
 
-    void showNoPermission(){
+    protected final void showEmpty() {
+        mStatefulLayout.showEmpty();
+    }
+
+    protected final void showContent() {
+        mStatefulLayout.showContent();
+    }
+
+    protected final boolean isContentLayoutVisible() {
+        return (mStatefulLayout.getState() == StatefulLayout.State.CONTENT);
+    }
+
+    protected final boolean isProgressLayoutVisible() {
+        return (mStatefulLayout.getState() == StatefulLayout.State.PROGRESS);
+    }
+
+    protected final void showProgress() {
+        mStatefulLayout.showProgress();
+    }
+
+    protected final void showNoPermission() {
         mStatefulLayout.showNoPermission();
     }
 
     void saveLayoutState(Bundle outState) {
         // stateful layout state
-        if(mStatefulLayout!=null) mStatefulLayout.saveInstanceState(outState);
+        if (mStatefulLayout != null) mStatefulLayout.saveInstanceState(outState);
     }
 
     @Override
-    public void permissionNotGranted() {
+    protected void permissionNotGranted() {
         showNoPermission();
     }
 
     @Override
-    public List<AppPermissionEnum> getPermissionList() {
+    protected List<AppPermissionEnum> getPermissionList() {
         List<AppPermissionEnum> ret = new ArrayList<>();
         ret.add(AppPermissionEnum.NETWORK_STATE);
         return ret;

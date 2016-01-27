@@ -42,22 +42,16 @@ public class EventListFragment extends StatefulPermissionFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // handle fragment arguments
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            handleArguments(arguments);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        setUserVisibleHint(true);
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        // handle fragment arguments
+//        Bundle arguments = getArguments();
+//        if (arguments != null) {
+//            handleArguments(arguments);
+//        }
+//    }
 
     @Override
     public void onStop() {
@@ -71,7 +65,7 @@ public class EventListFragment extends StatefulPermissionFragment {
 
 
     @Override
-    void initView(View view, Bundle savedInstanceState) {
+    protected void initOnCreateView(View view, Bundle savedInstanceState) {
         GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerViewLayoutManager.supportsPredictiveItemAnimations();
         // init adapter for the first time
@@ -97,8 +91,23 @@ public class EventListFragment extends StatefulPermissionFragment {
     }
 
     @Override
+    protected void onSaveState(Bundle outState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+        //outState.putParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340, mTodayWeatherWrapper);
+    }
+
+    @Override
+    protected void onRestoreState(Bundle savedInstanceState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+//        mTodayWeatherWrapper = savedInstanceState.getParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340);
+//        if ((isProgressLayoutVisible()||isContentLayoutVisible())&&mTodayWeatherWrapper!=null) {
+//            bindView(getFragmentView().getContext());
+//        }
+    }
+
+    @Override
     @LayoutRes
-    int getLayoutResource() {
+    protected int getLayoutResource() {
         return R.layout.fragment_event_list;
     }
 
@@ -114,7 +123,7 @@ public class EventListFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    StatefulLayout getFragmentView() {
+    protected StatefulLayout getFragmentView() {
         return (StatefulLayout) mFragmentView;
     }
 
@@ -129,7 +138,7 @@ public class EventListFragment extends StatefulPermissionFragment {
     @Override
     public List<AppPermissionEnum> getPermissionList() {
         List<AppPermissionEnum> ret = super.getPermissionList();
-        ret.addAll(Arrays.asList(AppPermissionEnum.INTERNET));
+        ret.addAll(Arrays.asList(AppPermissionEnum.INTERNET/*,AppPermissionEnum.LOCATION*/));
         return ret;
     }
 }

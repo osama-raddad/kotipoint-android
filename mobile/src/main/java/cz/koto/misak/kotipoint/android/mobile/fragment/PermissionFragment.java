@@ -1,8 +1,11 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.PermissionChecker;
 import android.view.View;
 
 import java.util.HashMap;
@@ -11,8 +14,8 @@ import java.util.Map;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.util.PermissionUtils;
+import timber.log.Timber;
 
 
 public abstract class PermissionFragment extends BaseFragment {
@@ -38,12 +41,12 @@ public abstract class PermissionFragment extends BaseFragment {
     /**
      * Do anything with the specified permissions.
      */
-    public abstract void doWithPermissions();
+    protected abstract void doWithPermissions();
 
     /**
      *
      */
-    public abstract void permissionNotGranted();
+    protected abstract void permissionNotGranted();
 
     /**
      * Define list of permission as precondition for doWithPermissions action.
@@ -51,7 +54,7 @@ public abstract class PermissionFragment extends BaseFragment {
      *
      * @return
      */
-    public abstract List<AppPermissionEnum> getPermissionList();
+    protected abstract List<AppPermissionEnum> getPermissionList();
 
 
     /**
@@ -74,12 +77,12 @@ public abstract class PermissionFragment extends BaseFragment {
      * If the permission has been denied previously, a SnackBar will prompt the user to grant the
      * permission, otherwise it is requested directly.
      */
-    void requestPermissions() {
+    protected void requestPermissions() {
 
         mPermissionNotGranted = false;
         List<AppPermissionEnum> permissionEnumList = getPermissionList();
 
-        if (permissionEnumList == null) {
+        if (hasPermission(permissionEnumList)) {
             doWithPermissions();
             return;
         }
@@ -92,12 +95,12 @@ public abstract class PermissionFragment extends BaseFragment {
                 // Provide an additional rationale to the user if the permission was not granted
                 // and the user would benefit from additional context for the use of the permission.
                 // For example, if the request has been denied previously.
-                Logcat.i("Displaying contacts permission rationale to provide additional context.");
+                Timber.i("Displaying contacts permission rationale to provide additional context.");
 
                 // Display a SnackBar with an explanation and a button to trigger the request.
                 Snackbar.make(getView(), R.string.permission_fine_location_rationale,
                         Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.ok, new View.OnClickListener() {
+                        .setAction(R.string.manage_permission, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 requestPermissions(permissionEnum.getPermissionArray(), permissionEnum.getRequestId());
@@ -105,7 +108,7 @@ public abstract class PermissionFragment extends BaseFragment {
                         })
                         .show();
             } else {
-                // Contact permissions have not been granted yet. Request them directly.
+                // Permissions have not been granted yet. Request them directly.
                 requestPermissions(permissionEnum.getPermissionArray(), permissionEnum.getRequestId());
             }
             // END_INCLUDE(permission_request)
@@ -133,10 +136,10 @@ public abstract class PermissionFragment extends BaseFragment {
             // checked.
             if (PermissionUtils.verifyPermissions(grantResults)) {
                 // All required permissions have been granted, do the right thing with these permission...
-                Logcat.d("%s permissions granted.",requestedAppPermission);
+                Timber.d("%s permissions granted.", requestedAppPermission);
                 grantAndDoWithPermissions(requestedAppPermission);
             } else {
-                Logcat.i("%s permissions NOT granted!",requestedAppPermission);
+                Timber.i("%s permissions NOT granted!",requestedAppPermission);
                 Snackbar.make(getView(), R.string.permissions_not_granted,
                         Snackbar.LENGTH_SHORT)
                         .show();
@@ -156,6 +159,33 @@ public abstract class PermissionFragment extends BaseFragment {
         mGrantedPermissionMap.put(appPermissionEnum, Boolean.TRUE);
         if (mGrantedPermissionMap.values().contains(null)|| mGrantedPermissionMap.values().contains(Boolean.FALSE)) return;
         doWithPermissions();
+    }
+
+    /**
+     * method that will return whether the permission is accepted. By default it is true if the user is using a device below
+     * version 23
+     * @param appPermissionEnumList
+     * @return
+     */
+    private boolean hasPermission(List<AppPermissionEnum> appPermissionEnumList) {
+        if (canMakeSmores()) {
+            if (appPermissionEnumList==null) return true;
+            for(AppPermissionEnum permission:appPermissionEnumList) {
+                if (PermissionChecker.checkSelfPermission(getContext(), permission.getPermissionArray()[0]) != PackageManager.PERMISSION_GRANTED){
+                    return false;
+                };
+            }
+            return true;
+        }
+        return true;
+    }
+
+    /**
+     * Just a check to see if we have marshmallows (version 23)
+     * @return
+     */
+    private boolean canMakeSmores() {
+        return(Build.VERSION.SDK_INT> Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
 }

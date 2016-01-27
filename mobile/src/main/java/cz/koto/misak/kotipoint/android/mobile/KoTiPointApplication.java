@@ -6,6 +6,7 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 
 import io.fabric.sdk.android.Fabric;
+import timber.log.Timber;
 
 
 public class KoTiPointApplication extends Application {
@@ -17,6 +18,8 @@ public class KoTiPointApplication extends Application {
         super.onCreate();
 
         sInstance = this;
+
+        Timber.plant(new Timber.DebugTree());
 
         //Use fabric for non-dev api only.
         CrashlyticsCore core = new CrashlyticsCore.Builder()

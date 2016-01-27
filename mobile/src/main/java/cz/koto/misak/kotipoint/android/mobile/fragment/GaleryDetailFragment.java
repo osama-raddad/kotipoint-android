@@ -60,7 +60,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    StatefulLayout getFragmentView() {
+    protected StatefulLayout getFragmentView() {
         return (StatefulLayout) mFragmentView;
     }
 
@@ -70,12 +70,27 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    int getLayoutResource() {
+    protected void onSaveState(Bundle outState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+        //outState.putParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340, mTodayWeatherWrapper);
+    }
+
+    @Override
+    protected void onRestoreState(Bundle savedInstanceState) {
+        //TODO consider usage of save state (necessary with MVVM?)
+//        mTodayWeatherWrapper = savedInstanceState.getParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340);
+//        if ((isProgressLayoutVisible()||isContentLayoutVisible())&&mTodayWeatherWrapper!=null) {
+//            bindView(getFragmentView().getContext());
+//        }
+    }
+
+    @Override
+    protected int getLayoutResource() {
         return R.layout.fragment_gallery_detail;
     }
 
     @Override
-    void initView(View view, Bundle savedInstanceState) {
+    protected void initOnCreateView(View view, Bundle savedInstanceState) {
 
     }
 

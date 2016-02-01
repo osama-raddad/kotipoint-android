@@ -52,11 +52,11 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
         mGalleryItem = getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY);
 
         /*
-         * Request all permissions defined in getPermissionList and
-         * call doWithPermissions() since all of them are granted.
-         * Call permissionNotGranted otherwise.
+         * Request all permissions defined in getMandatoryPermissionList and
+         * call doWithMandatoryPermissions() since all of them are granted.
+         * Call mandatoryPermissionNotGranted otherwise.
          */
-        requestPermissions();
+        requestMandatoryPermissions();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    public void doWithPermissions() {
+    public void doWithMandatoryPermissions() {
         doPhotoView();
     }
 

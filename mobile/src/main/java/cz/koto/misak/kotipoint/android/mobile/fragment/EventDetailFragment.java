@@ -53,11 +53,11 @@ public class EventDetailFragment extends PermissionFragment {
         bindPassedData(mKoTiEvent);
 
         /*
-         * Request all permissions defined in getPermissionList and
-         * call doWithPermissions() since all of them are granted.
-         * Call permissionNotGranted otherwise.
+         * Request all permissions defined in getMandatoryPermissionList and
+         * call doWithMandatoryPermissions() since all of them are granted.
+         * Call mandatoryPermissionNotGranted otherwise.
          */
-        requestPermissions();
+        requestMandatoryPermissions();
     }
 
 
@@ -145,17 +145,17 @@ public class EventDetailFragment extends PermissionFragment {
 
 
     @Override
-    public void doWithPermissions() {
+    public void doWithMandatoryPermissions() {
         bindNetworkImage();
     }
 
     @Override
-    public void permissionNotGranted() {
+    public void mandatoryPermissionNotGranted() {
         bindOfflineImage(mKoTiEvent.getmEventLocation());
     }
 
     @Override
-    public List<AppPermissionEnum> getPermissionList() {
+    public List<AppPermissionEnum> getMandatoryPermissionList() {
         return null;
     }
 }

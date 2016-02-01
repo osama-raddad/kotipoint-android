@@ -89,13 +89,13 @@ public class GalleryFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    public void doWithPermissions() {
+    public void doWithMandatoryPermissions() {
         doLoading();
     }
 
     @Override
-    public List<AppPermissionEnum> getPermissionList() {
-        List<AppPermissionEnum> ret = super.getPermissionList();
+    public List<AppPermissionEnum> getMandatoryPermissionList() {
+        List<AppPermissionEnum> ret = super.getMandatoryPermissionList();
         ret.addAll(Arrays.asList(AppPermissionEnum.INTERNET));
         return ret;
     }

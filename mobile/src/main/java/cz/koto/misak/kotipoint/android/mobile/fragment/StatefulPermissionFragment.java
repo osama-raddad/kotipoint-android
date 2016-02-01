@@ -43,11 +43,11 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
         if (NetworkUtils.isOnline(getActivity())) {
             showProgress();
         /*
-         * Request all permissions defined in getPermissionList and
-         * call doWithPermissions() after all of them are granted.
+         * Request all permissions defined in getMandatoryPermissionList and
+         * call doWithMandatoryPermissions() after all of them are granted.
          */
             if (savedInstanceState == null) {
-                requestPermissions();
+                requestMandatoryPermissions();
             } else {
                 Timber.d("KoTiNode reloaded not necessary.");
             }
@@ -126,14 +126,14 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
     }
 
     @Override
-    protected void permissionNotGranted() {
+    protected void mandatoryPermissionNotGranted() {
         showNoPermission();
     }
 
     @Override
-    protected List<AppPermissionEnum> getPermissionList() {
+    protected List<AppPermissionEnum> getMandatoryPermissionList() {
         List<AppPermissionEnum> ret = new ArrayList<>();
-        ret.add(AppPermissionEnum.NETWORK_STATE);
+        ret.add(AppPermissionEnum.ACCESS_NETWORK_STATE);
         return ret;
     }
 }

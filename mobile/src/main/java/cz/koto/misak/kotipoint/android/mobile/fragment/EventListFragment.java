@@ -130,15 +130,15 @@ public class EventListFragment extends StatefulPermissionFragment {
 
 
     @Override
-    public void doWithPermissions() {
+    public void doWithMandatoryPermissions() {
         doLoading();
     }
 
 
     @Override
-    public List<AppPermissionEnum> getPermissionList() {
-        List<AppPermissionEnum> ret = super.getPermissionList();
-        ret.addAll(Arrays.asList(AppPermissionEnum.INTERNET/*,AppPermissionEnum.LOCATION*/));
+    public List<AppPermissionEnum> getMandatoryPermissionList() {
+        List<AppPermissionEnum> ret = super.getMandatoryPermissionList();
+        ret.addAll(Arrays.asList(AppPermissionEnum.INTERNET,AppPermissionEnum.ACCESS_FINE_LOCATION));
         return ret;
     }
 }

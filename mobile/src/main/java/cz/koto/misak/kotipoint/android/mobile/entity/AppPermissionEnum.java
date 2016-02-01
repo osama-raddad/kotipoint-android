@@ -5,12 +5,18 @@ import android.Manifest;
 /**
  * Definition of all permissions, defined in AndroidManifest.xml for application.
  * Permission list in the manifest must be equal to permissions in this enum!
+ *
+ * http://developer.android.com/reference/android/Manifest.permission.html
  */
 public enum AppPermissionEnum {
 
-    LOCATION(0, Manifest.permission.ACCESS_FINE_LOCATION),
-    NETWORK_STATE(1, Manifest.permission.ACCESS_NETWORK_STATE),
-    INTERNET(2, Manifest.permission.INTERNET),
+    /* Allows applications to access information about networks. */
+    ACCESS_NETWORK_STATE(0, Manifest.permission.ACCESS_NETWORK_STATE),
+    /* Allows applications to open network sockets. */
+    INTERNET(1, Manifest.permission.INTERNET),
+    /* Allows an app to access precise location. */
+    ACCESS_FINE_LOCATION(2, Manifest.permission.ACCESS_FINE_LOCATION),
+    /* Allows an app to access approximate location. */
     ACCESS_COARSE_LOCATION(3, Manifest.permission.ACCESS_COARSE_LOCATION);
 
     AppPermissionEnum(int requestId, String... permissions) {

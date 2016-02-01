@@ -25,7 +25,7 @@ ext {
 	versionMajor = 3 // max two digits
 	versionMinor = 3 // max two digits
 	versionPatch = 5 // max two digits
-	versionBuild = 0 // max three digits
+	versionBuild = 2 // max three digits
 
 	minSdkVersion = 16
 	targetSdkVersion = 23

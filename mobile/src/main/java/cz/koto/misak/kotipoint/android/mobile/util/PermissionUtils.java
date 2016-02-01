@@ -17,7 +17,14 @@
 package cz.koto.misak.kotipoint.android.mobile.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.content.PermissionChecker;
+
+import java.util.List;
+
+import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 
 /**
  * Utility class that wraps access to the runtime permissions API in M and provides basic helper
@@ -47,6 +54,27 @@ public abstract class PermissionUtils {
     }
 
 
+    /**
+     * method that will return whether the permission is accepted. By default it is true if the user is using a device below
+     * version 23
+     * @param appPermissionEnumList
+     * @return
+     */
+    public static boolean hasPermission(Context context, List<AppPermissionEnum> appPermissionEnumList) {
+        if (isApi23orHigher()) {
+            if (appPermissionEnumList==null) return true;
+            for(AppPermissionEnum permission:appPermissionEnumList) {
+                if (PermissionChecker.checkSelfPermission(context, permission.getPermissionArray()[0]) != PackageManager.PERMISSION_GRANTED){
+                    return false;
+                };
+            }
+            return true;
+        }
+        return true;
+    }
 
+    private static boolean isApi23orHigher() {
+        return(Build.VERSION.SDK_INT> Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
 
 }

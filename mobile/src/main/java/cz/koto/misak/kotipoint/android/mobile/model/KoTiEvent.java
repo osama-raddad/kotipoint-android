@@ -1,4 +1,4 @@
-package cz.koto.misak.kotipoint.android.mobile.entity;
+package cz.koto.misak.kotipoint.android.mobile.model;
 
 
 

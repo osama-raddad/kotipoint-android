@@ -3,8 +3,8 @@ package cz.koto.misak.kotipoint.android.mobile.rest;
 
 import java.util.List;
 
-import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
-import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
+import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
+import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import rx.Observable;

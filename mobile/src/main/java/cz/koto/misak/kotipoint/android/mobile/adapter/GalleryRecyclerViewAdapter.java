@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryItemBinding;
-import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
+import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel;
 

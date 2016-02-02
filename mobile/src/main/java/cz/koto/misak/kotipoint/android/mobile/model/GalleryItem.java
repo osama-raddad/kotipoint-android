@@ -1,10 +1,12 @@
-package cz.koto.misak.kotipoint.android.mobile.entity;
+package cz.koto.misak.kotipoint.android.mobile.model;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
 
 public class GalleryItem implements Parcelable {
 
@@ -50,7 +52,7 @@ public class GalleryItem implements Parcelable {
 
 
     public String getUrl() {
-        return mUrl;
+        return KoTiPointConfig.replaceUrl(mUrl);
     }
 
     public void setUrl(String mUrl) {
@@ -64,5 +66,14 @@ public class GalleryItem implements Parcelable {
 
     public void setId(Long mId) {
         this.mId = mId;
+    }
+
+    @Override
+    public String toString() {
+        return "GalleryItem{" +
+                "mUrl='" + mUrl + '\'' +
+                "mUrlFiltered='" + KoTiPointConfig.replaceUrl(mUrl) + '\'' +
+                ", mId=" + mId +
+                '}';
     }
 }

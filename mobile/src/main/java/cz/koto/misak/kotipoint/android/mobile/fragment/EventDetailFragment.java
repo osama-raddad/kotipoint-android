@@ -16,7 +16,7 @@ import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
+import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 
 public class EventDetailFragment extends PermissionFragment {

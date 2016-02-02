@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentEventItemBinding;
-import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
+import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel;
 

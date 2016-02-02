@@ -23,7 +23,7 @@ public class KoTiPointApplication extends Application {
 
         //Use fabric for non-dev api only.
         CrashlyticsCore core = new CrashlyticsCore.Builder()
-                .disabled(KoTiPointConfig.DEV_API)
+                .disabled(KoTiPointConfigBase.DEV_API)
                 .build();
         /**
          * Attention!

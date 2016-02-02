@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
-import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
+import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.Intents;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;

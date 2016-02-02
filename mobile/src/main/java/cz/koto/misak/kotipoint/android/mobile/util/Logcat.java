@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 
-import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfigBase;
 
 
 public final class Logcat {
@@ -20,48 +20,48 @@ public final class Logcat {
 
 
     public static void d(String msg, Object... args) {
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.d(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 
 
     public static void e(String msg, Object... args) {
         Crashlytics.log(Log.ERROR,TAG, getCodeLocation().toString() + formatMessage(msg, args));
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.e(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 
 
     public static void e(Throwable tr, String msg, Object... args) {
         Crashlytics.logException(tr);
-        if (KoTiPointConfig.LOGS) {
+        if (KoTiPointConfigBase.LOGS) {
             Log.e(TAG, getCodeLocation().toString() + formatMessage(msg, args), tr);
         }
     }
 
 
     public static void i(String msg, Object... args) {
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.i(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 
 
     public static void v(String msg, Object... args) {
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.v(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 
 
     public static void w(String msg, Object... args) {
         Crashlytics.log(Log.WARN,TAG, getCodeLocation().toString() + formatMessage(msg, args));
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.w(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 
 
     public static void wtf(String msg, Object... args) {
         Crashlytics.log(Log.ASSERT,TAG, getCodeLocation().toString() + formatMessage(msg, args));
-        if (KoTiPointConfig.LOGS)
+        if (KoTiPointConfigBase.LOGS)
             Log.wtf(TAG, getCodeLocation().toString() + formatMessage(msg, args));
     }
 

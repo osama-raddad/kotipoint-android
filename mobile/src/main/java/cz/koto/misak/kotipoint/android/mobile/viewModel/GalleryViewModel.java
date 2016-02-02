@@ -12,8 +12,9 @@ import com.squareup.picasso.Picasso;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
-import cz.koto.misak.kotipoint.android.mobile.entity.GalleryItem;
+import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
+import timber.log.Timber;
 
 public class GalleryViewModel extends BaseObservable {
 
@@ -27,7 +28,7 @@ public class GalleryViewModel extends BaseObservable {
 
 
     public String getImageUrl() {
-        //http://localhost:8080/public/gallery/2015-11-15-Racice/racice_001.png
+        //"url":"localhost:8080/public/gallery/2015-11-15-Racice/racice_011.png"
         return "http://" + mGalleryItem.getUrl();
     }
 
@@ -39,10 +40,12 @@ public class GalleryViewModel extends BaseObservable {
      */
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
+        Timber.e("ImageUrl: %s",imageUrl);
         Picasso
                 .with(view.getContext())
-                //http://localhost:8080/public/gallery/2015-11-15-Racice/racice_001.png
                 .load(imageUrl)
+//                .load("http://10.0.3.2:8080/public/gallery/2015-11-15-Racice/racice_001.png")
+//                .load("http://localhost:8080/public/gallery/2015-11-15-Racice/racice_003.png")
                 .transform(ImageTransformation.getTransformation(view))
                 .placeholder(R.drawable.progress_animation)
                 .into(view);

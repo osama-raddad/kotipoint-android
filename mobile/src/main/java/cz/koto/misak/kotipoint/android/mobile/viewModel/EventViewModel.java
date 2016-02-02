@@ -14,7 +14,7 @@ import java.util.Date;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
-import cz.koto.misak.kotipoint.android.mobile.entity.KoTiEvent;
+import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 
 public class EventViewModel extends BaseObservable {
 

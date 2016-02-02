@@ -18,7 +18,7 @@ import cz.koto.misak.kotipoint.android.mobile.fragment.GalleryFragment;
  * https://github.com/codepath/android_guides/wiki/Google-Play-Style-Tabs-using-TabLayout
  */
 public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
-    public static final int FRAGMENT_COUNT = 1;
+    public static final int FRAGMENT_COUNT = 2;
 
     private Context mContext;
 
@@ -54,19 +54,6 @@ public class TabLayoutFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-//        switch (position) {
-//            case 0:
-//                return "EVENT";
-//            case 1:
-//                return "GALLERY";
-//            default:
-//                return null;
-//        }
-
-        // getDrawable(int i) is deprecated, use getDrawable(int i, Theme theme) for min SDK >=21
-        // or ContextCompat.getDrawable(Context context, int id) if you want support for older versions.
-        // Drawable image = context.getResources().getDrawable(iconIds[position], context.getTheme());
-        // Drawable image = context.getResources().getDrawable(imageResId[position]);
 
         Drawable image = ContextCompat.getDrawable(mContext, imageResId[position]);
         image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());

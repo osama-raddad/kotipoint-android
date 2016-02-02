@@ -46,17 +46,10 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
         //TODO what is better this command or extractIntentArguments method?
+//        mGalleryItem = getArguments().getParcelable(Intents.EXTRA_IMAGE);
         mGalleryItem = getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY);
-
-        /*
-         * Request all permissions defined in getMandatoryPermissionList and
-         * call doWithMandatoryPermissions() since all of them are granted.
-         * Call mandatoryPermissionNotGranted otherwise.
-         */
-        requestMandatoryPermissions();
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -92,11 +85,6 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     @Override
     protected void initOnCreateView(View view, Bundle savedInstanceState) {
 
-    }
-
-    private void extractIntentArguments() {
-        Bundle b = getArguments();
-        mGalleryItem = /*Parcels.unwrap(b.getParcelable(Intents.EXTRA_IMAGE)*/b.getParcelable(Intents.EXTRA_IMAGE);
     }
 
     private void doPhotoView() {

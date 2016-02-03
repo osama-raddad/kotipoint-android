@@ -57,6 +57,44 @@ dependencies
 	compile "org.ocpsoft.prettytime:prettytime:$rootProject.ext.prettyTime"
 
 	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+
+	// Dependencies for local unit tests
+	testCompile 'junit:junit:' + rootProject.ext.junitVersion
+	testCompile 'org.mockito:mockito-all:' + rootProject.ext.mockitoVersion
+	testCompile 'org.hamcrest:hamcrest-all:' + rootProject.ext.hamcrestVersion
+
+	//Provides AndroidJUnitRunner
+	androidTestCompile ("com.android.support.test:runner:$rootProject.ext.runnerVersion") {
+		exclude module: 'support-annotations'
+	}
+	// Provides JUnit 4 rules
+	androidTestCompile ("com.android.support.test:rules:$rootProject.ext.rulesVersion") {
+		exclude module: 'support-annotations'
+	}
+
+	//Due to a bug in the current Android plugin just exclude dependencies which are duplicated in both the app and test app.
+	androidTestCompile ("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion") {
+		exclude module: 'support-annotations'
+	}
+
+	androidTestCompile ("com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion") {
+		exclude module: 'support-annotations'
+		exclude group: 'com.android.support', module: 'appcompat'
+		exclude group: 'com.android.support', module: 'support-v4'
+		exclude module: 'recyclerview-v7'
+	}
+
+	// Espresso- Intents and Web dependencies are not used in this project.
+	/*
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:' + rootProject.ext.espressoVersion
+    androidTestCompile 'com.android.support.test.espresso:espresso-web:' + rootProject.ext.espressoVersion
+     */
+
+	// Set this dependency to build and run UI Automator tests
+	// For support main minsdk under 18 just override androidTest/AndroidManifest.xml (to have tests with minsdk set to 18)
+	// For mote details see: https://github.com/googlesamples/android-testing-templates/tree/master/AndroidTestingBlueprint
+	androidTestCompile "com.android.support.test.uiautomator:uiautomator-v18:$rootProject.ext.uiautomatorVersion"
 }
 
 

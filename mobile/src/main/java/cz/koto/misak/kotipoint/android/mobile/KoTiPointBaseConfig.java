@@ -2,10 +2,9 @@ package cz.koto.misak.kotipoint.android.mobile;
 
 
 /**
- * KoTiPointConfigBase is base class for KoTiPointConfig given by specific flavour.
- * TODO this would be nice to solve by using dependency injection (Dagger2 or so)
+ * KoTiPointConfigBase is base config for application.
  */
-public class KoTiPointConfigBase
+public class KoTiPointBaseConfig
 {
 
 	public static final boolean LOGS = BuildConfig.LOGS;

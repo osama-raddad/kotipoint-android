@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
-import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfigBase;
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointBaseConfig;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.adapter.EventRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
@@ -86,7 +86,7 @@ public class EventListFragment extends StatefulPermissionFragment {
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mRecyclerView.setLimit(LIMIT);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), KoTiPointConfigBase.API_KOTINODE_TEST_DELAY));
+        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), KoTiPointBaseConfig.API_KOTINODE_TEST_DELAY));
         mRecyclerView.setStatefulLayout(getFragmentView());
     }
 

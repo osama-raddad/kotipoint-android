@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.google.gson.GsonBuilder;
 
-import cz.koto.misak.kotipoint.android.mobile.KoTiPointConfig;
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointServerConfig;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -18,7 +18,7 @@ public class KoTiNodeClient {
         if (sRestInterface == null) {
             GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'");//ISO-8601
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(KoTiPointConfig.API_KOTINODE_ENDPOINT)
+                    .baseUrl(KoTiPointServerConfig.API_KOTINODE_ENDPOINT)
                     .client(KotoSSLTrust.trustcert(context))
                     .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//important for RX!!!

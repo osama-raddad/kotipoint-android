@@ -1,11 +1,16 @@
 package cz.koto.misak.kotipoint.android.mobile;
 
 
-public class KoTiPointConfig extends KoTiPointConfigBase
+/**
+ * KoTiPointServerConfig for rosti buildFlavour.
+ * Don't forget update also other flavours!
+ *
+ * TODO would it be better to solve by using dependency injection (Dagger2 or so)?
+ */
+public class KoTiPointServerConfig extends KoTiPointBaseConfig
 {
 	public static final String API_KOTINODE_PROTOCOL = "https";
 
-	// Genymotion emulator
 	public static final String API_KOTINODE_ENDPOINT;
 
     static {

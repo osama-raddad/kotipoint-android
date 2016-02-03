@@ -19,22 +19,16 @@ import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 
 public class GaleryDetailFragment extends StatefulPermissionFragment {
 
-    protected GalleryItem mGalleryItem;
-
     @Bind(R.id.image_preview)
     ImageLayout mImageLayout;
+
+    protected GalleryItem mGalleryItem;
 
     public static GaleryDetailFragment newInstance(Context context, GalleryItem galleryItem) {
         Bundle b = new Bundle();
         b.putParcelable(Intents.EXTRA_IMAGE, galleryItem/*Parcels.wrap(image)*/);
         return (GaleryDetailFragment) GaleryDetailFragment.instantiate(context, GaleryDetailFragment.class.getName(), b);
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +82,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     }
 
     private void doPhotoView() {
+        getFragmentView().showContent();
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();

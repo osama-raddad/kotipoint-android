@@ -1,6 +1,5 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,13 +29,7 @@ public class EventDetailFragment extends PermissionFragment {
     @Bind(R.id.event_detail_date)
     TextView mEventDetailDate;
 
-    private KoTiEvent mKoTiEvent;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
+    protected KoTiEvent mKoTiEvent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

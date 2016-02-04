@@ -13,6 +13,6 @@ public class KoTiPointBaseConfig
 	/**
 	 * Delay (in millis) for testing purpose.
 	 */
-	public static final int API_KOTINODE_TEST_DELAY = 2000;
+	public static final int API_KOTINODE_TEST_DELAY = 0;
 
 }

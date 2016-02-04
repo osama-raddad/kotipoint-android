@@ -2,9 +2,7 @@ package cz.koto.misak.kotipoint.android.mobile.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
@@ -29,17 +27,18 @@ public class ImageLayout extends RelativeLayout implements Target {
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//        setBackground(new ColorDrawable(Color.BLUE));
         setBackground(new BitmapDrawable(getResources(), bitmap));
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        setBackground(new ColorDrawable(Color.RED));//Set your error drawable
+        //TODO provide button for reload possibility?
+        //setBackground(new ColorDrawable(Color.RED));//Set your error drawable
     }
 
     @Override
     public void onPrepareLoad(Drawable placeHolderDrawable) {
-        setBackground(new ColorDrawable(Color.GREEN));//Set your placeholder
+        //TODO display static icon about loading?
+        //setBackground(new ColorDrawable(Color.GREEN));//Set your placeholder
     }
 }

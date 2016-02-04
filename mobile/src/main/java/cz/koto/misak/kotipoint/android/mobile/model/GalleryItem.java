@@ -51,6 +51,15 @@ public class GalleryItem implements Parcelable {
     }
 
 
+    /**
+     * Return url for image, but without protocol!
+     * This url is replaced for localhost flavour with specific IP!
+     *
+     * localhost:8080/public/gallery/2015-11-15-Racice/racice_003.png
+     * 10.0.3.2:8080/public/gallery/2015-11-15-Racice/racice_001.png
+     *
+     * @return
+     */
     public String getUrl() {
         return KoTiPointServerConfig.replaceUrl(mUrl);
     }

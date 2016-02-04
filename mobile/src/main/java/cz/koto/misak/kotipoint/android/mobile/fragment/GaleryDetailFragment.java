@@ -81,6 +81,10 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
 
     }
 
+    /**
+     * //TODO consider offer to the user switch between center and crop.
+     * //TODO or consider offer to the user scale image when crop is chosen.
+     */
     private void doPhotoView() {
         getFragmentView().showContent();
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -92,6 +96,8 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
         Picasso.with(getContext())
                 .load("http://"+mGalleryItem.getUrl())
                 .resize(width, height)
-                .centerCrop().into(mImageLayout);
+                .centerCrop()
+//                .centerInside()
+                .into(mImageLayout);
     }
 }

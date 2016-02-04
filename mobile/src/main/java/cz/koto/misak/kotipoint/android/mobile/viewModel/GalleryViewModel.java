@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
@@ -28,7 +27,6 @@ public class GalleryViewModel extends BaseObservable {
 
 
     public String getImageUrl() {
-        //"url":"localhost:8080/public/gallery/2015-11-15-Racice/racice_011.png"
         return "http://" + mGalleryItem.getUrl();
     }
 
@@ -44,18 +42,8 @@ public class GalleryViewModel extends BaseObservable {
         Picasso
                 .with(view.getContext())
                 .load(imageUrl)
-//                .load("http://10.0.3.2:8080/public/gallery/2015-11-15-Racice/racice_001.png")
-//                .load("http://localhost:8080/public/gallery/2015-11-15-Racice/racice_003.png")
                 .transform(ImageTransformation.getTransformation(view))
-                .placeholder(R.drawable.progress_animation)
                 .into(view);
-//        Uri imageURI = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Integer.toString(columnIndex));
-//        Picasso
-//                .with(context)
-//                .load(imageURI)
-//                .fit()
-//                .centerInside()
-//                .into(imageView);
     }
 
     public View.OnClickListener onClickGalleryItem() {

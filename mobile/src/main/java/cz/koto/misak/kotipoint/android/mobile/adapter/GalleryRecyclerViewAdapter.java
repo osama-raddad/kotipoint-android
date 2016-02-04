@@ -13,8 +13,8 @@ import android.widget.ProgressBar;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryItemBinding;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel;
+import timber.log.Timber;
 
 /**
  * http://blog.sqisland.com/2014/12/recyclerview-grid-with-header.html
@@ -42,9 +42,9 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 
     @Override
     public long getItemId(int position) {
-        Logcat.w("Items count %s, Requester position:%s , Item:%s", getItemCount(), position, getItem(position));
+        Timber.w("Items count %s, Requester position:%s , Item:%s", getItemCount(), position, getItem(position));
         if (getItem(position).getUrl() == null) {
-            Logcat.w("Null ID for position: %s", getItem(position));
+            Timber.w("Null ID for position: %s", getItem(position));
         }
         return getItem(position).getId();
     }

@@ -18,13 +18,13 @@ import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.AutoLoadingRecy
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.ILoading;
 import cz.koto.misak.kotipoint.android.mobile.entity.autoloading.OffsetAndLimit;
 import cz.koto.misak.kotipoint.android.mobile.util.BackgroundExecutor;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+import timber.log.Timber;
 
 
 public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extends RecyclerView {
@@ -178,7 +178,7 @@ public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extend
 
             @Override
             public void onError(Throwable e) {
-                Logcat.e("%s SubscribeToLoadingChannel error: %s", autoLoadingRecyclerViewAdapter,e);
+                Timber.e("%s SubscribeToLoadingChannel error: %s", autoLoadingRecyclerViewAdapter,e);
                 setLayoutOffline();
             }
 
@@ -203,7 +203,7 @@ public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extend
 
             @Override
             public void onError(Throwable e) {
-                Logcat.e("%s LoadNewItems error: %s", autoLoadingRecyclerViewAdapter,e);
+                Timber.e("%s LoadNewItems error: %s", autoLoadingRecyclerViewAdapter,e);
                 setLayoutOffline();
                 subscribeToLoadingChannel();
             }
@@ -251,7 +251,7 @@ public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extend
                 loadNewItemsSubscription.unsubscribe();
             }catch (Throwable th){
                 if (KoTiPointBaseConfig.DEV_API) {
-                    Logcat.e(th, "https://github.com/kaushikgopal/RxJava-Android-Samples/pull/26");
+                    Timber.e(th, "https://github.com/kaushikgopal/RxJava-Android-Samples/pull/26");
                 }
             }
         }

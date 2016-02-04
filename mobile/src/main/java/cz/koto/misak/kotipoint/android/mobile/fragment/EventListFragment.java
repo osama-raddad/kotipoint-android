@@ -16,9 +16,9 @@ import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
+import timber.log.Timber;
 
 
 public class EventListFragment extends StatefulPermissionFragment {
@@ -72,7 +72,7 @@ public class EventListFragment extends StatefulPermissionFragment {
         // init adapter for the first time
         if ((savedInstanceState == null) || (mRecyclerViewAdapter == null)) {
             if (mRecyclerViewAdapter == null) {
-                Logcat.d("RecyclerViewAdapter is NULL, init it!");
+                Timber.d("RecyclerViewAdapter is NULL, init it!");
             }
             mRecyclerViewAdapter = new EventRecyclerViewAdapter(getContext());
             mRecyclerViewAdapter.setHasStableIds(true);
@@ -115,7 +115,7 @@ public class EventListFragment extends StatefulPermissionFragment {
     private void handleArguments(Bundle arguments) {
         if (arguments.containsKey(TITLE_KEY)) {
             String mTitle = (String) arguments.get(TITLE_KEY);
-            Logcat.d("Handled %s value: %s", TITLE_KEY, mTitle);
+            Timber.d("Handled %s value: %s", TITLE_KEY, mTitle);
         }
     }
 

@@ -12,8 +12,8 @@ import android.widget.ProgressBar;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentEventItemBinding;
 import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
-import cz.koto.misak.kotipoint.android.mobile.util.Logcat;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel;
+import timber.log.Timber;
 
 public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoTiEvent, EventRecyclerViewAdapter.EventBindingHolder> {
 
@@ -34,9 +34,9 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
 
     @Override
     public long getItemId(int position) {
-        Logcat.w("Items count %s, Requester position:%s , Item:%s",getItemCount(), position,getItem(position));
+        Timber.w("Items count %s, Requester position:%s , Item:%s",getItemCount(), position,getItem(position));
         if (getItem(position).getmId()==null) {
-            Logcat.w("Null ID for position: %s",getItem(position));
+            Timber.w("Null ID for position: %s",getItem(position));
         }
         return getItem(position).getmId();
     }

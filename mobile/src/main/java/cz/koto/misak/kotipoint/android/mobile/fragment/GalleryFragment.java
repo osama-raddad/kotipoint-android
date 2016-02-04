@@ -13,6 +13,7 @@ import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.adapter.GalleryRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
+import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
 import cz.koto.misak.kotipoint.android.mobile.util.Logcat;

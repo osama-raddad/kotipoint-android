@@ -1,4 +1,4 @@
-package cz.koto.misak.kotipoint.android.mobile.fragment;
+package cz.koto.misak.kotipoint.android.mobile.fragment.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import java.util.Map;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
+import cz.koto.misak.kotipoint.android.mobile.fragment.base.BaseFragment;
 import cz.koto.misak.kotipoint.android.mobile.util.PermissionUtils;
 import timber.log.Timber;
 

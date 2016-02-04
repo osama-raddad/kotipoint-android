@@ -1,4 +1,4 @@
-package cz.koto.misak.kotipoint.android.mobile.fragment;
+package cz.koto.misak.kotipoint.android.mobile.fragment.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

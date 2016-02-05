@@ -5,32 +5,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
+import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentEventDetailBinding;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.fragment.base.PermissionFragment;
-import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
-import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
+import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
+import cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel;
 
-public class EventDetailFragment extends PermissionFragment {
+public class EventDetailFragment extends StatefulPermissionFragment {
 
-    @Bind(R.id.event_detail_image)
-    ImageView mDetailImage;
-    @Bind(R.id.event_detail_header)
-    TextView mEventDetailHeader;
-    @Bind(R.id.event_detail_text)
-    TextView mEventDetailText;
-    @Bind(R.id.event_detail_date)
-    TextView mEventDetailDate;
-
-    protected KoTiEvent mKoTiEvent;
+    private FragmentEventDetailBinding mBinding;
+    private EventViewModel mViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,24 +26,6 @@ public class EventDetailFragment extends PermissionFragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
     }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mKoTiEvent = getActivity().getIntent().getExtras().getParcelable(EventDetailActivity.PAYLOAD_KEY);
-        bindPassedData(mKoTiEvent);
-
-        /*
-         * Request all permissions defined in getMandatoryPermissionList and
-         * call doWithMandatoryPermissions() since all of them are granted.
-         * Call mandatoryPermissionNotGranted otherwise.
-         */
-        requestMandatoryPermissions();
-    }
-
-
-
 
 
     @Override
@@ -105,47 +75,14 @@ public class EventDetailFragment extends PermissionFragment {
 
     @Override
     protected void initOnCreateView(View view, Bundle savedInstanceState) {
-        //Nothing to do yet.
-    }
-
-    private void bindNetworkImage() {
-        if (NetworkUtils.isOnline(getActivity())) {
-            bindOfflineImage(mKoTiEvent.getmEventLocation());
-        } else {
-            bindOfflineImage(mKoTiEvent.getmEventLocation());
-        }
-    }
-
-    private void bindOfflineImage(List<String> location) {
-        if ((location!=null)&&(location.contains("Tihava"))){
-            mDetailImage.setImageResource(R.drawable.detail_tihava);
-        }else{
-            mDetailImage.setImageResource(R.drawable.detail_kotopeky);
-        }
-    }
-
-    private void bindPassedData(KoTiEvent koTiEvent) {
-
-        if (koTiEvent == null) return;
-
-        mEventDetailHeader.setText(koTiEvent.getmHeadline());
-
-        mEventDetailText.setText(koTiEvent.getmText());
-
-        SimpleDateFormat df = new SimpleDateFormat(getResources().getString(R.string.date_format_date));
-        mEventDetailDate.setText(df.format(koTiEvent.getmEventDate()));
-
+        mBinding = FragmentEventDetailBinding.bind(view);
+        mViewModel = new EventViewModel(getActivity().getIntent().getExtras().getParcelable(EventDetailActivity.PAYLOAD_KEY), view.getResources());
+        mBinding.setViewModel(mViewModel);
     }
 
 
-    @Override
     public void doWithMandatoryPermissions() {
-        bindNetworkImage();
-    }
-
-    @Override
-    public void mandatoryPermissionNotGranted() {
-        bindOfflineImage(mKoTiEvent.getmEventLocation());
+        showContent();
     }
 
     @Override

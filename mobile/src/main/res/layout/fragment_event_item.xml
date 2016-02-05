@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:orientation="vertical"
-            android:onClick="@{viewModel.onClickEvent}">
+            android:onClick="@{viewModel.callEventDetailActivity}">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,9 +35,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/global_spacing_xxs"
-                    android:text="@{viewModel.headline}"
+                    android:text="@{viewModel.eventHeadline}"
                     android:textAppearance="@style/TextAppearance.KoTiPoint.Headline"
-                    android:onClick="@{viewModel.onClickEvent}"/>
+                    android:onClick="@{viewModel.callEventDetailActivity}"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                     android:padding="@dimen/default_padding"
                     android:background="@drawable/selector_clickable_item_bg"
                     android:clickable="true"
-                    android:onClick="@{viewModel.onClickDate}"
+                    android:onClick="@{viewModel.callEventDetailActivity}"
                     android:visibility="@{viewModel.eventDateVisibility}"/>
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:clickable="true"
                     android:textAppearance="@style/TextAppearance.KoTiPoint.Body1.Link"
                     android:text="@string/view_button"
-                    android:onClick="@{viewModel.onClickEvent}"/>
+                    android:onClick="@{viewModel.callEventDetailActivity}"/>
 
             </LinearLayout>
 

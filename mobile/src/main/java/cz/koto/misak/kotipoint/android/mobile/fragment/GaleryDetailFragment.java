@@ -16,7 +16,6 @@ import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFr
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.Intents;
-import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 
 public class GaleryDetailFragment extends StatefulPermissionFragment {
 
@@ -45,11 +44,6 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
 //        mGalleryItem = getArguments().getParcelable(Intents.EXTRA_IMAGE);
         mGalleryItem = getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY);
         super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    protected StatefulLayout getFragmentView() {
-        return (StatefulLayout) mFragmentView;
     }
 
     @Override

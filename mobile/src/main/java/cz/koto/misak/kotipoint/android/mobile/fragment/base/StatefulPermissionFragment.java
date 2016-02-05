@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
-import cz.koto.misak.kotipoint.android.mobile.fragment.base.PermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import timber.log.Timber;
@@ -18,7 +17,9 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
 
     private StatefulLayout mStatefulLayout;
 
-    protected abstract StatefulLayout getFragmentView();
+    protected StatefulLayout getFragmentView() {
+        return (StatefulLayout) mFragmentView;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

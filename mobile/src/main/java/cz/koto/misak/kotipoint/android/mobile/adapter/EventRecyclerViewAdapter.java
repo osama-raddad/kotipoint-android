@@ -74,7 +74,7 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
         switch (getItemViewType(position)) {
             case VIEW_TYPE_EVENT:
                 FragmentEventItemBinding fragmentEventItemBinding = (FragmentEventItemBinding)holder.binding;
-                fragmentEventItemBinding.setViewModel(new EventViewModel(mContext,getItem(position)));
+                fragmentEventItemBinding.setViewModel(new EventViewModel(getItem(position), mContext.getResources()));
                 break;
             case VIEW_TYPE_FOOTER:
                 break;

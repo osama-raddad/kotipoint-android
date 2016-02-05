@@ -3,9 +3,12 @@ package cz.koto.misak.kotipoint.android.mobile.viewModel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.databinding.BaseObservable;
+import android.databinding.BindingAdapter;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -18,12 +21,12 @@ import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 
 public class EventViewModel extends BaseObservable {
 
-    private Context mContext;
-    private KoTiEvent mEvent;
+    KoTiEvent mEvent;
+    Resources mResources;
 
-    public EventViewModel(Context context, KoTiEvent event) {
-        this.mContext = context;
+    public EventViewModel(KoTiEvent event, Resources resources) {
         this.mEvent = event;
+        this.mResources = resources;
     }
 
 //    @BindingAdapter("containerMargin")
@@ -57,7 +60,7 @@ public class EventViewModel extends BaseObservable {
     }
 
     public String getEventDate() {
-        SimpleDateFormat df = new SimpleDateFormat(mContext.getResources().getString(R.string.date_format_date));
+        SimpleDateFormat df = new SimpleDateFormat(mResources.getString(R.string.date_format_date));
         return mEvent.getmEventDate() == null ? "" : df.format(mEvent.getmEventDate());
     }
 
@@ -66,28 +69,32 @@ public class EventViewModel extends BaseObservable {
     }
 
     public String getEventLocation() {
-        String location = (mEvent.getmEventLocation() == null || mEvent.getmEventLocation().size() == 0) ? "-" : mEvent.getmEventLocation().get(0);
-//        String author = mContext.getString(R.string.text_post_author,location);
-//        SpannableString content = new SpannableString(author);
-//        int index = author.indexOf(location);
-//        content.setSpan(new UnderlineSpan(), index,location.length() + index, 0);
-//        return content;
-        return location;
+        String ret = "";
+        if (mEvent.getmEventLocation()!=null){
+            if (mEvent.getmEventLocation().size()>0){
+                ret = mEvent.getmEventLocation().get(0);
+            }
+        }
+        return ret;
     }
 
-    public String getHeadline() {
+    public String getEventHeadline(){
         return mEvent.getmHeadline();
     }
 
+    public String getEventText(){
+        return "TODOfalskfjas;lkfj;asdfkj;aslfkj;asldfkj;asldfjkjasdhflkasdhflkasddjhfklasdfhlasdjflasdjkflasdjflsadkjflaskdjflaskdfjlaskdjflasdkjflasdkfjlasdfjlasdkj lkfsa l;kas;lfdkjas;lfdkjasd;lf kjas;lfkj;asldfjka;sldfkj a;lskdfj ;laksfjd;lkasfjd";//mEvent.getmText();
+    }
 
-    public View.OnClickListener onClickEvent() {
+    public View.OnClickListener callEventDetailActivity() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(EventDetailActivity.newIntent(mContext));
-                Intent i = EventDetailActivity.newIntent(mContext);
+                Context context = v.getContext();
+                context.startActivity(EventDetailActivity.newIntent(context));
+                Intent i = EventDetailActivity.newIntent(context);
                 i.putExtra(EventDetailActivity.PAYLOAD_KEY, mEvent);
-                mContext.startActivity(i);
+                context.startActivity(i);
             }
         };
     }
@@ -101,6 +108,33 @@ public class EventViewModel extends BaseObservable {
                         Snackbar.LENGTH_SHORT).show();
             }
         };
+    }
+
+    /**
+     * https://medium.com/android-news/loading-images-with-data-binding-and-picasso-555dad683fdc#.1ny3d2s2w
+     *
+     * @param view
+     * @param eventLocation
+     */
+    @BindingAdapter({"bind:imageUrlEvent"})
+    public static void loadImageEvent(ImageView view, String eventLocation) {
+
+
+        if (false){
+//            Timber.e("ImageUrl: %s",imageUrl);
+//            Picasso
+//                    .with(view.getContext())
+//                    .load(imageUrl)
+//                    .transform(ImageTransformation.getTransformation(view))
+//                    .into(view);
+
+        }else {
+            if ((eventLocation != null) && (eventLocation.contains("Tihava"))) {
+                view.setImageResource(R.drawable.detail_tihava);
+            } else {
+                view.setImageResource(R.drawable.detail_kotopeky);
+            }
+        }
     }
 
 }

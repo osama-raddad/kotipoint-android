@@ -16,7 +16,6 @@ import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
-import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 import timber.log.Timber;
 
@@ -122,13 +121,6 @@ public class EventListFragment extends StatefulPermissionFragment {
     private void doLoading() {
         mRecyclerView.startLoading();
     }
-
-    @Override
-    protected StatefulLayout getFragmentView() {
-        return (StatefulLayout) mFragmentView;
-    }
-
-
 
     @Override
     public void doWithMandatoryPermissions() {

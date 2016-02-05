@@ -64,9 +64,9 @@ public class KoTiEvent implements Parcelable
     public KoTiEvent(Parcel in){
         this.mId = in.readInt();
         this.mHeadline = in.readString();
-        this.mLabel = new ArrayList<>();//in.readArrayList(); TODO fix this
+        in.readStringList(this.mLabel = new ArrayList<String>());
         this.mEventDate = new Date(in.readLong());
-        this.mEventLocation = new ArrayList<>();//TODO fix this
+        in.readStringList(this.mEventLocation = new ArrayList<String>());
         this.mTextCapital = in.readString();
         this.mText = in.readString();
         this.mImageResource = in.readString();

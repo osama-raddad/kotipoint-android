@@ -1,42 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel" />
+    </data>
+
+    <cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fragment_example_stateful_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        app:emptyLayout="@layout/fragment_placeholder_empty"
+        app:noPermissionLayout="@layout/fragment_placeholder_nopermission"
+        app:offlineLayout="@layout/fragment_placeholder_offline"
+        app:progressLayout="@layout/fragment_placeholder_progress"
+        app:state="content">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:fitsSystemWindows="false">
 
-            <ImageView
-                android:id="@+id/event_detail_image"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:fitsSystemWindows="true">
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <ImageView
+                        android:id="@+id/event_detail_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        app:imageUrlEvent="@{viewModel.eventLocation}"
+                        app:layout_collapseMode="parallax" />
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_collapseMode="pin" />
+
+                </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
+
+            <!--TODO include temporarily bypassed because of weak knowledge - how to apply binding!-->
+            <!--<include layout="@layout/fragment_event_detail_content"  bind:viewModel="@viewModel"/>-->
+
+            <!--TODO include this block with fragment_event_detail_content.xml if possible-->
+            <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/fragment_event_detail">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_clickable_item_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_padding">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+                    <TextView
+                        android:id="@+id/event_item_headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/global_spacing_xxs"
+                        android:text="@{viewModel.eventHeadline}"
+                        android:textAppearance="@style/TextAppearance.KoTiPoint.Headline" />
 
-    <include layout="@layout/fragment_event_detail_content" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/event_item_date_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="@{viewModel.eventDateDuration}"
+                            android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date" />
+
+                        <TextView
+                            android:id="@+id/event_item_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/event_item_date_duration"
+                            android:gravity="right"
+                            android:text="@{viewModel.eventLocation}"
+                            android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Location"
+                            android:textColor="@color/theme_edge_effect" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/event_item_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/event_item_date_duration"
+                        android:gravity="right"
+                        android:text="@{viewModel.eventDate}"
+                        android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/event_item_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.eventText}"
+                            android:padding="@dimen/global_spacing_s"
+                            android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+            <!--TODO include this block with fragment_event_detail_content.xml if possible-->
+
+
+        </android.support.design.widget.CoordinatorLayout>
+    </cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout>
+</layout>

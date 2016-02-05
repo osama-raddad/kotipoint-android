@@ -17,7 +17,6 @@ import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFr
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.rest.KoTiNodeClient;
 import cz.koto.misak.kotipoint.android.mobile.view.LinearDividerItemDecoration;
-import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView;
 import timber.log.Timber;
 
@@ -81,12 +80,6 @@ public class GalleryFragment extends StatefulPermissionFragment {
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).galleryList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit()));
         mRecyclerView.setStatefulLayout(getFragmentView());
-    }
-
-
-    @Override
-    protected StatefulLayout getFragmentView() {
-        return (StatefulLayout) mFragmentView;
     }
 
     @Override

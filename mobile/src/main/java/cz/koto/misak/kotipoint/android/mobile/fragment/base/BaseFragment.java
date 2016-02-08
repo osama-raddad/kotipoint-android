@@ -48,6 +48,14 @@ public abstract class BaseFragment extends Fragment {
             onRestoreState(savedInstanceState);
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mFragmentView = null;
+    }
+
+
     protected abstract @LayoutRes int getLayoutResource();
 
     protected abstract void initOnCreateView(View view, Bundle savedInstanceState);

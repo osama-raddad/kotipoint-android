@@ -117,7 +117,7 @@ public class EventViewModel extends BaseObservable {
      * @param eventLocation
      */
     @BindingAdapter({"bind:imageUrlEvent"})
-    public static void loadImageEvent(ImageView view, String eventLocation) {
+    public static void imageUrlEvent(ImageView view, String eventLocation) {
 
 
         if (false){

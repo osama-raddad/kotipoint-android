@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -17,17 +20,17 @@ import timber.log.Timber;
 
 public class GalleryViewModel extends BaseObservable {
 
-    private Context mContext;
+    private static final String PROTOCOL_PREFIX = "http://";
+
     private GalleryItem mGalleryItem;
 
-    public GalleryViewModel(Context context, GalleryItem galleryItem) {
-        this.mContext = context;
+    public GalleryViewModel(GalleryItem galleryItem) {
         this.mGalleryItem = galleryItem;
     }
 
 
     public String getImageUrl() {
-        return "http://" + mGalleryItem.getUrl();
+        return PROTOCOL_PREFIX + mGalleryItem.getUrl();
     }
 
     /**
@@ -37,8 +40,8 @@ public class GalleryViewModel extends BaseObservable {
      * @param imageUrl
      */
     @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Timber.e("ImageUrl: %s",imageUrl);
+    public static void imageUrl(ImageView view, String imageUrl) {
+        Timber.e("ImageUrl: %s", imageUrl);
         Picasso
                 .with(view.getContext())
                 .load(imageUrl)
@@ -46,13 +49,35 @@ public class GalleryViewModel extends BaseObservable {
                 .into(view);
     }
 
-    public View.OnClickListener onClickGalleryItem() {
+
+    public static void loadImageGalleryDetail(ImageView view, String imageUrl) {
+        /**
+         * //TODO consider offer to the user switch between center and crop.
+         * //TODO or consider offer to the user scale image when crop is chosen.
+         */
+        Context context = view.getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        Picasso.with(context)
+                .load(PROTOCOL_PREFIX + imageUrl)
+                .resize(width, height)
+                .centerCrop()
+//                .centerInside()
+                .into(view);
+    }
+
+    public View.OnClickListener callGalleryDetailActivity() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = GalleryDetailActivity.newIntent(mContext);
+                Context context = v.getContext();
+                Intent i = GalleryDetailActivity.newIntent(context);
                 i.putExtra(GalleryDetailActivity.PAYLOAD_KEY, mGalleryItem);
-                mContext.startActivity(i);
+                context.startActivity(i);
             }
         };
     }

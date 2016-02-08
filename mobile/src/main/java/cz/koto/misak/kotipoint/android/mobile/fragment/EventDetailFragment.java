@@ -21,21 +21,6 @@ public class EventDetailFragment extends StatefulPermissionFragment {
     private EventViewModel mViewModel;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        setRetainInstance(true);
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mFragmentView = null;
-    }
-
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // action bar menu
         super.onCreateOptionsMenu(menu, inflater);

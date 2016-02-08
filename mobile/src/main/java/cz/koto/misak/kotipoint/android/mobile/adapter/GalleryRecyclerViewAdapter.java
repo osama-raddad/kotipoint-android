@@ -82,7 +82,7 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
         switch (getItemViewType(position)) {
             case VIEW_TYPE_IMAGE:
                 FragmentGalleryItemBinding fragmentEventItemBinding = (FragmentGalleryItemBinding)holder.binding;
-                fragmentEventItemBinding.setViewModel(new GalleryViewModel(mContext,getItem(position)));
+                fragmentEventItemBinding.setGalleryViewModel(new GalleryViewModel(getItem(position)));
                 break;
             case VIEW_TYPE_FOOTER:
                 break;

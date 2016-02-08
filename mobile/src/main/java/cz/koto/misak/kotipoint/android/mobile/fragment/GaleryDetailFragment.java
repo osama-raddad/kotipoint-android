@@ -1,26 +1,21 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 
-import com.squareup.picasso.Picasso;
-
-import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
+import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryDetailBinding;
 import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
-import cz.koto.misak.kotipoint.android.mobile.view.ImageLayout;
 import cz.koto.misak.kotipoint.android.mobile.view.Intents;
+import cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel;
 
 public class GaleryDetailFragment extends StatefulPermissionFragment {
 
-    @Bind(R.id.image_preview)
-    ImageLayout mImageLayout;
+    private FragmentGalleryDetailBinding mBinding;
+    private GalleryViewModel mViewModel;
 
     protected GalleryItem mGalleryItem;
 
@@ -31,24 +26,8 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        extractIntentArguments();
-        setHasOptionsMenu(true);
-        setRetainInstance(true);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        //TODO what is better this command or extractIntentArguments method?
-//        mGalleryItem = getArguments().getParcelable(Intents.EXTRA_IMAGE);
-        mGalleryItem = getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY);
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public void doWithMandatoryPermissions() {
-        doPhotoView();
+        showContent();
     }
 
     @Override
@@ -73,26 +52,9 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
 
     @Override
     protected void initOnCreateView(View view, Bundle savedInstanceState) {
-
+        mBinding = FragmentGalleryDetailBinding.bind(view);
+        mViewModel = new GalleryViewModel(getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY));
+        mBinding.setGalleryViewModel(mViewModel);
     }
 
-    /**
-     * //TODO consider offer to the user switch between center and crop.
-     * //TODO or consider offer to the user scale image when crop is chosen.
-     */
-    private void doPhotoView() {
-        getFragmentView().showContent();
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        Picasso.with(getContext())
-                .load("http://"+mGalleryItem.getUrl())
-                .resize(width, height)
-                .centerCrop()
-//                .centerInside()
-                .into(mImageLayout);
-    }
 }

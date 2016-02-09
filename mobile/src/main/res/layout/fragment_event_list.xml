@@ -5,18 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    app:state="content"
-    app:progressLayout="@layout/fragment_placeholder_progress"
-    app:offlineLayout="@layout/fragment_placeholder_offline"
     app:emptyLayout="@layout/fragment_placeholder_empty"
-    app:noPermissionLayout="@layout/fragment_placeholder_nopermission">
+    app:noPermissionLayout="@layout/fragment_placeholder_nopermission"
+    app:offlineLayout="@layout/fragment_placeholder_offline"
+    app:progressLayout="@layout/fragment_placeholder_progress"
+    app:state="content">
 
-	<cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView
-		android:id="@+id/RecyclerView"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@android:color/white"
-		android:scrollbars="vertical"
-		android:overScrollMode="always"/>
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_event_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <cz.koto.misak.kotipoint.android.mobile.view.autoloading.AutoLoadingRecyclerView
+            android:id="@+id/RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:overScrollMode="always"
+            android:scrollbars="vertical" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout>

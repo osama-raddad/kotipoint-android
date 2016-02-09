@@ -57,6 +57,13 @@ public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extend
         init();
     }
 
+    public void startReLoading(){
+        autoLoadingRecyclerViewAdapter.clearViewItems();
+        firstPortionLoaded = false;
+        allPortionsLoaded = false;
+        startLoading();
+    }
+
     /**
      * required method
      * call after init all parameters in AutoLoadedRecyclerView
@@ -352,4 +359,9 @@ public class AutoLoadingRecyclerView<T,U extends RecyclerView.ViewHolder> extend
         }
     }
 
+    public void clearView(){
+        firstPortionLoaded = false;
+        allPortionsLoaded = false;
+        autoLoadingRecyclerViewAdapter.clearViewItems();
+    }
 }

@@ -57,4 +57,15 @@ public abstract class AutoLoadingRecyclerViewAdapter<T,U extends RecyclerView.Vi
 
     public abstract void showLoader();
 
+
+    abstract void addDefaultItem();
+    /* SWIPE 2 REFRESH methods */
+
+    // Clean all elements of the recycler
+    public void clearViewItems() {
+        mFooterCount = 0;
+        mElementList.clear();
+        addDefaultItem();
+        notifyDataSetChanged();
+    }
 }

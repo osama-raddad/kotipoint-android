@@ -35,10 +35,13 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
 
     public GalleryRecyclerViewAdapter(Context context) {
         mContext = context;
-       // addFooter(new GalleryItem("-", UNIQUE_LOADER_ID));
-
+        addDefaultItem();
     }
 
+    @Override
+    void addDefaultItem() {
+        // addFooter(new GalleryItem("-", UNIQUE_LOADER_ID));
+    }
 
     @Override
     public long getItemId(int position) {

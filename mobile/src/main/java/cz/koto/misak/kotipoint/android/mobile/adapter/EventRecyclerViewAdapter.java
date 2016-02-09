@@ -28,6 +28,10 @@ public class EventRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<KoT
 
     public EventRecyclerViewAdapter(Context context) {
         mContext = context;
+        addDefaultItem();
+    }
+
+    void addDefaultItem() {
         addFooter(new KoTiEvent(UNIQUE_LOADER_ID,"Loader"));
     }
 

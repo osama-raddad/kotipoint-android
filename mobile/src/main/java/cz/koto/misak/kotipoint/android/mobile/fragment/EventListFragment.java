@@ -1,7 +1,9 @@
 package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
@@ -29,6 +31,8 @@ public class EventListFragment extends StatefulPermissionFragment {
     AutoLoadingRecyclerView<KoTiEvent,EventRecyclerViewAdapter.EventBindingHolder> mRecyclerView;
 
     private EventRecyclerViewAdapter mRecyclerViewAdapter;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public static EventListFragment newInstance(String title) {
@@ -88,6 +92,23 @@ public class EventListFragment extends StatefulPermissionFragment {
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).eventList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), KoTiPointBaseConfig.API_KOTINODE_TEST_DELAY));
         mRecyclerView.setStatefulLayout(getFragmentView());
+
+        //TODO improve this quick win solution
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_event_container);
+        swipeRefreshLayout.setColorSchemeResources(R.color.global_color_control_highlight,R.color.global_color_control_activated,R.color.global_color_accent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRecyclerView.clearView();
+                        requestContent();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 500);
+            }
+        });
     }
 
     @Override

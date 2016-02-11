@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import timber.log.Timber;
+
 
 /**
  "headline": "Bazárek v Praskolesích",
@@ -59,6 +61,7 @@ public class KoTiEvent implements Parcelable
     public KoTiEvent(Integer id, String headLine){
         this.mId = id;
         this.mHeadline = headLine;
+        Timber.d("KoTiEvent-Parcel-in_1:%s",this.toString());
     }
 
     public KoTiEvent(Parcel in){
@@ -66,10 +69,12 @@ public class KoTiEvent implements Parcelable
         this.mHeadline = in.readString();
         in.readStringList(this.mLabel = new ArrayList<String>());
         this.mEventDate = new Date(in.readLong());
-        in.readStringList(this.mEventLocation = new ArrayList<String>());
+        in.readStringList(this.mEventLocation = new ArrayList<String>(1));
         this.mTextCapital = in.readString();
         this.mText = in.readString();
         this.mImageResource = in.readString();
+        Timber.d("KoTiEvent-Parcel-in_2:%s",this.toString());
+
     }
 
     public static final Creator<KoTiEvent> CREATOR
@@ -155,11 +160,12 @@ public class KoTiEvent implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        Timber.d("KoTiEvent-writeToParcel:%s",this);
         dest.writeInt(this.mId);
         dest.writeString(this.mHeadline);
-        dest.writeList(this.mLabel);
+        dest.writeStringList(this.mLabel);
         dest.writeLong(this.mEventDate == null?0:this.mEventDate.getTime());
-        dest.writeList(this.mEventLocation);
+        dest.writeStringList(this.mEventLocation);
         dest.writeString(this.mTextCapital);
         dest.writeString(this.mText);
         dest.writeString(this.mImageResource);

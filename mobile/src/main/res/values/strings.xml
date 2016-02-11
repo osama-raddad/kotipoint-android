@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KoTiPoint</string>
     <string name="placeholder_empty">Empty</string>
-    <string name="placeholder_offline">Offline</string>
+    <string name="placeholder_offline">You are offline.\n\nEnable your internet connection and press reload.</string>
     <string name="placeholder_nopermission">@string/permissions_not_granted</string>
 
     <string name="permission_fine_location_rationale">Permissions are needed.</string>

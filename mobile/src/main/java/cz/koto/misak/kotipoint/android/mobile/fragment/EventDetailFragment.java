@@ -65,6 +65,11 @@ public class EventDetailFragment extends StatefulPermissionFragment {
         mBinding.setViewModel(mViewModel);
     }
 
+    @Override
+    public void reloadFragmentView() {
+        requestContent();
+    }
+
 
     public void doWithMandatoryPermissions() {
         showContent();

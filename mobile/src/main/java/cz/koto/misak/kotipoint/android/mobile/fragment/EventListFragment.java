@@ -102,13 +102,18 @@ public class EventListFragment extends StatefulPermissionFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mRecyclerView.clearView();
-                        requestContent();
+                        reloadFragmentView();
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 500);
             }
         });
+    }
+
+    @Override
+    public void reloadFragmentView() {
+        mRecyclerView.clearView();
+        requestContent();
     }
 
     @Override

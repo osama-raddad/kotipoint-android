@@ -83,6 +83,12 @@ public class GalleryFragment extends StatefulPermissionFragment {
     }
 
     @Override
+    public void reloadFragmentView() {
+        mRecyclerView.clearView();
+        requestContent();
+    }
+
+    @Override
     public void doWithMandatoryPermissions() {
         doLoading();
     }

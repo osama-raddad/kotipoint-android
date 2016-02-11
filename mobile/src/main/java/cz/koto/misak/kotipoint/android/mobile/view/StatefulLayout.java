@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import cz.koto.misak.kotipoint.android.mobile.R;
+import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentPlaceholderOfflineBinding;
+import cz.koto.misak.kotipoint.android.mobile.viewModel.StatefulLayoutModel;
+import rx.Observable;
+import rx.Observer;
 import timber.log.Timber;
 
 // code inspired by: https://github.com/jakubkinst/Android-StatefulView
@@ -28,6 +32,9 @@ public class StatefulLayout extends FrameLayout {
     private View mNoPermissionLayout;
     private State mState;
     private OnStateChangeListener mOnStateChangeListener;
+
+    private FragmentPlaceholderOfflineBinding mPlaceholderOfflineBinding;
+    private StatefulLayoutModel mStatefulLayoutModel;
 
 
     public enum State {
@@ -143,7 +150,6 @@ public class StatefulLayout extends FrameLayout {
         mOnStateChangeListener = l;
     }
 
-
     public void saveInstanceState(Bundle outState) {
         if (mState != null) {
             outState.putInt(SAVED_STATE, mState.getValue());
@@ -170,6 +176,11 @@ public class StatefulLayout extends FrameLayout {
             mEmptyLayout = LayoutInflater.from(getContext()).inflate(mEmptyLayoutId, this, false);
             mNoPermissionLayout = LayoutInflater.from(getContext()).inflate(mNoPermissionLayoutId, this, false);
 
+            mPlaceholderOfflineBinding = FragmentPlaceholderOfflineBinding.bind(mOfflineLayout);
+            mStatefulLayoutModel = new StatefulLayoutModel();
+            mPlaceholderOfflineBinding.setViewOfflineModel(mStatefulLayoutModel);
+
+
             addView(mProgressLayout);
             addView(mOfflineLayout);
             addView(mEmptyLayout);
@@ -178,4 +189,14 @@ public class StatefulLayout extends FrameLayout {
             setState(mInitialState);
         }
     }
+
+    public final void setupObservables(Observable<String> reloadObservable, Observer<String> reloadObserver) {
+//    public abstract Observable<Void> getReloadObservable();
+//    public abstract Observer<Void> getReloadObserver();
+        if (mStatefulLayoutModel != null) {
+            mStatefulLayoutModel.setmReloadObservable(reloadObservable);
+            mStatefulLayoutModel.setmReloadObserver(reloadObserver);
+        }
+    }
+
 }

@@ -57,4 +57,9 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
         mBinding.setGalleryViewModel(mViewModel);
     }
 
+    @Override
+    public void reloadFragmentView() {
+        requestContent();
+    }
+
 }

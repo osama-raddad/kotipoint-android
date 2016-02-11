@@ -18,6 +18,9 @@ import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
 import timber.log.Timber;
 
+/**
+ * Subclassing BaseObservable allows us to use @Bindable on getters, and notifyPropertyChanged() when a @Bindable property changes.
+ */
 public class GalleryViewModel extends BaseObservable {
 
     private static final String PROTOCOL_PREFIX = "http://";

@@ -2,6 +2,7 @@ package cz.koto.misak.kotipoint.android.mobile.fragment.base;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -10,10 +11,11 @@ import java.util.List;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
+import rx.Observable;
+import rx.Observer;
 import timber.log.Timber;
 
-public abstract class StatefulPermissionFragment extends PermissionFragment {
-
+public abstract class StatefulPermissionFragment extends PermissionFragment{
 
     private StatefulLayout mStatefulLayout;
 
@@ -32,6 +34,30 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
             //Prevent unnecessary reloading!
             requestContent(savedInstanceState);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Observable<String> myObservable = Observable.just("");
+        Observer<String> myObserver = new Observer<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                reloadFragmentView();
+            }
+        };
+
+        getFragmentView().setupObservables(myObservable,myObserver);
     }
 
     /**
@@ -138,4 +164,7 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
         ret.add(AppPermissionEnum.ACCESS_NETWORK_STATE);
         return ret;
     }
+
+
+    public abstract void reloadFragmentView();
 }

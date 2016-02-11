@@ -19,6 +19,9 @@ import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.EventDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.model.KoTiEvent;
 
+/**
+ * Subclassing BaseObservable allows us to use @Bindable on getters, and notifyPropertyChanged() when a @Bindable property changes.
+ */
 public class EventViewModel extends BaseObservable {
 
     KoTiEvent mEvent;

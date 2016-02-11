@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
 
     <data>
-        <variable name="viewModel" type="cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel" />
+
+        <variable
+            name="viewModel"
+            type="cz.koto.misak.kotipoint.android.mobile.viewModel.EventViewModel" />
     </data>
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/event_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fragment_event_item_card_space"
         android:layout_marginBottom="@dimen/fragment_event_item_card_space"
+        android:layout_marginTop="@dimen/fragment_event_item_card_space"
         card_view:cardCornerRadius="@dimen/fragment_event_item_card_space"
         card_view:cardUseCompatPadding="true">
 
@@ -20,24 +24,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical"
-            android:onClick="@{viewModel.callEventDetailActivity}">
+            android:onClick="@{viewModel.callEventDetailActivity}"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_clickable_item_bg"
                 android:orientation="vertical"
-                android:padding="@dimen/default_padding"
-                android:background="@drawable/selector_clickable_item_bg">
+                android:padding="@dimen/default_padding">
 
                 <TextView
                     android:id="@+id/event_item_headline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/global_spacing_xxs"
+                    android:onClick="@{viewModel.callEventDetailActivity}"
                     android:text="@{viewModel.eventHeadline}"
-                    android:textAppearance="@style/TextAppearance.KoTiPoint.Headline"
-                    android:onClick="@{viewModel.callEventDetailActivity}"/>
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Headline" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -56,10 +60,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/event_item_date_duration"
+                        android:gravity="right"
                         android:text="@{viewModel.eventLocation}"
-                        android:textColor="@color/theme_edge_effect"
                         android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Location"
-                        android:gravity="right" />
+                        android:textColor="@color/theme_edge_effect" />
 
                 </RelativeLayout>
 
@@ -68,44 +72,44 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/event_item_date_duration"
+                    android:gravity="right"
                     android:text="@{viewModel.eventDate}"
-                    android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date"
-                    android:gravity="right" />
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Subhead.Date" />
 
             </LinearLayout>
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@color/theme_edge_effect" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/theme_edge_effect" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/global_bg_front">
+                android:background="@color/global_bg_front"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/event_calendar"
-                    android:src="@drawable/ic_calendar_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/default_padding"
                     android:background="@drawable/selector_clickable_item_bg"
                     android:clickable="true"
                     android:onClick="@{viewModel.callEventDetailActivity}"
-                    android:visibility="@{viewModel.eventDateVisibility}"/>
+                    android:padding="@dimen/default_padding"
+                    android:src="@drawable/ic_calendar_black_24dp"
+                    android:visibility="@{viewModel.eventDateVisibility}" />
 
                 <TextView
                     android:id="@+id/text_view_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/default_padding"
                     android:background="@drawable/selector_clickable_item_bg"
                     android:clickable="true"
-                    android:textAppearance="@style/TextAppearance.KoTiPoint.Body1.Link"
+                    android:onClick="@{viewModel.callEventDetailActivity}"
+                    android:padding="@dimen/default_padding"
                     android:text="@string/view_button"
-                    android:onClick="@{viewModel.callEventDetailActivity}"/>
+                    android:textAppearance="@style/TextAppearance.KoTiPoint.Body1.Link" />
 
             </LinearLayout>
 

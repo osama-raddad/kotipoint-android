@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -11,6 +10,7 @@
     </data>
 
     <cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment_example_stateful_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,8 @@
         app:noPermissionLayout="@layout/fragment_placeholder_nopermission"
         app:offlineLayout="@layout/fragment_placeholder_offline"
         app:progressLayout="@layout/fragment_placeholder_progress"
-        app:state="content">
+        app:state="content"
+        tools:context=".activity.EventDetailActivity">
 
         <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
@@ -127,8 +128,8 @@
                             android:id="@+id/event_item_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.eventText}"
                             android:padding="@dimen/global_spacing_s"
+                            android:text="@{viewModel.eventText}"
                             android:textAppearance="@style/TextAppearance.KoTiPoint.Body1" />
 
                     </RelativeLayout>

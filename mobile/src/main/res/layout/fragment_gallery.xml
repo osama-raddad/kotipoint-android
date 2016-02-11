@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_example_stateful_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,8 @@
     app:noPermissionLayout="@layout/fragment_placeholder_nopermission"
     app:offlineLayout="@layout/fragment_placeholder_offline"
     app:progressLayout="@layout/fragment_placeholder_progress"
-    app:state="content">
+    app:state="content"
+    tools:context=".activity.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_gallery_container"

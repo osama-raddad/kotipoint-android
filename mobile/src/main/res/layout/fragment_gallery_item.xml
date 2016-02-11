@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
 
     <data>
 
@@ -16,8 +18,8 @@
         android:background="@drawable/selector_clickable_item_bg"
         android:gravity="center_vertical"
         android:minHeight="@dimen/global_spacing_l"
-        android:orientation="horizontal"
-        android:onClick="@{galleryViewModel.callGalleryDetailActivity}">
+        android:onClick="@{galleryViewModel.callGalleryDetailActivity}"
+        android:orientation="horizontal">
 
         <!--<TextView-->
         <!--android:id="@+id/fragment_gallery_item_name"-->
@@ -33,8 +35,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            app:imageUrl="@{galleryViewModel.imageUrl}">
-        </ImageView>
+            app:imageUrl="@{galleryViewModel.imageUrl}"></ImageView>
 
     </LinearLayout>
 

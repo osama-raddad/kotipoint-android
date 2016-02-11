@@ -195,7 +195,7 @@ public class StatefulLayout extends FrameLayout {
      *
      * @param reloadViewObserver
      */
-    public final void setupObservables(Observer<Void> reloadViewObserver) {
+    public final void setupObservers(Observer<Void> reloadViewObserver) {
         if (mStatefulLayoutModel != null) {
             mStatefulLayoutModel.setReloadObserver(reloadViewObserver);
         }

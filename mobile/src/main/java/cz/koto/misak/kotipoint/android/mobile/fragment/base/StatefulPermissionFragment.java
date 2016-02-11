@@ -52,7 +52,7 @@ public abstract class StatefulPermissionFragment extends PermissionFragment {
             }
         };
 
-        getFragmentView().setupObservables(reloadViewObserver);
+        getFragmentView().setupObservers(reloadViewObserver);
     }
 
     /**

@@ -3,11 +3,13 @@ package cz.koto.misak.kotipoint.android.mobile.viewModel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.Toast;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
+import timber.log.Timber;
 
 /**
  * Subclassing BaseObservable allows us to use @Bindable on getters, and notifyPropertyChanged() when a @Bindable property changes.
@@ -15,19 +17,24 @@ import rx.Observer;
 public class StatefulLayoutModel extends BaseObservable {
 
 
-    private Observable<String> mReloadObservable;
-    private Observer<String> mReloadObserver;
+    private Observer<Void> mReloadObserver;
+    private Observable<Void> reloadViewTriggerObservable;
 
     public StatefulLayoutModel(/*Observable<Void> observable, Observer<Void> observer*/) {
 //        mReloadObservable = observable;
 //        mReloadObserver = observer;
+
+        reloadViewTriggerObservable = Observable.create(new Observable.OnSubscribe<Void>() {
+            @Override
+            public void call(Subscriber<? super Void> subscriber) {
+                // Do the work and call onCompleted when you done,
+                // no need to call onNext if you have nothing to emit
+                subscriber.onCompleted();
+            }
+        });
     }
 
-    public void setmReloadObservable(Observable<String> mReloadObservable) {
-        this.mReloadObservable = mReloadObservable;
-    }
-
-    public void setmReloadObserver(Observer<String> mReloadObserver) {
+    public void setReloadObserver(@NonNull  Observer<Void> mReloadObserver) {
         this.mReloadObserver = mReloadObserver;
     }
 
@@ -35,11 +42,11 @@ public class StatefulLayoutModel extends BaseObservable {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mReloadObservable == null) {
+                if (mReloadObserver == null) {
                     Context context = v.getContext();
-                    Toast.makeText(context, "TODO IMPLEMENT @Observable to call StatefulPermissionFragment.requestContent", Toast.LENGTH_SHORT).show();
+                    Timber.e("Unable to locate observer for triggering reloadViewObservable");
                 } else {
-                    mReloadObservable.subscribe(mReloadObserver);
+                    reloadViewTriggerObservable.subscribe(mReloadObserver);
                 }
             }
         };

@@ -10,12 +10,11 @@ import java.util.List;
 
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
 import cz.koto.misak.kotipoint.android.mobile.util.NetworkUtils;
+import cz.koto.misak.kotipoint.android.mobile.util.ReloadViewObserver;
 import cz.koto.misak.kotipoint.android.mobile.view.StatefulLayout;
-import rx.Observable;
-import rx.Observer;
 import timber.log.Timber;
 
-public abstract class StatefulPermissionFragment extends PermissionFragment{
+public abstract class StatefulPermissionFragment extends PermissionFragment {
 
     private StatefulLayout mStatefulLayout;
 
@@ -39,25 +38,21 @@ public abstract class StatefulPermissionFragment extends PermissionFragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Observable<String> myObservable = Observable.just("");
-        Observer<String> myObserver = new Observer<String>() {
+
+
+        ReloadViewObserver<Void> reloadViewObserver = new ReloadViewObserver<Void>() {
             @Override
             public void onCompleted() {
-
+                reloadFragmentView();
             }
 
             @Override
             public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-                reloadFragmentView();
+               Timber.e(e,"Unable to complete reloadViewObserver!");
             }
         };
 
-        getFragmentView().setupObservables(myObservable,myObserver);
+        getFragmentView().setupObservables(reloadViewObserver);
     }
 
     /**

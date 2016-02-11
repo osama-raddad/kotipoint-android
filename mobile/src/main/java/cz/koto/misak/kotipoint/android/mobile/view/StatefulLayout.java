@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentPlaceholderOfflineBinding;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.StatefulLayoutModel;
-import rx.Observable;
 import rx.Observer;
 import timber.log.Timber;
 
@@ -190,12 +189,15 @@ public class StatefulLayout extends FrameLayout {
         }
     }
 
-    public final void setupObservables(Observable<String> reloadObservable, Observer<String> reloadObserver) {
-//    public abstract Observable<Void> getReloadObservable();
-//    public abstract Observer<Void> getReloadObserver();
+    /**
+     * Register observer for view reloading.
+     * Do registration in onViewCreated() if possible.
+     *
+     * @param reloadViewObserver
+     */
+    public final void setupObservables(Observer<Void> reloadViewObserver) {
         if (mStatefulLayoutModel != null) {
-            mStatefulLayoutModel.setmReloadObservable(reloadObservable);
-            mStatefulLayoutModel.setmReloadObserver(reloadObserver);
+            mStatefulLayoutModel.setReloadObserver(reloadViewObserver);
         }
     }
 

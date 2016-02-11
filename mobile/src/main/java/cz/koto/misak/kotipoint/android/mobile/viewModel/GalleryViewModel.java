@@ -53,7 +53,8 @@ public class GalleryViewModel extends BaseObservable {
     }
 
 
-    public static void loadImageGalleryDetail(ImageView view, String imageUrl) {
+    @BindingAdapter({"bind:imageUrlDetail"})
+    public static void imageUrlDetail(ImageView view, String imageUrl) {
         /**
          * //TODO consider offer to the user switch between center and crop.
          * //TODO or consider offer to the user scale image when crop is chosen.
@@ -66,7 +67,7 @@ public class GalleryViewModel extends BaseObservable {
         int width = size.x;
         int height = size.y;
         Picasso.with(context)
-                .load(PROTOCOL_PREFIX + imageUrl)
+                .load(imageUrl)
                 .resize(width, height)
                 .centerCrop()
 //                .centerInside()

@@ -2,6 +2,8 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -30,6 +32,8 @@ public class GalleryFragment extends StatefulPermissionFragment {
     AutoLoadingRecyclerView<GalleryItem, GalleryRecyclerViewAdapter.GalleryBindingHolder> mRecyclerView;
 
     private GalleryRecyclerViewAdapter mRecyclerViewAdapter;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static GalleryFragment newInstance() {
         GalleryFragment fragment = new GalleryFragment();
@@ -80,6 +84,22 @@ public class GalleryFragment extends StatefulPermissionFragment {
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).galleryList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit()));
         mRecyclerView.setStatefulLayout(getFragmentView());
+
+        //TODO improve this quick win solution
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_gallery_container);
+        swipeRefreshLayout.setColorSchemeResources(R.color.global_color_control_highlight,R.color.global_color_control_activated,R.color.global_color_accent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        reloadFragmentView();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 500);
+            }
+        });
     }
 
     @Override

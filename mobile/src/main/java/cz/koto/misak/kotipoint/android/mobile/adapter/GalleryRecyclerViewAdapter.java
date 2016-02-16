@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import java.util.HashMap;
+
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryItemBinding;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
@@ -85,7 +87,12 @@ public class GalleryRecyclerViewAdapter extends AutoLoadingRecyclerViewAdapter<G
         switch (getItemViewType(position)) {
             case VIEW_TYPE_IMAGE:
                 FragmentGalleryItemBinding fragmentEventItemBinding = (FragmentGalleryItemBinding)holder.binding;
-                fragmentEventItemBinding.setGalleryViewModel(new GalleryViewModel(getItem(position)));
+                //TODO don't forget to solve this!
+                HashMap<Long,GalleryItem> map = new HashMap<>();
+                for (GalleryItem item:getItems()){
+                    map.put(item.getId(),item);
+                }
+                fragmentEventItemBinding.setGalleryViewModel(new GalleryViewModel(map, Long.valueOf(position)));
                 break;
             case VIEW_TYPE_FOOTER:
                 break;

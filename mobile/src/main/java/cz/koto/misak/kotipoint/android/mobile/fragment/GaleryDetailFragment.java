@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.HashMap;
+
 import cz.koto.misak.kotipoint.android.mobile.R;
-import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryDetailBinding;
 import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
-import cz.koto.misak.kotipoint.android.mobile.view.Intents;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel;
 
 public class GaleryDetailFragment extends StatefulPermissionFragment {
@@ -17,11 +17,11 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     private FragmentGalleryDetailBinding mBinding;
     private GalleryViewModel mViewModel;
 
-    protected GalleryItem mGalleryItem;
+    protected Long mGalleryPointer;
 
-    public static GaleryDetailFragment newInstance(Context context, GalleryItem galleryItem) {
+    public static GaleryDetailFragment newInstance(Context context, Long galleryPointer) {
         Bundle b = new Bundle();
-        b.putParcelable(Intents.EXTRA_IMAGE, galleryItem/*Parcels.wrap(image)*/);
+        b.putLong(GalleryViewModel.PAYLOAD_POINTER_KEY, galleryPointer);
         return (GaleryDetailFragment) GaleryDetailFragment.instantiate(context, GaleryDetailFragment.class.getName(), b);
     }
 
@@ -34,6 +34,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     protected void onSaveState(Bundle outState) {
         //TODO consider usage of save state (necessary with MVVM?)
         //outState.putParcelable(M_TODAY_WEATHER_WRAPPER_0784150041885340, mTodayWeatherWrapper);
+        outState.putLong(GalleryViewModel.PAYLOAD_POINTER_KEY, mGalleryPointer);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
 //        if ((isProgressLayoutVisible()||isContentLayoutVisible())&&mTodayWeatherWrapper!=null) {
 //            bindView(getFragmentView().getContext());
 //        }
+        mGalleryPointer = savedInstanceState.getLong(GalleryViewModel.PAYLOAD_POINTER_KEY);
     }
 
     @Override
@@ -53,7 +55,9 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     @Override
     protected void initOnCreateView(View view, Bundle savedInstanceState) {
         mBinding = FragmentGalleryDetailBinding.bind(view);
-        mViewModel = new GalleryViewModel(getActivity().getIntent().getExtras().getParcelable(GalleryDetailActivity.PAYLOAD_KEY));
+        HashMap<Long,GalleryItem> galleryItemMap = (HashMap<Long,GalleryItem>) getActivity().getIntent().getExtras().get(GalleryViewModel.PAYLOAD_MAP_KEY);
+        mGalleryPointer = getArguments().getLong(GalleryViewModel.PAYLOAD_POINTER_KEY);
+        mViewModel = new GalleryViewModel(galleryItemMap,mGalleryPointer);
         mBinding.setGalleryViewModel(mViewModel);
     }
 

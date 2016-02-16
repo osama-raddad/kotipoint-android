@@ -33,6 +33,7 @@ Old variants are:
 3.3.4.x - architecture MVVM approach refactoring.  
 3.3.5.x - architecture refactoring.  
 3.3.6.x - ability to refresh data on demand  
+3.3.7.x - ability to switch gallery detail using the slide
 
                                                                                              
 Documentation

@@ -13,6 +13,9 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
@@ -23,17 +26,35 @@ import timber.log.Timber;
  */
 public class GalleryViewModel extends BaseObservable {
 
+    public static final String PAYLOAD_MAP_KEY = "koTiGalleryDetailPayloadMap";
+    public static final String PAYLOAD_POINTER_KEY = "koTiGalleryDetailPayloadPointer";
+
     private static final String PROTOCOL_PREFIX = "http://";
 
-    private GalleryItem mGalleryItem;
+    private HashMap<Long,GalleryItem> mGalleryItemMap = new HashMap<>();
+    private Long mGalleryItemPointer;
 
-    public GalleryViewModel(GalleryItem galleryItem) {
-        this.mGalleryItem = galleryItem;
+//    public GalleryViewModel(GalleryItem galleryItem) {
+//        this.mGalleryItemMap.clear();
+//        this.mGalleryItemMap.put(galleryItem.getId(),galleryItem);
+//        this.mGalleryItemPointer = galleryItem.getId();
+//    }
+
+    public GalleryViewModel(Map<Long,GalleryItem> galleryItemMap, Long currentItem){
+        if (galleryItemMap!=null) {
+            this.mGalleryItemMap.putAll(galleryItemMap);
+            this.mGalleryItemPointer = currentItem;
+        }
     }
 
 
     public String getImageUrl() {
-        return PROTOCOL_PREFIX + mGalleryItem.getUrl();
+        GalleryItem galleryItem = mGalleryItemMap.get(mGalleryItemPointer);
+        if (galleryItem==null){
+            Timber.e("Missing gallery item on position: %s!",mGalleryItemPointer);
+            throw new RuntimeException();
+        }
+        return PROTOCOL_PREFIX + galleryItem.getUrl();
     }
 
     /**
@@ -44,7 +65,7 @@ public class GalleryViewModel extends BaseObservable {
      */
     @BindingAdapter({"bind:imageUrl"})
     public static void imageUrl(ImageView view, String imageUrl) {
-        Timber.e("ImageUrl: %s", imageUrl);
+        Timber.d("imageUrl: %s", imageUrl);
         Picasso
                 .with(view.getContext())
                 .load(imageUrl)
@@ -55,6 +76,7 @@ public class GalleryViewModel extends BaseObservable {
 
     @BindingAdapter({"bind:imageUrlDetail"})
     public static void imageUrlDetail(ImageView view, String imageUrl) {
+        Timber.d("imageUrlDetail: %s", imageUrl);
         /**
          * //TODO consider offer to the user switch between center and crop.
          * //TODO or consider offer to the user scale image when crop is chosen.
@@ -80,7 +102,8 @@ public class GalleryViewModel extends BaseObservable {
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent i = GalleryDetailActivity.newIntent(context);
-                i.putExtra(GalleryDetailActivity.PAYLOAD_KEY, mGalleryItem);
+                i.putExtra(GalleryViewModel.PAYLOAD_MAP_KEY, mGalleryItemMap);
+                i.putExtra(GalleryViewModel.PAYLOAD_POINTER_KEY, mGalleryItemPointer);
                 context.startActivity(i);
             }
         };

@@ -8,11 +8,18 @@
 
     <include layout="@layout/toolbar" />
 
-    <fragment
-        android:id="@+id/fragment_gallery_detail"
-        android:name="cz.koto.misak.kotipoint.android.mobile.fragment.GaleryDetailFragment"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent">
+
+        <!--<fragment-->
+            <!--android:id="@+id/fragment_gallery_detail"-->
+            <!--android:name="cz.koto.misak.kotipoint.android.mobile.fragment.GaleryDetailFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1" />-->
+
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

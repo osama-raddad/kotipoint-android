@@ -3,6 +3,7 @@ package cz.koto.misak.kotipoint.android.mobile.util;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.util.DisplayMetrics;
+import android.view.View;
 
 public class ViewUtils {
 
@@ -19,6 +20,13 @@ public class ViewUtils {
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+        }
+    }
+
+    public static void setViewHeight(View view, int height, boolean layout) {
+        view.getLayoutParams().height = height;
+        if (layout) {
+            view.requestLayout();
         }
     }
 

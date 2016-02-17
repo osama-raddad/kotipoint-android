@@ -44,9 +44,12 @@ public class GalleryDetailActivity extends AppCompatActivity {
         setupActionBar();
 
         HashMap<Long,GalleryItem> galleryItemMap = (HashMap<Long,GalleryItem>) getIntent().getExtras().get(GalleryViewModel.PAYLOAD_MAP_KEY);
-//        Long galleryPointer = getIntent().getExtras().getParcelable(GalleryViewModel.PAYLOAD_POINTER_KEY);
+        Long galleryPointer = getIntent().getExtras().getLong(GalleryViewModel.PAYLOAD_POINTER_KEY);
         fragmentAdapter = new SlideFragmentAdapter(this, getSupportFragmentManager(), galleryItemMap);
         pager.setAdapter(fragmentAdapter);
+        pager.setCurrentItem(galleryPointer.intValue());
+        pager.setOffscreenPageLimit(getResources().getInteger(
+                R.integer.gallery_pager_offscreen_limit));
     }
 
     @Override

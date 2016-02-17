@@ -1,0 +1,46 @@
+02-17 01:07:06.713 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:CONTENT
+02-17 01:07:06.714 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:PROGRESS
+02-17 01:07:06.715 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulPermissionFragment: ***StateChange:PROGRESS
+02-17 01:07:06.715 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:CONTENT
+02-17 01:07:06.716 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulPermissionFragment: ***StateChange:CONTENT
+02-17 01:07:06.729 1817-1817/cz.koto.misak.kotipoint.android.mobile D/GalleryViewModel: imageUrlDetail: http://10.0.3.2:8080/public/gallery/2015-11-15-Racice/racice_013.png
+02-17 01:07:06.735 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.735 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.739 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.747 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 105MB to 96MB
+02-17 01:07:06.747 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Alloc partial concurrent mark sweep GC freed 587(27KB) AllocSpace objects, 1(4MB) LOS objects, 7% free, 89MB/96MB, paused 170us total 8.703ms
+02-17 01:07:06.798 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.798 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.800 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:06.805 1817-1863/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 96MB to 96MB
+02-17 01:07:09.354 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:CONTENT
+02-17 01:07:09.355 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:PROGRESS
+02-17 01:07:09.355 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulPermissionFragment: ***StateChange:PROGRESS
+02-17 01:07:09.356 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulLayout: >>setState:CONTENT
+02-17 01:07:09.356 1817-1817/cz.koto.misak.kotipoint.android.mobile D/StatefulPermissionFragment: ***StateChange:CONTENT
+02-17 01:07:09.369 1817-1817/cz.koto.misak.kotipoint.android.mobile D/GalleryViewModel: imageUrlDetail: http://10.0.3.2:8080/public/gallery/2015-11-15-Racice/racice_014.png
+02-17 01:07:09.374 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.374 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.379 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.386 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 105MB to 96MB
+02-17 01:07:09.386 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Alloc partial concurrent mark sweep GC freed 558(24KB) AllocSpace objects, 1(4MB) LOS objects, 7% free, 89MB/96MB, paused 159us total 6.588ms
+02-17 01:07:09.437 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.437 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.439 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.442 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.443 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.447 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.448 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Forcing collection of SoftReferences for 13MB allocation
+02-17 01:07:09.448 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.452 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.453 1817-1860/cz.koto.misak.kotipoint.android.mobile W/art: Throwing OutOfMemoryError "Failed to allocate a 13898892 byte allocation with 2253368 free bytes and 2MB until OOM"
+02-17 01:07:09.453 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.453 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.454 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.458 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.458 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.462 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.463 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Forcing collection of SoftReferences for 13MB allocation
+02-17 01:07:09.463 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Starting a blocking GC Alloc
+02-17 01:07:09.467 1817-1860/cz.koto.misak.kotipoint.android.mobile I/art: Clamp target GC heap from 109MB to 96MB
+02-17 01:07:09.468 1817-1860/cz.koto.misak.kotipoint.android.mobile W/art: Throwing OutOfMemoryError "Failed to allocate a 13898892 byte allocation with 2253368 free bytes and 2MB until OOM"

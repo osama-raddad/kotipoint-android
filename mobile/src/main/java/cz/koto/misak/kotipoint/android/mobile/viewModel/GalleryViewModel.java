@@ -67,8 +67,8 @@ public class GalleryViewModel extends BaseObservable {
      * @param imageGalleryUrl
      */
     @BindingAdapter({"bind:imageGalleryUrl"})
-    public static void imageUrlX(ImageView view, String imageGalleryUrl) {
-        Timber.d("imageUrl(): %s", imageGalleryUrl);
+    public static void loadImageGalleryView(ImageView view, String imageGalleryUrl) {
+        Timber.d("loadImageGalleryView(): %s", imageGalleryUrl);
         Picasso
                 .with(view.getContext())
                 .load(imageGalleryUrl)
@@ -78,8 +78,8 @@ public class GalleryViewModel extends BaseObservable {
 
 
     @BindingAdapter({"bind:imageGalleryDetailUrl"})
-    public static void imageUrlDetail(ImageView view, String imageGalleryDetailUrl) {
-        Timber.d("imageUrlDetail(): %s", imageGalleryDetailUrl);
+    public static void loadImageGalleryDetailView(ImageView view, String imageGalleryDetailUrl) {
+        Timber.d("loadImageGalleryDetailView(): %s", imageGalleryDetailUrl);
         /**
          * //TODO consider offer to the user switch between center and crop.
          * //TODO or consider offer to the user scale image when crop is chosen.

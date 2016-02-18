@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.activity.GalleryDetailActivity;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.view.ImageTransformation;
@@ -53,7 +54,8 @@ public class GalleryViewModel extends BaseObservable {
         if (galleryItem==null){
             Timber.e("Missing gallery item on position: %s!",mGalleryItemPointer);
             Timber.wtf("mGalleryItemMap=[%s]",mGalleryItemMap);
-            throw new RuntimeException();
+            //throw new RuntimeException(); TODO this block should never happen, but currently still sometimes occurs!
+            return "android.resource://cz.koto.misak.kotipoint.android.mobile/"+R.drawable.detail_kotopeky;
         }
         return PROTOCOL_PREFIX + galleryItem.getUrl();
     }

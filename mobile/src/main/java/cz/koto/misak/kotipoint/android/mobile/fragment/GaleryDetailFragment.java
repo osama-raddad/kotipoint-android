@@ -3,14 +3,19 @@ package cz.koto.misak.kotipoint.android.mobile.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
+import butterknife.Bind;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.databinding.FragmentGalleryDetailBinding;
 import cz.koto.misak.kotipoint.android.mobile.fragment.base.StatefulPermissionFragment;
 import cz.koto.misak.kotipoint.android.mobile.model.GalleryItem;
 import cz.koto.misak.kotipoint.android.mobile.viewModel.GalleryViewModel;
+import timber.log.Timber;
 
 public class GaleryDetailFragment extends StatefulPermissionFragment {
 
@@ -18,6 +23,9 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     private GalleryViewModel mViewModel;
 
     protected Long mGalleryPointer;
+
+    @Bind(R.id.image_preview)
+    ImageView view;
 
     public static GaleryDetailFragment newInstance(Context context, Long galleryPointer) {
         Bundle b = new Bundle();
@@ -56,7 +64,12 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     protected void initOnCreateView(View view, Bundle savedInstanceState) {
         mBinding = FragmentGalleryDetailBinding.bind(view);
         HashMap<Long,GalleryItem> galleryItemMap = (HashMap<Long,GalleryItem>) getActivity().getIntent().getExtras().get(GalleryViewModel.PAYLOAD_MAP_KEY);
-        mGalleryPointer = getArguments().getLong(GalleryViewModel.PAYLOAD_POINTER_KEY);
+        try {
+            mGalleryPointer = getArguments().getLong(GalleryViewModel.PAYLOAD_POINTER_KEY);
+        }catch (Throwable th){
+            Timber.e(th,"[-]%s",getArguments().getLong(GalleryViewModel.PAYLOAD_POINTER_KEY));
+            throw th;
+        }
         mViewModel = new GalleryViewModel(galleryItemMap,mGalleryPointer);
         mBinding.setGalleryViewModel(mViewModel);
     }
@@ -66,4 +79,10 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
         requestContent();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Picasso.with(getContext()).cancelRequest(view);
+        Timber.d("View destroyed.");
+    }
 }

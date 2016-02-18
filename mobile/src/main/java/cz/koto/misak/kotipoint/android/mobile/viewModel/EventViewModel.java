@@ -63,8 +63,9 @@ public class EventViewModel extends BaseObservable {
     }
 
     public String getEventDate() {
+        if (mEvent.getmEventDate()==null) return "";
         SimpleDateFormat df = new SimpleDateFormat(mResources.getString(R.string.date_format_date));
-        return mEvent.getmEventDate() == null ? "" : df.format(mEvent.getmEventDate());
+        return df.format(mEvent.getmEventDate());
     }
 
     public int getEventDateVisibility() {

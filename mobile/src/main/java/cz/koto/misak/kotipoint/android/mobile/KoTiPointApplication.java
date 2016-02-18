@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.squareup.picasso.Picasso;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -31,6 +32,11 @@ public class KoTiPointApplication extends Application {
          * Always use customized Kit (like the core above) to omit DEV reporting to Crashlytics server.
          */
         Fabric.with(this, new Crashlytics.Builder().core(core).build());
+
+        if (BuildConfig.DEBUG || KoTiPointBaseConfig.DEV_API) {
+            Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
+            Picasso.with(getApplicationContext()).setLoggingEnabled(true);
+        }
     }
 
     public static KoTiPointApplication get() {

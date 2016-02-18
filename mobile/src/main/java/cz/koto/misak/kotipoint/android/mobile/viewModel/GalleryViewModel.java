@@ -52,6 +52,7 @@ public class GalleryViewModel extends BaseObservable {
         GalleryItem galleryItem = mGalleryItemMap.get(mGalleryItemPointer);
         if (galleryItem==null){
             Timber.e("Missing gallery item on position: %s!",mGalleryItemPointer);
+            Timber.wtf("mGalleryItemMap=[%s]",mGalleryItemMap);
             throw new RuntimeException();
         }
         return PROTOCOL_PREFIX + galleryItem.getUrl();

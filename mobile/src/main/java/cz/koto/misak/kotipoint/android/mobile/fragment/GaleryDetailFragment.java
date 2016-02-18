@@ -25,7 +25,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     protected Long mGalleryPointer;
 
     @Bind(R.id.image_preview)
-    ImageView view;
+    ImageView mImagePreview;
 
     public static GaleryDetailFragment newInstance(Context context, Long galleryPointer) {
         Bundle b = new Bundle();
@@ -82,7 +82,7 @@ public class GaleryDetailFragment extends StatefulPermissionFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Picasso.with(getContext()).cancelRequest(view);
+        Picasso.with(getContext()).cancelRequest(mImagePreview);
         Timber.d("View destroyed.");
     }
 }

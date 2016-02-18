@@ -64,22 +64,22 @@ public class GalleryViewModel extends BaseObservable {
      * https://medium.com/android-news/loading-images-with-data-binding-and-picasso-555dad683fdc#.1ny3d2s2w
      *
      * @param view
-     * @param imageUrl
+     * @param imageGalleryUrl
      */
-    @BindingAdapter({"bind:imageUrl"})
-    public static void imageUrl(ImageView view, String imageUrl) {
-        Timber.d("imageUrl(): %s", imageUrl);
+    @BindingAdapter({"bind:imageGalleryUrl"})
+    public static void imageUrlX(ImageView view, String imageGalleryUrl) {
+        Timber.d("imageUrl(): %s", imageGalleryUrl);
         Picasso
                 .with(view.getContext())
-                .load(imageUrl)
+                .load(imageGalleryUrl)
                 .transform(ImageTransformation.getTransformation(view))
                 .into(view);
     }
 
 
-    @BindingAdapter({"bind:imageUrlDetail"})
-    public static void imageUrlDetail(ImageView view, String imageUrl) {
-        Timber.d("imageUrlDetail(): %s", imageUrl);
+    @BindingAdapter({"bind:imageGalleryDetailUrl"})
+    public static void imageUrlDetail(ImageView view, String imageGalleryDetailUrl) {
+        Timber.d("imageUrlDetail(): %s", imageGalleryDetailUrl);
         /**
          * //TODO consider offer to the user switch between center and crop.
          * //TODO or consider offer to the user scale image when crop is chosen.
@@ -92,7 +92,7 @@ public class GalleryViewModel extends BaseObservable {
         int width = size.x;
         int height = size.y;
         Picasso.with(context)
-                .load(imageUrl)
+                .load(imageGalleryDetailUrl)
                 .resize(width, height)
                 .centerCrop()
 //                .centerInside()

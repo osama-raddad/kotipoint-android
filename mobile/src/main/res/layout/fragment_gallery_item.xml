@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            app:imageUrl="@{galleryViewModel.imageUrl}"></ImageView>
+            app:imageGalleryUrl="@{galleryViewModel.imageUrl}"></ImageView>
 
     </LinearLayout>
 

@@ -52,9 +52,9 @@ public class GalleryViewModel extends BaseObservable {
     public String getImageUrl() {
         GalleryItem galleryItem = mGalleryItemMap.get(mGalleryItemPointer);
         if (galleryItem==null){
-            Timber.e("Missing gallery item on position: %s!",mGalleryItemPointer);
+            //This is serious mistake, log crash and use placeholder for image
+            Timber.e("Missing gallery item on position: %s! Placeholder will be used.",mGalleryItemPointer);
             Timber.wtf("mGalleryItemMap=[%s]",mGalleryItemMap);
-            //throw new RuntimeException(); TODO this block should never happen, but currently still sometimes occurs!
             return "android.resource://cz.koto.misak.kotipoint.android.mobile/"+R.drawable.detail_kotopeky;
         }
         return PROTOCOL_PREFIX + galleryItem.getUrl();

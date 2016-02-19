@@ -42,18 +42,20 @@ dependencies
 	compile "com.android.support:design:$rootProject.ext.supportLibVersion"
 	compile "com.android.support:palette-v7:$rootProject.ext.supportLibVersion"
 
-	compile "com.squareup.retrofit:converter-gson:$rootProject.ext.retrofitVersion"//GsonConverterFactory 4retrofit
-	compile "com.squareup.retrofit:retrofit:$rootProject.ext.retrofitVersion"//retrofit
-	compile "com.squareup.retrofit:adapter-rxjava:$rootProject.ext.retrofitVersion"
+	compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"//GsonConverterFactory 4retrofit
+	compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"//retrofit
+	compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
 
-    compile "io.reactivex:rxandroid:$rootProject.ext.rxJavaVersion"
+	compile "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.loggingInterceptor"
+
+	compile "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
+
+	compile "io.reactivex:rxandroid:$rootProject.ext.rxJavaVersion"
     compile "io.reactivex:rxjava:$rootProject.ext.rxJavaVersion"
     compile "io.reactivex:rxjava-math:$rootProject.ext.rxJavaMathVersion"
 
 	compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
 	compile "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
-
-	compile "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
 
 	compile "org.ocpsoft.prettytime:prettytime:$rootProject.ext.prettyTime"
 

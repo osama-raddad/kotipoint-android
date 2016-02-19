@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
+import cz.koto.misak.kotipoint.android.mobile.KoTiPointBaseConfig;
 import cz.koto.misak.kotipoint.android.mobile.R;
 import cz.koto.misak.kotipoint.android.mobile.adapter.GalleryRecyclerViewAdapter;
 import cz.koto.misak.kotipoint.android.mobile.entity.AppPermissionEnum;
@@ -82,7 +83,7 @@ public class GalleryFragment extends StatefulPermissionFragment {
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mRecyclerView.setLimit(LIMIT);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).galleryList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit()));
+        mRecyclerView.setLoadingObservable(offsetAndLimit -> KoTiNodeClient.getKoTiNodeClient(getContext()).galleryList(offsetAndLimit.getOffset(), offsetAndLimit.getLimit(), KoTiPointBaseConfig.DEV_API));
         mRecyclerView.setStatefulLayout(getFragmentView());
 
         //TODO improve this quick win solution

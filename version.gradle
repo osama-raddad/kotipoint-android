@@ -4,7 +4,7 @@ ext {
     versionMajor = 3 // max two digits
     versionMinor = 3 // max two digits
     versionPatch = 7 // max two digits
-    versionBuild = 2 // max three digits
+    versionBuild = 3 // max three digits
 
     minSdkVersion = 16
     targetSdkVersion = 23
@@ -21,7 +21,8 @@ ext {
     espressoVersion = "2.2.1"
     uiautomatorVersion = "2.1.2"
 
-    retrofitVersion = "2.0.0-beta2"
+    retrofitVersion = "2.0.0-beta4"
+    loggingInterceptor = "3.0.1"
     rxJavaVersion = "1.1.0"
     rxJavaMathVersion = "1.0.0"
     butterknifeVersion = "7.0.1"

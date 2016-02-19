@@ -5,9 +5,10 @@ import android.content.Context;
 import com.google.gson.GsonBuilder;
 
 import cz.koto.misak.kotipoint.android.mobile.KoTiPointServerConfig;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class KoTiNodeClient {
 
